@@ -6,7 +6,6 @@ CREATE TABLE payment_method (
   description VARCHAR(255),
   expiration_date DATE,
   active BOOL,
-  notes VARCHAR(255),
   PRIMARY KEY(id)
 );
 
@@ -16,7 +15,6 @@ CREATE TABLE account (
   payment_method_id INT,
   recurring VARCHAR(50),
   active BOOL,
-  notes VARCHAR(255),
   PRIMARY KEY(id),
   FOREIGN KEY(payment_method_id) REFERENCES payment_method(id)
 );
@@ -26,8 +24,38 @@ CREATE TABLE archive_log (
   account_id INT,
   payment_method_id INT,
   date DATE,
-  notes VARCHAR(255),
   PRIMARY KEY(id),
   FOREIGN KEY(account_id) REFERENCES account(id),
   FOREIGN KEY(payment_method_id) REFERENCES payment_method(id)
 );
+
+CREATE TABLE account_note (
+  id INT NOT NULL AUTO_INCREMENT,
+  date DATE,
+  account_id INT,
+  note VARCHAR(255),
+  PRIMARY KEY(id),
+  FOREIGN KEY(account_id) REFERENCES account(id)
+);
+
+CREATE TABLE payment_method_note (
+  id INT NOT NULL AUTO_INCREMENT,
+  date DATE,
+  payment_method_id INT,
+  note VARCHAR(255),
+  PRIMARY KEY(id),
+  FOREIGN KEY(payment_method_id) REFERENCES payment_method(id)
+);
+
+CREATE TABLE archive_log_note (
+  id INT NOT NULL AUTO_INCREMENT,
+  date DATE,
+  archive_log_id INT,
+  note VARCHAR(255),
+  PRIMARY KEY(id),
+  FOREIGN KEY(archive_log_id) REFERENCES archive_log(id)
+);
+
+
+
+
