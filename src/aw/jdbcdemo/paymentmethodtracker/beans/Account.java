@@ -1,18 +1,18 @@
 package aw.jdbcdemo.paymentmethodtracker.beans;
 
 public class Account {
-	private int ID;
+	private int id;
 	private String name;
 	private int paymentMethod;
 	private String recurring;
 	private boolean active;
 
 	public int getID() {
-		return ID;
+		return id;
 	}
 
 	public void setID(int iD) {
-		ID = iD;
+		id = iD;
 	}
 
 	public String getName() {
@@ -49,7 +49,7 @@ public class Account {
 
 	@Override
 	public String toString() {
-		return "AccountArchiveLog [ID=" + ID + ", name=" + name + ", paymentMethod=" + paymentMethod + ", recurring="
+		return "AccountArchiveLog [id=" + id + ", name=" + name + ", paymentMethod=" + paymentMethod + ", recurring="
 				+ recurring + ", active=" + active + "]";
 	}
 
