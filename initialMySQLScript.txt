@@ -1,25 +1,15 @@
 CREATE DATABASE paymentmethodtracker;
 
 CREATE TABLE payment_method (
-  id INT NOT NULL AUTO_INCREMENT,
+  id INT NOT NULL AUTO_INCREMENT=3000,
   name VARCHAR(255),
   description VARCHAR(255),
   expiration_date DATE,
-  active BOOL,
   PRIMARY KEY(id)
 );
 
 CREATE TABLE payment_method_note (
-  id INT NOT NULL AUTO_INCREMENT,
-  payment_method_id INT,
-  date DATE,
-  note VARCHAR(255),
-  PRIMARY KEY(id),
-  FOREIGN KEY(payment_method_id) REFERENCES payment_method(id)
-);
-
-CREATE TABLE payment_method_archive_log(
-  id INT NOT NULL AUTO_INCREMENT,
+  id INT NOT NULL AUTO_INCREMENT=4000,
   payment_method_id INT,
   date DATE,
   note VARCHAR(255),
@@ -28,17 +18,15 @@ CREATE TABLE payment_method_archive_log(
 );
 
 CREATE TABLE account (
-  id INT NOT NULL AUTO_INCREMENT,
+  id INT NOT NULL AUTO_INCREMENT=1000,
   name VARCHAR(255),
   payment_method_id INT,
-  recurring VARCHAR(50),
-  active BOOL,
   PRIMARY KEY(id),
   FOREIGN KEY(payment_method_id) REFERENCES payment_method(id)
 );
 
 CREATE TABLE account_note (
-  id INT NOT NULL AUTO_INCREMENT,
+  id INT NOT NULL AUTO_INCREMENT=2000,
   account_id INT,
   date DATE,
   note VARCHAR(255),
@@ -46,12 +34,8 @@ CREATE TABLE account_note (
   FOREIGN KEY(account_id) REFERENCES account(id)
 );
 
-CREATE TABLE account_archive_log (
-  id INT NOT NULL AUTO_INCREMENT,
-  account_id INT,
-  date DATE,
-  note VARCHAR(255),
-  PRIMARY KEY(id),
-  FOREIGN KEY(account_id) REFERENCES account(id)
-);
+ALTER TABLE payment_method AUTO_INCREMENT = 3000;
+ALTER TABLE payment_method_note AUTO_INCREMENT = 4000;
+ALTER TABLE account AUTO_INCREMENT = 1000;
+ALTER TABLE account_note AUTO_INCREMENT = 2000;
 
