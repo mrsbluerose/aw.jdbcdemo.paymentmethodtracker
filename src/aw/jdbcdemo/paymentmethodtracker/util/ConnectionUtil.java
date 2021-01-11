@@ -10,7 +10,7 @@ public class ConnectionUtil {
     	
     	final String HOST_NAME = "localhost";
     	final String SQL_PORT = "3306";
-    	final String DATABASE_NAME = "mydb";
+    	final String DATABASE_NAME = "paymentmethodtracker";
     	final String DATABASE_USERNAME = "root";
     	final String DATABASE_PASSWORD = "TryThisOne";
     	Connection conn = null;
