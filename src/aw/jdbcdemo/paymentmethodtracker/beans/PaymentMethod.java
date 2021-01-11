@@ -5,7 +5,6 @@ public class PaymentMethod {
 	private String name;
 	private String description;
 	private String expDate;
-	private boolean active;
 
 	public int getId() {
 		return id;
@@ -39,18 +38,10 @@ public class PaymentMethod {
 		this.expDate = expDate;
 	}
 
-	public boolean isActive() {
-		return active;
-	}
-
-	public void setActive(boolean active) {
-		this.active = active;
-	}
-
 	@Override
 	public String toString() {
 		return "PaymentMethod [id=" + id + ", name=" + name + ", description=" + description + ", expDate=" + expDate
-				+ ", active=" + active + "]";
+				+ "]";
 	}
 
 }

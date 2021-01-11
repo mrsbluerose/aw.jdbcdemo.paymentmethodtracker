@@ -4,8 +4,6 @@ public class Account {
 	private int id;
 	private String name;
 	private int paymentMethod;
-	private String recurring;
-	private boolean active;
 
 	public int getID() {
 		return id;
@@ -31,26 +29,9 @@ public class Account {
 		this.paymentMethod = paymentMethod;
 	}
 
-	public String getRecurring() {
-		return recurring;
-	}
-
-	public void setRecurring(String recurring) {
-		this.recurring = recurring;
-	}
-
-	public boolean isActive() {
-		return active;
-	}
-
-	public void setActive(boolean active) {
-		this.active = active;
-	}
-
 	@Override
 	public String toString() {
-		return "AccountArchiveLog [id=" + id + ", name=" + name + ", paymentMethod=" + paymentMethod + ", recurring="
-				+ recurring + ", active=" + active + "]";
+		return "Account [id=" + id + ", name=" + name + ", paymentMethod=" + paymentMethod + "]";
 	}
 
 }
