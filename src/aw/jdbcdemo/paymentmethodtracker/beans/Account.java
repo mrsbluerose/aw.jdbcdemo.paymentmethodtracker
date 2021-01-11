@@ -3,7 +3,7 @@ package aw.jdbcdemo.paymentmethodtracker.beans;
 public class Account {
 	private int id;
 	private String name;
-	private int paymentMethod;
+	private int paymentMethodID;
 
 	public int getID() {
 		return id;
@@ -21,17 +21,16 @@ public class Account {
 		this.name = name;
 	}
 
-	public int getPaymentMethod() {
-		return paymentMethod;
+	public int getPaymentMethodID() {
+		return paymentMethodID;
 	}
 
-	public void setPaymentMethod(int paymentMethod) {
-		this.paymentMethod = paymentMethod;
+	public void setPaymentMethodID(int paymentMethod) {
+		this.paymentMethodID = paymentMethod;
 	}
 
 	@Override
 	public String toString() {
-		return "Account [id=" + id + ", name=" + name + ", paymentMethod=" + paymentMethod + "]";
+		return "Account [id=" + id + ", name=" + name + ", paymentMethodID=" + paymentMethodID + "]";
 	}
-
 }
