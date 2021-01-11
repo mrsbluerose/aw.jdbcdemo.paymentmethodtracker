@@ -4,7 +4,7 @@ CREATE TABLE payment_method (
   id INT NOT NULL AUTO_INCREMENT=3000,
   name VARCHAR(255),
   description VARCHAR(255),
-  expiration_date DATE,
+  expiration_date VARCHAR(50),
   PRIMARY KEY(id)
 );
 
