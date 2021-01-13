@@ -1,4 +1,4 @@
-package aw.jdbcdemo.paymentmethodtracker.beans;
+package aw.jdbcdemo.paymentmethodtracker.model;
 
 public class Account {
 	private int id;

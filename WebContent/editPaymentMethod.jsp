@@ -9,7 +9,7 @@
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.Connection"%>
 <%@page import="aw.jdbcdemo.paymentmethodtracker.util.ConnectionUtil" %>
-<%@page import="aw.jdbcdemo.paymentmethodtracker.beans.PaymentMethod" %>
+<%@page import="aw.jdbcdemo.paymentmethodtracker.model.PaymentMethod" %>
 
 <%
 	PaymentMethod paymentMethod = new PaymentMethod();

@@ -1,8 +1,8 @@
-package aw.jdbcdemo.paymentmethodtracker.beans;
+package aw.jdbcdemo.paymentmethodtracker.model;
 
-public class PaymentMethodNote {
+public class AccountNote {
 	private int id;
-	private int paymentMethodID;
+	private int accountID;
 	private String date;
 	private String note;
 
@@ -14,12 +14,12 @@ public class PaymentMethodNote {
 		this.id = id;
 	}
 
-	public int getPaymentMethodID() {
-		return paymentMethodID;
+	public int getAccountID() {
+		return accountID;
 	}
 
-	public void setPaymentMethodID(int paymentMethodID) {
-		this.paymentMethodID = paymentMethodID;
+	public void setAccountID(int accountID) {
+		this.accountID = accountID;
 	}
 
 	public String getDate() {
@@ -40,8 +40,7 @@ public class PaymentMethodNote {
 
 	@Override
 	public String toString() {
-		return "PaymentMethodNote [id=" + id + ", paymentMethodID=" + paymentMethodID + ", date=" + date + ", note="
-				+ note + "]";
+		return "AccountNote [id=" + id + ", accountID=" + accountID + ", date=" + date + ", note=" + note + "]";
 	}
 
 }

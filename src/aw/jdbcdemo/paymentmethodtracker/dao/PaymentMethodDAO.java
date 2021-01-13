@@ -5,7 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import aw.jdbcdemo.paymentmethodtracker.beans.PaymentMethod;
+import aw.jdbcdemo.paymentmethodtracker.model.PaymentMethod;
 import aw.jdbcdemo.paymentmethodtracker.util.ConnectionUtil;
 
 
