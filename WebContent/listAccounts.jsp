@@ -25,6 +25,8 @@
 </head>
 <body>
 	<h1>Accounts:</h1>
+	<input type="button" name="create" value="Create New">
+	<input type="button" name="search" value="Search Accounts">
 	<table>
 		<tr>
 			<th>ID</th>

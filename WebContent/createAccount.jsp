@@ -4,16 +4,15 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Save Payment Method</title>
+<title>Create Account</title>
 </head>
 <body>
-<h1>Save Payment Method</h1>
-<form action="paymentMethod" method="post">
+<h1>Create Account</h1>
+<form action="accountController" method="post">
 <pre>
 Name: <input type="text" name="name" />
-Description: <input type="text" name="description" />
-Expiration: <input type="text" name="expDate" />
-<input type="hidden" name="action" value="save"/>
+Payment Method: <input type="text" name="paymentMethod" />
+<input type="hidden" name="action" value="create"/>
 <input type="submit" value="Save">
 </pre>
 </form>

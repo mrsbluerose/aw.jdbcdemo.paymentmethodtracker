@@ -9,10 +9,10 @@
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.Connection"%>
 <%@page import="aw.jdbcdemo.paymentmethodtracker.util.ConnectionUtil" %>
-<%@page import="aw.jdbcdemo.paymentmethodtracker.model.PaymentMethod" %>
+<%@page import="aw.jdbcdemo.paymentmethodtracker.model.Account" %>
 
 <%
-	PaymentMethod paymentMethod = new PaymentMethod();
+	Account account = new Account();
 	String id = request.getParameter("id");
 	Connection connection = null;
 	Statement statement = null;
@@ -23,27 +23,24 @@
 try {
 	connection = ConnectionUtil.getConnection();
 	statement=connection.createStatement();
-	String sql = "SELECT * FROM payment_method WHERE id=" + id;
+	String sql = "SELECT * FROM account WHERE id=" + id;
 	resultSet = statement.executeQuery(sql);
 	while(resultSet.next()) {
 %>
 
-
-
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Edit Payment Method</title>
+<title>Edit Account</title>
 </head>
 <body>
-<h1>Edit Payment Method</h1>
-<form action="paymentMethod" method="post">
+<h1>Edit Account</h1>
+<form action="accountController" method="post">
 <input type="hidden" name="id" value="<%=resultSet.getString("id") %>">
 <pre>
 ID: <%=resultSet.getInt("id") %>
 Name: <input type="text" name="name" value="<%=resultSet.getString("name") %>"/>
-Description: <input type="text" name="description" value="<%=resultSet.getString("description") %>"/>
-Expiration: <input type="text" name="expDate" value="<%=resultSet.getString("expiration_date") %>"/>
+Payment Method: <input type="text" name="description" value="<%=resultSet.getInt("payment_method_id") %>"/>
 <input type="hidden" name="action" value="edit"/>
 <input type="submit" value="Save">
 </pre>
@@ -59,4 +56,3 @@ connection.close();
 
 </body>
 </html>
-
