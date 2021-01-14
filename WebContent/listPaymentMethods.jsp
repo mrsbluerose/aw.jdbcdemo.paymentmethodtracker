@@ -24,7 +24,9 @@
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-	<h1>Payment Methods:</h1>
+	<h1>Payment Methods</h1>
+	<a href="createPaymentMethod.jsp">Create New</a>
+	<a href="searchPaymentMethod.jsp">Search</a>
 	<table>
 		<tr>
 			<th>ID</th>

@@ -37,7 +37,7 @@ try {
 </head>
 <body>
 <h1>Edit Payment Method</h1>
-<form action="paymentMethod" method="post">
+<form action="paymentMethodController" method="post">
 <input type="hidden" name="id" value="<%=resultSet.getString("id") %>">
 <pre>
 ID: <%=resultSet.getInt("id") %>

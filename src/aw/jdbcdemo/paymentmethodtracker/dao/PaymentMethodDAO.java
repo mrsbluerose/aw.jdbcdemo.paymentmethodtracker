@@ -4,7 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
+import aw.jdbcdemo.paymentmethodtracker.model.Account;
 import aw.jdbcdemo.paymentmethodtracker.model.PaymentMethod;
 import aw.jdbcdemo.paymentmethodtracker.util.ConnectionUtil;
 
@@ -15,10 +17,10 @@ public class PaymentMethodDAO {
 		Connection connection;
 		try {
 			connection = ConnectionUtil.getConnection();
-			PreparedStatement statement = connection.prepareStatement("INSERT INTO payment_method (name,description,expDate) VALUES(?,?,?)");
+			PreparedStatement statement = connection.prepareStatement("INSERT INTO payment_method (name,description,expiration_date) VALUES(?,?,?)");
 			statement.setString(1, paymentMethod.getName());
 			statement.setString(2, paymentMethod.getDescription());
-			statement.setString(2, paymentMethod.getExpDate());
+			statement.setString(3, paymentMethod.getExpDate());
 			statement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -44,7 +46,8 @@ public class PaymentMethodDAO {
 		}
 	}
 	
-	public PaymentMethod searchByID(int id) {
+	public ArrayList<PaymentMethod> searchByID(int id) {
+		ArrayList<PaymentMethod> paymentMethodList = new ArrayList<>();
 		PaymentMethod paymentMethod = new PaymentMethod();
 		Connection connection;
 		try {
@@ -53,10 +56,12 @@ public class PaymentMethodDAO {
 			statement.setInt(1, id);
 			ResultSet resultSet = statement.executeQuery();
 			while(resultSet.next()) {
+				paymentMethod = new PaymentMethod();
 				paymentMethod.setID(resultSet.getInt(1));
 				paymentMethod.setName(resultSet.getString(2));
 				paymentMethod.setDescription(resultSet.getString(3));
 				paymentMethod.setExpDate(resultSet.getString(4));
+				paymentMethodList.add(paymentMethod);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -64,10 +69,11 @@ public class PaymentMethodDAO {
 			e.printStackTrace();
 		}
 		
-		return paymentMethod;
+		return paymentMethodList;
 	}
 	
-	public PaymentMethod searchByName(String name) {
+	public ArrayList<PaymentMethod> searchByName(String name) {
+		ArrayList<PaymentMethod> paymentMethodList = new ArrayList<>();
 		PaymentMethod paymentMethod = new PaymentMethod();
 		Connection connection;
 		try {
@@ -76,10 +82,12 @@ public class PaymentMethodDAO {
 			statement.setString(1, "%"+name+"%");
 			ResultSet resultSet = statement.executeQuery();
 			while(resultSet.next()) {
+				paymentMethod = new PaymentMethod();
 				paymentMethod.setID(resultSet.getInt(1));
 				paymentMethod.setName(resultSet.getString(2));
 				paymentMethod.setDescription(resultSet.getString(3));
 				paymentMethod.setExpDate(resultSet.getString(4));
+				paymentMethodList.add(paymentMethod);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -87,10 +95,11 @@ public class PaymentMethodDAO {
 			e.printStackTrace();
 		}
 		
-		return paymentMethod;
+		return paymentMethodList;
 	}
 	
-	public PaymentMethod searchByExpirationYear(String expYear) {
+	public ArrayList<PaymentMethod> searchByExpirationYear(String expYear) {
+		ArrayList<PaymentMethod> paymentMethodList = new ArrayList<>();
 		PaymentMethod paymentMethod = new PaymentMethod();
 		Connection connection;
 		try {
@@ -99,10 +108,12 @@ public class PaymentMethodDAO {
 			statement.setString(1, "%"+expYear+"%");
 			ResultSet resultSet = statement.executeQuery();
 			while(resultSet.next()) {
+				paymentMethod = new PaymentMethod();
 				paymentMethod.setID(resultSet.getInt(1));
 				paymentMethod.setName(resultSet.getString(2));
 				paymentMethod.setDescription(resultSet.getString(3));
 				paymentMethod.setExpDate(resultSet.getString(4));
+				paymentMethodList.add(paymentMethod);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -110,7 +121,21 @@ public class PaymentMethodDAO {
 			e.printStackTrace();
 		}
 		
-		return paymentMethod;
+		return paymentMethodList;
+	}
+
+	public void delete(int id) {
+		Connection connection;
+		try {
+			connection = ConnectionUtil.getConnection();
+			PreparedStatement statement = connection.prepareStatement("DELETE FROM payment_method WHERE id=?");
+			statement.setInt(1, id);
+			statement.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
 	}
 	
 }
