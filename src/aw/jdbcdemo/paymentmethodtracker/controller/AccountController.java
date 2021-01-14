@@ -2,6 +2,7 @@ package aw.jdbcdemo.paymentmethodtracker.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -30,7 +31,7 @@ public class AccountController extends HttpServlet {
 		if(action.contentEquals("create")) {
 			createAccount(request,response);
 		} else if (action.contentEquals("search")) {
-			searchAccount(request,response);
+			search(request,response);
 		} else if (action.contentEquals("edit")) {
 			editAccount(request,response);
 		} else if (action.contentEquals("delete")) {
@@ -54,10 +55,6 @@ public class AccountController extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		out.print("<b>Account Created!!</b>");
 		out.print("<br/><a href='listAccounts.jsp'>Home</a>");
-	}
-	
-	private void searchAccount(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		
 	}
 	
 	private void editAccount(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -93,5 +90,27 @@ public class AccountController extends HttpServlet {
 		out.print("<b>Action cancelled</b>");
 		out.print("<br/><a href='listAccounts.jsp'>Back to Accounts</a>");
 	}
+	private void search(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		String searchType = request.getParameter("searchType");
+		String searchTerm = request.getParameter("searchTerm");
+		ArrayList<Account> accountList = new ArrayList<>();
+		
+		if (searchType.contentEquals("ID")) {
+			accountList = dao.searchByID(Integer.parseInt(searchTerm));
+		} else if (searchType.contentEquals("Name")) {
+			accountList = dao.searchByName(searchTerm);
+		} else if (searchType.contentEquals("Payment Method ID")) {
+			accountList = dao.searchByPaymentMethodID(Integer.parseInt(searchTerm));
+		}
+		
+		response.setContentType("text/html");
+		PrintWriter out = response.getWriter();
+		out.print("<a href='listAccounts.jsp'>Back to Accounts</a><br/>");
+		out.print("<b>Accounts Found:</b>");
+		for(Account a:accountList) {
+			out.print(a + "<br/>");
+		}
+	}
+
 	
 }

@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import aw.jdbcdemo.paymentmethodtracker.model.Account;
 import aw.jdbcdemo.paymentmethodtracker.util.ConnectionUtil;
@@ -55,7 +56,8 @@ public class AccountDAO {
 		}
 	}
 	
-	public Account searchByID(int id) {
+	public ArrayList<Account> searchByID(int id) {
+		ArrayList<Account> accountList = new ArrayList<>();
 		Account account = new Account();
 		Connection connection;
 		try {
@@ -64,9 +66,11 @@ public class AccountDAO {
 			statement.setInt(1, id);
 			ResultSet resultSet = statement.executeQuery();
 			while(resultSet.next()) {
+				account = new Account();
 				account.setID(resultSet.getInt(1));
 				account.setName(resultSet.getString(2));
 				account.setPaymentMethodID(resultSet.getInt(3));
+				accountList.add(account);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -74,11 +78,12 @@ public class AccountDAO {
 			e.printStackTrace();
 		}
 		
-		return account;
+		return accountList;
 	}
 	
-	public Account searchByName(String name) {
-		Account account = new Account();
+	public ArrayList<Account> searchByName(String name) {
+		ArrayList<Account> accountList = new ArrayList<>();
+		Account account;
 		Connection connection;
 		try {
 			connection = ConnectionUtil.getConnection();
@@ -86,9 +91,11 @@ public class AccountDAO {
 			statement.setString(1, "%"+name+"%");
 			ResultSet resultSet = statement.executeQuery();
 			while(resultSet.next()) {
+				account = new Account();
 				account.setID(resultSet.getInt(1));
 				account.setName(resultSet.getString(2));
 				account.setPaymentMethodID(resultSet.getInt(3));
+				accountList.add(account);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -96,11 +103,12 @@ public class AccountDAO {
 			e.printStackTrace();
 		}
 		
-		return account;
+		return accountList;
 	}
 	
-	public Account searchByPaymentMethodID(int paymentMethodID) {
-		Account account = new Account();
+	public ArrayList<Account> searchByPaymentMethodID(int paymentMethodID) {
+		ArrayList<Account> accountList = new ArrayList<>();
+		Account account;
 		Connection connection;
 		try {
 			connection = ConnectionUtil.getConnection();
@@ -108,9 +116,11 @@ public class AccountDAO {
 			statement.setInt(1, paymentMethodID);
 			ResultSet resultSet = statement.executeQuery();
 			while(resultSet.next()) {
+				account = new Account();
 				account.setID(resultSet.getInt(1));
 				account.setName(resultSet.getString(2));
 				account.setPaymentMethodID(resultSet.getInt(3));
+				accountList.add(account);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -118,6 +128,6 @@ public class AccountDAO {
 			e.printStackTrace();
 		}
 		
-		return account;
+		return accountList;
 	}
 }
