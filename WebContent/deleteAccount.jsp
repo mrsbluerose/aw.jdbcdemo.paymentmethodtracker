@@ -35,17 +35,18 @@ try {
 </head>
 <body>
 <h1>Delete Account ?</h1>
-<form action="accountController" method="post">
-<input type="hidden" name="id" value="<%=resultSet.getString("id") %>">
 <pre>
 ID: <%=resultSet.getInt("id") %>
-Name: <input type="text" name="name" value="<%=resultSet.getString("name") %>"/>
-Payment Method: <input type="text" name="description" value="<%=resultSet.getInt("payment_method_id") %>"/>
-<input type="hidden" name="action" value="delete"/>
-<input type="submit" value="Yes">
-<input type= value="button" onclick= value="No">
+Name: <%=resultSet.getString("name") %>
+Payment Method: <%=resultSet.getInt("payment_method_id")%>
 </pre>
+<form action="accountController" method="post">
+<input type="hidden" name="id" value="<%=resultSet.getString("id") %>" />
+<input type="submit" name="action" value="delete" />
+<input type="submit" name="action" value="cancel"/>
+
 </form>
+
 
 <%
 }

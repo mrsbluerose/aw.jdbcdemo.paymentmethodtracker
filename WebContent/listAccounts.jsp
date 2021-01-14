@@ -25,8 +25,9 @@
 </head>
 <body>
 	<h1>Accounts:</h1>
-	<input type="button" name="create" value="Create New">
-	<input type="button" name="search" value="Search Accounts">
+	<a href="createAccount.jsp">Create New</a>
+	<a href="searchAccount.jsp">Search</a>
+	
 	<table>
 		<tr>
 			<th>ID</th>

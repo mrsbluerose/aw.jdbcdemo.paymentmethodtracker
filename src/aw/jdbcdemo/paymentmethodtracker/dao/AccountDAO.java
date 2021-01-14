@@ -41,6 +41,20 @@ public class AccountDAO {
 		}
 	}
 	
+	public void delete(int id) {
+		Connection connection;
+		try {
+			connection = ConnectionUtil.getConnection();
+			PreparedStatement statement = connection.prepareStatement("DELETE FROM account WHERE id=?");
+			statement.setInt(1, id);
+			statement.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public Account searchByID(int id) {
 		Account account = new Account();
 		Connection connection;

@@ -38,9 +38,9 @@ try {
 <form action="accountController" method="post">
 <input type="hidden" name="id" value="<%=resultSet.getString("id") %>">
 <pre>
-ID: <%=resultSet.getInt("id") %>
+ID: <input type="text" name="id" value="<%=resultSet.getInt("id")%>" readonly/>
 Name: <input type="text" name="name" value="<%=resultSet.getString("name") %>"/>
-Payment Method: <input type="text" name="description" value="<%=resultSet.getInt("payment_method_id") %>"/>
+Payment Method: <input type="text" name="paymentMethod" value="<%=resultSet.getInt("payment_method_id") %>"/>
 <input type="hidden" name="action" value="edit"/>
 <input type="submit" value="Save">
 </pre>
