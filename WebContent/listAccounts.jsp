@@ -34,6 +34,7 @@
 			<th>ID</th>
 			<th>Name</th>
 			<th>Payment Method</th>
+			<th>Notes</th>
 			<th>Edit</th>
 			<th>Delete</th>
 		</tr>
@@ -50,6 +51,7 @@
 			<td><%=resultSet.getInt("id")%></td>
 			<td><%=resultSet.getString("name")%></td>
 			<td><%=resultSet.getInt("payment_method_id")%></td>
+			<td><a href="editAccount.jsp?id=<%=resultSet.getInt("id")%>">Notes</a></td>
 			<td><a href="editAccount.jsp?id=<%=resultSet.getInt("id")%>">Edit</a></td>
 			<td><a href="deleteAccount.jsp?id=<%=resultSet.getInt("id")%>">Delete</a></td>
 		</tr>
