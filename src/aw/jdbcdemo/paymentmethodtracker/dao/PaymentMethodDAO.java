@@ -16,7 +16,7 @@ public class PaymentMethodDAO {
 		Connection connection;
 		try {
 			connection = ConnectionUtil.getConnection();
-			PreparedStatement statement = connection.prepareStatement("INSERT INTO payment_method (name,description,expiration_date) VALUES(?,?,?)");
+			PreparedStatement statement = connection.prepareStatement("INSERT INTO payment_method (payment_method_name,payment_method_description,payment_method_exp_date) VALUES(?,?,?)");
 			statement.setString(1, paymentMethod.getName());
 			statement.setString(2, paymentMethod.getDescription());
 			statement.setString(3, paymentMethod.getExpDate());
@@ -34,7 +34,7 @@ public class PaymentMethodDAO {
 		Connection connection;
 		try {
 			connection = ConnectionUtil.getConnection();
-			PreparedStatement statement = connection.prepareStatement("SELECT * FROM payment_method WHERE id=?");
+			PreparedStatement statement = connection.prepareStatement("SELECT * FROM payment_method WHERE payment_method_id=?");
 			statement.setInt(1, id);
 			ResultSet resultSet = statement.executeQuery();
 			while(resultSet.next()) {
@@ -60,7 +60,7 @@ public class PaymentMethodDAO {
 		Connection connection;
 		try {
 			connection = ConnectionUtil.getConnection();
-			PreparedStatement statement = connection.prepareStatement("SELECT * FROM payment_method WHERE name LIKE ?");
+			PreparedStatement statement = connection.prepareStatement("SELECT * FROM payment_method WHERE payment_method_name LIKE ?");
 			statement.setString(1, "%"+name+"%");
 			ResultSet resultSet = statement.executeQuery();
 			while(resultSet.next()) {
@@ -86,7 +86,7 @@ public class PaymentMethodDAO {
 		Connection connection;
 		try {
 			connection = ConnectionUtil.getConnection();
-			PreparedStatement statement = connection.prepareStatement("SELECT * FROM payment_method WHERE expiration_date LIKE ?");
+			PreparedStatement statement = connection.prepareStatement("SELECT * FROM payment_method WHERE payment_method_exp_date LIKE ?");
 			statement.setString(1, "%"+expYear+"%");
 			ResultSet resultSet = statement.executeQuery();
 			while(resultSet.next()) {
@@ -110,7 +110,7 @@ public class PaymentMethodDAO {
 		Connection connection;
 		try {
 			connection = ConnectionUtil.getConnection();
-			PreparedStatement statement = connection.prepareStatement("UPDATE payment_method SET name=?, description=?, expiration_date=? WHERE id=?");
+			PreparedStatement statement = connection.prepareStatement("UPDATE payment_method SET payment_method_name=?, payment_method_description=?, payment_method_exp_date=? WHERE payment_method_id=?");
 			statement.setString(1, paymentMethod.getName());
 			statement.setString(2, paymentMethod.getDescription());
 			statement.setString(3, paymentMethod.getExpDate());
@@ -127,7 +127,7 @@ public class PaymentMethodDAO {
 		Connection connection;
 		try {
 			connection = ConnectionUtil.getConnection();
-			PreparedStatement statement = connection.prepareStatement("DELETE FROM payment_method WHERE id=?");
+			PreparedStatement statement = connection.prepareStatement("DELETE FROM payment_method WHERE payment_method_id=?");
 			statement.setInt(1, id);
 			statement.executeUpdate();
 		} catch (SQLException e) {

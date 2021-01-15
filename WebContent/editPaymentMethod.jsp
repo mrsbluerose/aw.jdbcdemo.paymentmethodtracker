@@ -13,7 +13,7 @@
 
 <%
 	PaymentMethod paymentMethod = new PaymentMethod();
-	String id = request.getParameter("id");
+	String id = request.getParameter("payment_method_id");
 	Connection connection = null;
 	Statement statement = null;
 	ResultSet resultSet = null;
@@ -23,7 +23,7 @@
 	try {
 		connection = ConnectionUtil.getConnection();
 		statement = connection.createStatement();
-		String sql = "SELECT * FROM payment_method WHERE id=" + id;
+		String sql = "SELECT * FROM payment_method WHERE payment_method_id=" + id;
 		resultSet = statement.executeQuery(sql);
 		while (resultSet.next()) {
 %>
@@ -39,15 +39,15 @@
 	<a href="index.html">Home</a>
 	<h1>Edit Payment Method</h1>
 	<form action="paymentMethodController" method="post">
-		<input type="hidden" name="id" value="<%=resultSet.getString("id")%>">
+		<input type="hidden" name="id" value="<%=resultSet.getString("payment_method_id")%>">
 		<pre>
-ID: <%=resultSet.getInt("id")%>
-Name: <input type="text" name="name"
-				value="<%=resultSet.getString("name")%>" />
-Description: <input type="text" name="description"
-				value="<%=resultSet.getString("description")%>" />
-Expiration: <input type="text" name="expDate"
-				value="<%=resultSet.getString("expiration_date")%>" />
+		ID: <%=resultSet.getInt("payment_method_id")%>
+		Name: <input type="text" name="name"
+				value="<%=resultSet.getString("payment_method_name")%>" />
+		Description: <input type="text" name="description"
+				value="<%=resultSet.getString("payment_method_description")%>" />
+		Expiration: <input type="text" name="expDate"
+				value="<%=resultSet.getString("payment_method_exp_date")%>" />
 <input type="hidden" name="action" value="edit" />
 <input type="submit" value="Save">
 </pre>

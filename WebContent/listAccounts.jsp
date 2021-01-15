@@ -42,18 +42,20 @@
 			try {
 				connection = ConnectionUtil.getConnection();
 				statement = connection.createStatement();
-				String sql = "SELECT * FROM account ORDER BY id";
+				String sql = "SELECT a.account_id, a.account_name, pm.payment_method_name "
+						+ "FROM account as a "
+						+ "INNER JOIN payment_method as pm ON a.payment_method_id=pm.payment_method_id;"; 
 				resultSet = statement.executeQuery(sql);
 				while (resultSet.next()) {
 		%>
 
 		<tr>
-			<td><%=resultSet.getInt("id")%></td>
-			<td><%=resultSet.getString("name")%></td>
-			<td><%=resultSet.getInt("payment_method_id")%></td>
-			<td><a href="editAccount.jsp?id=<%=resultSet.getInt("id")%>">Notes</a></td>
-			<td><a href="editAccount.jsp?id=<%=resultSet.getInt("id")%>">Edit</a></td>
-			<td><a href="deleteAccount.jsp?id=<%=resultSet.getInt("id")%>">Delete</a></td>
+			<td><%=resultSet.getInt("account_id")%></td>
+			<td><%=resultSet.getString("account_name")%></td>
+			<td><%=resultSet.getString("payment_method_name")%></td>
+			<td><a href="editAccount.jsp?id=<%=resultSet.getInt("account_id")%>">Notes</a></td>
+			<td><a href="editAccount.jsp?id=<%=resultSet.getInt("account_id")%>">Edit</a></td>
+			<td><a href="deleteAccount.jsp?id=<%=resultSet.getInt("account_id")%>">Delete</a></td>
 		</tr>
 		<%
 			}

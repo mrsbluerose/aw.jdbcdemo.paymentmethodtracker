@@ -41,20 +41,20 @@
 			try {
 				connection = ConnectionUtil.getConnection();
 				statement = connection.createStatement();
-				String sql = "SELECT * FROM payment_method ORDER BY id";
+				String sql = "SELECT * FROM payment_method ORDER BY payment_method_id";
 				resultSet = statement.executeQuery(sql);
 				while (resultSet.next()) {
 		%>
 
 		<tr>
-			<td><%=resultSet.getInt("id")%></td>
-			<td><%=resultSet.getString("name")%></td>
-			<td><%=resultSet.getString("description")%></td>
-			<td><%=resultSet.getString("expiration_date")%></td>
+			<td><%=resultSet.getInt("payment_method_id")%></td>
+			<td><%=resultSet.getString("payment_method_name")%></td>
+			<td><%=resultSet.getString("payment_method_description")%></td>
+			<td><%=resultSet.getString("payment_method_exp_date")%></td>
 			<td><a
-				href="editPaymentMethod.jsp?id=<%=resultSet.getInt("id")%>">Edit</a></td>
+				href="editPaymentMethod.jsp?payment_method_id=<%=resultSet.getInt("payment_method_id")%>">Edit</a></td>
 			<td><a
-				href="deletePaymentMethod.jsp?id=<%=resultSet.getInt("id")%>">Delete</a></td>
+				href="deletePaymentMethod.jsp?payment_method_id=<%=resultSet.getInt("payment_method_id")%>">Delete</a></td>
 		</tr>
 		<%
 			}

@@ -15,7 +15,7 @@ public class AccountDAO {
 		Connection connection;
 		try {
 			connection = ConnectionUtil.getConnection();
-			PreparedStatement statement = connection.prepareStatement("INSERT INTO account (name,payment_method_id) VALUES(?,?)");
+			PreparedStatement statement = connection.prepareStatement("INSERT INTO account (account_name,payment_method_id) VALUES(?,?)");
 			statement.setString(1, account.getName());
 			statement.setInt(2, account.getPaymentMethodID());
 			statement.executeUpdate();
@@ -32,7 +32,7 @@ public class AccountDAO {
 		Connection connection;
 		try {
 			connection = ConnectionUtil.getConnection();
-			PreparedStatement statement = connection.prepareStatement("SELECT * FROM account WHERE id=?");
+			PreparedStatement statement = connection.prepareStatement("SELECT * FROM account WHERE account_id=?");
 			statement.setInt(1, id);
 			ResultSet resultSet = statement.executeQuery();
 			while(resultSet.next()) {
@@ -57,7 +57,7 @@ public class AccountDAO {
 		Connection connection;
 		try {
 			connection = ConnectionUtil.getConnection();
-			PreparedStatement statement = connection.prepareStatement("SELECT * FROM account WHERE name LIKE ?");
+			PreparedStatement statement = connection.prepareStatement("SELECT * FROM account WHERE account_name LIKE ?");
 			statement.setString(1, "%"+name+"%");
 			ResultSet resultSet = statement.executeQuery();
 			while(resultSet.next()) {
@@ -105,7 +105,7 @@ public class AccountDAO {
 		Connection connection;
 		try {
 			connection = ConnectionUtil.getConnection();
-			PreparedStatement statement = connection.prepareStatement("UPDATE account SET name=?, payment_method_id=? WHERE id=?");
+			PreparedStatement statement = connection.prepareStatement("UPDATE account SET account_name=?, payment_method_id=? WHERE account_id=?");
 			statement.setString(1, account.getName());
 			statement.setInt(2, account.getPaymentMethodID());
 			statement.setInt(3, account.getID());
@@ -121,7 +121,7 @@ public class AccountDAO {
 		Connection connection;
 		try {
 			connection = ConnectionUtil.getConnection();
-			PreparedStatement statement = connection.prepareStatement("DELETE FROM account WHERE id=?");
+			PreparedStatement statement = connection.prepareStatement("DELETE FROM account WHERE account_id=?");
 			statement.setInt(1, id);
 			statement.executeUpdate();
 		} catch (SQLException e) {

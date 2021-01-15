@@ -23,7 +23,7 @@
 	try {
 		connection = ConnectionUtil.getConnection();
 		statement = connection.createStatement();
-		String sql = "SELECT * FROM account WHERE id=" + id;
+		String sql = "SELECT * FROM account WHERE account_id=" + id;
 		resultSet = statement.executeQuery(sql);
 		while (resultSet.next()) {
 %>
@@ -37,13 +37,12 @@
 	<a href="index.html">Home</a>
 	<h1>Edit Account</h1>
 	<form action="accountController" method="post">
-		<input type="hidden" name="id" value="<%=resultSet.getString("id")%>">
+		<input type="hidden" name="id" value="<%=resultSet.getInt("account_id")%>">
 		<pre>
-ID: <input type="text" name="id" value="<%=resultSet.getInt("id")%>"
-				readonly />
-Name: <input type="text" name="name"
-				value="<%=resultSet.getString("name")%>" />
-Payment Method: <input type="text" name="paymentMethod"
+		ID: <%=resultSet.getInt("account_id")%>
+		Name: <input type="text" name="name"
+				value="<%=resultSet.getString("account_name")%>" />
+		Payment Method: <input type="text" name="paymentMethod"
 				value="<%=resultSet.getInt("payment_method_id")%>" />
 <input type="hidden" name="action" value="edit" />
 <input type="submit" value="Save">
