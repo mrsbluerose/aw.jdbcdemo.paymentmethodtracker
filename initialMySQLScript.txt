@@ -1,7 +1,15 @@
+/*
+Creates and the database and uses it
+*/
 CREATE DATABASE paymentmethodtracker;
+USE paymentmethodtracker;
 
+/*
+Creates tables
+The order of creation is significant due to foreign key dependencies
+*/
 CREATE TABLE payment_method (
-  id INT NOT NULL AUTO_INCREMENT=3000,
+  id INT NOT NULL AUTO_INCREMENT,
   name VARCHAR(255),
   description VARCHAR(255),
   expiration_date VARCHAR(50),
@@ -9,16 +17,16 @@ CREATE TABLE payment_method (
 );
 
 CREATE TABLE payment_method_note (
-  id INT NOT NULL AUTO_INCREMENT=4000,
+  id INT NOT NULL AUTO_INCREMENT,
   payment_method_id INT,
-  date DATE,
+  date VARCHAR(50),
   note VARCHAR(255),
   PRIMARY KEY(id),
   FOREIGN KEY(payment_method_id) REFERENCES payment_method(id)
 );
 
 CREATE TABLE account (
-  id INT NOT NULL AUTO_INCREMENT=1000,
+  id INT NOT NULL AUTO_INCREMENT,
   name VARCHAR(255),
   payment_method_id INT,
   PRIMARY KEY(id),
@@ -26,16 +34,32 @@ CREATE TABLE account (
 );
 
 CREATE TABLE account_note (
-  id INT NOT NULL AUTO_INCREMENT=2000,
+  id INT NOT NULL AUTO_INCREMENT,
   account_id INT,
-  date DATE,
+  date VARCHAR(50),
   note VARCHAR(255),
   PRIMARY KEY(id),
   FOREIGN KEY(account_id) REFERENCES account(id)
 );
 
+/*
+Alters table primary keys to start numbering at specified numbers
+*/
 ALTER TABLE payment_method AUTO_INCREMENT = 3000;
 ALTER TABLE payment_method_note AUTO_INCREMENT = 4000;
 ALTER TABLE account AUTO_INCREMENT = 1000;
 ALTER TABLE account_note AUTO_INCREMENT = 2000;
+
+/*
+Adds Sample records
+The order of insertion is significant due to foreign key dependencies
+*/
+INSERT INTO payment_method (name, description, expiration_date) VALUES ('payment method 1', 'description 1', '2022-12-31');
+INSERT INTO payment_method (name, description, expiration_date) VALUES ('payment method 2', 'description 2', '2022-12-31');
+INSERT INTO payment_method (name, description, expiration_date) VALUES ('payment method 3', 'description 3', '2022-12-31');
+
+/*If needed, change payment method id values to match above ids when they are created*/
+INSERT INTO account (name, payment_method_id) VALUES ('Account 1', 3000);
+INSERT INTO account (name, payment_method_id) VALUES ('Account 2', 3001);
+INSERT INTO account (name, payment_method_id) VALUES ('Account 3', 3002);
 
