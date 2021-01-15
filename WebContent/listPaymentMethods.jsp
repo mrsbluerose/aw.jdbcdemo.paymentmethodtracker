@@ -24,6 +24,7 @@
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+	<a href="index.html">Home</a>
 	<h1>Payment Methods</h1>
 	<a href="createPaymentMethod.jsp">Create New</a>
 	<a href="searchPaymentMethod.jsp">Search</a>
@@ -50,7 +51,8 @@
 			<td><%=resultSet.getString("name")%></td>
 			<td><%=resultSet.getString("description")%></td>
 			<td><%=resultSet.getString("expiration_date")%></td>
-			<td><a href="editPaymentMethod.jsp?id=<%=resultSet.getInt("id")%>">Edit</a></td>
+			<td><a
+				href="editPaymentMethod.jsp?id=<%=resultSet.getInt("id")%>">Edit</a></td>
 			<td><a
 				href="deletePaymentMethod.jsp?id=<%=resultSet.getInt("id")%>">Delete</a></td>
 		</tr>

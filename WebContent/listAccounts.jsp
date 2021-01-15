@@ -24,10 +24,11 @@
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+	<a href="index.html">Home</a>
 	<h1>Accounts:</h1>
 	<a href="createAccount.jsp">Create New</a>
 	<a href="searchAccount.jsp">Search</a>
-	
+
 	<table>
 		<tr>
 			<th>ID</th>
@@ -50,8 +51,7 @@
 			<td><%=resultSet.getString("name")%></td>
 			<td><%=resultSet.getInt("payment_method_id")%></td>
 			<td><a href="editAccount.jsp?id=<%=resultSet.getInt("id")%>">Edit</a></td>
-			<td><a
-				href="deleteAccount.jsp?id=<%=resultSet.getInt("id")%>">Delete</a></td>
+			<td><a href="deleteAccount.jsp?id=<%=resultSet.getInt("id")%>">Delete</a></td>
 		</tr>
 		<%
 			}
