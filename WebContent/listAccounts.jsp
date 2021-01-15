@@ -41,7 +41,7 @@
 			try {
 				connection = ConnectionUtil.getConnection();
 				statement = connection.createStatement();
-				String sql = "SELECT * FROM account";
+				String sql = "SELECT * FROM account ORDER BY id";
 				resultSet = statement.executeQuery(sql);
 				while (resultSet.next()) {
 		%>
