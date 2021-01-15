@@ -53,8 +53,8 @@ public class PaymentMethodController extends HttpServlet {
 		
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
-		out.print("<b>Payment Method Created!!</b>");
-		out.print("<br/><a href='listPaymentMethods.jsp'>Back to Payment Method</a>");	}
+		out.print("<b>Payment Method Created!!</b><br/>");
+		out.print("<a href='listPaymentMethods.jsp'>Back to Payment Method</a>");	}
 	
 	private void editPaymentMethod(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		int id = Integer.parseInt(request.getParameter("id"));
@@ -71,8 +71,8 @@ public class PaymentMethodController extends HttpServlet {
 		
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
-		out.print("<b>Payment Method Updated!!</b>");
-		out.print("<br/><a href='listPaymentMethods.jsp'>Back to Payment Method</a>");
+		out.print("<b>Payment Method Updated!!</b><br/>");
+		out.print("<a href='listPaymentMethods.jsp'>Back to Payment Method</a>");
 	}
 	
 	private void deletePaymentMethod(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -81,8 +81,8 @@ public class PaymentMethodController extends HttpServlet {
 		
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
-		out.print("<b>Payment Method Deleted!!</b>");
-		out.print("<br/><a href='listPaymentMethods.jsp'>Back to Payment Method</a>");
+		out.print("<b>Payment Method Deleted!!</b><br/>");
+		out.print("<a href='listPaymentMethods.jsp'>Back to Payment Method</a>");
 	}
 	
 	private void searchPaymentMethod(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -90,18 +90,18 @@ public class PaymentMethodController extends HttpServlet {
 		String searchTerm = request.getParameter("searchTerm");
 		ArrayList<PaymentMethod> paymentMethodList = new ArrayList<>();
 		
-		if (searchType.contentEquals("ID")) {
+		if (searchType.contentEquals("id")) {
 			paymentMethodList = dao.searchByID(Integer.parseInt(searchTerm));
-		} else if (searchType.contentEquals("Name")) {
+		} else if (searchType.contentEquals("name")) {
 			paymentMethodList = dao.searchByName(searchTerm);
-		} else if (searchType.contentEquals("Expiration Year")) {
+		} else if (searchType.contentEquals("expYear")) {
 			paymentMethodList = dao.searchByExpirationYear(searchTerm);
 		}
 		
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
-		out.print("<br/><a href='listPaymentMethods.jsp'>Back to Payment Method</a>");
-		out.print("<b>Payment Methods Found:</b>");
+		out.print("<a href='listPaymentMethods.jsp'>Back to Payment Method</a><br/>");
+		out.print("<b>Payment Methods Found:</b><br/>");
 		for(PaymentMethod a:paymentMethodList) {
 			out.print(a + "<br/>");
 		}

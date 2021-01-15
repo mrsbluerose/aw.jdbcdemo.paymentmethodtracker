@@ -12,9 +12,9 @@
 		<pre>
 		Search By: 
 		<select name="searchType" multiple size="1">
-			<option>ID</option>
-			<option>Name</option>
-			<option>Payment Method ID</option>
+			<option value="id">ID</option>
+			<option value="name">Name</option>
+			<option value="paymentMethodID">Payment Method ID</option>
 		</select>
 		Search for: <input type="text" name="searchTerm" />
 		<input type="hidden" name="action" value="search" />

@@ -51,8 +51,8 @@ public class AccountController extends HttpServlet {
 		
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
-		out.print("<b>Account Created!!</b>");
-		out.print("<br/><a href='listAccounts.jsp'>Home</a>");
+		out.print("<b>Account Created!!</b><br/>");
+		out.print("<a href='listAccounts.jsp'>Home</a>");
 	}
 	
 	private void editAccount(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -68,8 +68,8 @@ public class AccountController extends HttpServlet {
 		
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
-		out.print("<b>Account Updated!!</b>");
-		out.print("<br/><a href='listAccounts.jsp'>Back to Accounts</a>");
+		out.print("<b>Account Updated!!</b><br/>");
+		out.print("<a href='listAccounts.jsp'>Back to Accounts</a>");
 	}
 	
 	private void deleteAccount(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -78,33 +78,33 @@ public class AccountController extends HttpServlet {
 		
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
-		out.print("<b>Account Deleted!!</b>");
-		out.print("<br/><a href='listAccounts.jsp'>Back to Accounts</a>");
+		out.print("<b>Account Deleted!!</b><br/>");
+		out.print("<a href='listAccounts.jsp'>Back to Accounts</a>");
 	}
 	
 	private void cancelAccount(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
-		out.print("<b>Action cancelled</b>");
-		out.print("<br/><a href='listAccounts.jsp'>Back to Accounts</a>");
+		out.print("<b>Action cancelled</b><br/>");
+		out.print("<a href='listAccounts.jsp'>Back to Accounts</a>");
 	}
 	private void search(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		String searchType = request.getParameter("searchType");
 		String searchTerm = request.getParameter("searchTerm");
 		ArrayList<Account> accountList = new ArrayList<>();
 		
-		if (searchType.contentEquals("ID")) {
+		if (searchType.contentEquals("id")) {
 			accountList = dao.searchByID(Integer.parseInt(searchTerm));
-		} else if (searchType.contentEquals("Name")) {
+		} else if (searchType.contentEquals("name")) {
 			accountList = dao.searchByName(searchTerm);
-		} else if (searchType.contentEquals("Payment Method ID")) {
+		} else if (searchType.contentEquals("paymentMethodID")) {
 			accountList = dao.searchByPaymentMethodID(Integer.parseInt(searchTerm));
 		}
 		
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 		out.print("<a href='listAccounts.jsp'>Back to Accounts</a><br/>");
-		out.print("<b>Accounts Found:</b>");
+		out.print("<b>Accounts Found:</b><br/>");
 		for(Account a:accountList) {
 			out.print(a + "<br/>");
 		}
