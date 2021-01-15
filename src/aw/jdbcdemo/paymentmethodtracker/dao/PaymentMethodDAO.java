@@ -6,14 +6,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import aw.jdbcdemo.paymentmethodtracker.model.Account;
 import aw.jdbcdemo.paymentmethodtracker.model.PaymentMethod;
 import aw.jdbcdemo.paymentmethodtracker.util.ConnectionUtil;
 
 
 public class PaymentMethodDAO {
 
-	public void save(PaymentMethod paymentMethod) {
+	public void create(PaymentMethod paymentMethod) {
 		Connection connection;
 		try {
 			connection = ConnectionUtil.getConnection();
@@ -28,24 +27,7 @@ public class PaymentMethodDAO {
 			e.printStackTrace();
 		}
 	}
-	
-	public void edit(PaymentMethod paymentMethod) {
-		Connection connection;
-		try {
-			connection = ConnectionUtil.getConnection();
-			PreparedStatement statement = connection.prepareStatement("UPDATE payment_method SET name=?, description=?, expiration_date=? WHERE id=?");
-			statement.setString(1, paymentMethod.getName());
-			statement.setString(2, paymentMethod.getDescription());
-			statement.setString(3, paymentMethod.getExpDate());
-			statement.setInt(4, paymentMethod.getID());
-			statement.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-	}
-	
+		
 	public ArrayList<PaymentMethod> searchByID(int id) {
 		ArrayList<PaymentMethod> paymentMethodList = new ArrayList<>();
 		PaymentMethod paymentMethod = new PaymentMethod();
@@ -124,6 +106,23 @@ public class PaymentMethodDAO {
 		return paymentMethodList;
 	}
 
+	public void edit(PaymentMethod paymentMethod) {
+		Connection connection;
+		try {
+			connection = ConnectionUtil.getConnection();
+			PreparedStatement statement = connection.prepareStatement("UPDATE payment_method SET name=?, description=?, expiration_date=? WHERE id=?");
+			statement.setString(1, paymentMethod.getName());
+			statement.setString(2, paymentMethod.getDescription());
+			statement.setString(3, paymentMethod.getExpDate());
+			statement.setInt(4, paymentMethod.getID());
+			statement.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public void delete(int id) {
 		Connection connection;
 		try {

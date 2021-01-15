@@ -11,43 +11,13 @@ import aw.jdbcdemo.paymentmethodtracker.util.ConnectionUtil;
 
 public class AccountDAO {
 
-	public void save(Account account) {
+	public void create(Account account) {
 		Connection connection;
 		try {
 			connection = ConnectionUtil.getConnection();
 			PreparedStatement statement = connection.prepareStatement("INSERT INTO account (name,payment_method_id) VALUES(?,?)");
 			statement.setString(1, account.getName());
 			statement.setInt(2, account.getPaymentMethodID());
-			statement.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	public void edit(Account account) {
-		Connection connection;
-		try {
-			connection = ConnectionUtil.getConnection();
-			PreparedStatement statement = connection.prepareStatement("UPDATE account SET name=?, payment_method_id=? WHERE id=?");
-			statement.setString(1, account.getName());
-			statement.setInt(2, account.getPaymentMethodID());
-			statement.setInt(3, account.getID());
-			statement.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	public void delete(int id) {
-		Connection connection;
-		try {
-			connection = ConnectionUtil.getConnection();
-			PreparedStatement statement = connection.prepareStatement("DELETE FROM account WHERE id=?");
-			statement.setInt(1, id);
 			statement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -129,5 +99,35 @@ public class AccountDAO {
 		}
 		
 		return accountList;
+	}
+	
+	public void edit(Account account) {
+		Connection connection;
+		try {
+			connection = ConnectionUtil.getConnection();
+			PreparedStatement statement = connection.prepareStatement("UPDATE account SET name=?, payment_method_id=? WHERE id=?");
+			statement.setString(1, account.getName());
+			statement.setInt(2, account.getPaymentMethodID());
+			statement.setInt(3, account.getID());
+			statement.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void delete(int id) {
+		Connection connection;
+		try {
+			connection = ConnectionUtil.getConnection();
+			PreparedStatement statement = connection.prepareStatement("DELETE FROM account WHERE id=?");
+			statement.setInt(1, id);
+			statement.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
 	}
 }
