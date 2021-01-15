@@ -12,8 +12,7 @@
 <%@page import="aw.jdbcdemo.paymentmethodtracker.model.Account"%>
 
 <%
-	Account account = new Account();
-	String id = request.getParameter("id");
+	String id = request.getParameter("account_id");
 	Connection connection = null;
 	Statement statement = null;
 	ResultSet resultSet = null;

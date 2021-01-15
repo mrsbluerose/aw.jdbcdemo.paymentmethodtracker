@@ -7,16 +7,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import aw.jdbcdemo.paymentmethodtracker.dao.AccountNoteDAO;
+
 /**
  * Servlet implementation class AccountNoteController
  */
 @WebServlet("/accountNoteController")
 public class AccountNoteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+	private AccountNoteDAO dao = new AccountNoteDAO();
+	
     public AccountNoteController() {
         super();
         // TODO Auto-generated constructor stub

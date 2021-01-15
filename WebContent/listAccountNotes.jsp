@@ -11,6 +11,8 @@
 <%@page import="aw.jdbcdemo.paymentmethodtracker.util.ConnectionUtil"%>
 <%@page import="aw.jdbcdemo.paymentmethodtracker.model.Account"%>
 <%
+String id = request.getParameter("account_id");
+String name = request.getParameter("account_name");
 	Connection connection = null;
 	Statement statement = null;
 	ResultSet resultSet = null;
@@ -19,21 +21,22 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Accounts</title>
+<title>Account Notes</title>
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 	<a href="index.html">Home</a>
-	<h1>Accounts:</h1>
-	<a href="createAccount.jsp">Create New</a>
-	<a href="searchAccount.jsp">Search</a>
+	<a href='listAccounts.jsp'>Back to Accounts</a>
+	<h1>Account Notes</h1>
+	<a href="createAccountNote.jsp?account_id=<%=id%>&account_name=<%=name%>">Create New</a>
+
+<p>Account ID:  <%=id%></p>
+<p>Account Name: <%=name%></p>
 
 	<table>
 		<tr>
-			<th>ID</th>
-			<th>Name</th>
-			<th>Payment Method</th>
-			<th>Notes</th>
+			<th>Date</th>
+			<th>Note</th>
 			<th>Edit</th>
 			<th>Delete</th>
 		</tr>
@@ -41,20 +44,17 @@
 			try {
 				connection = ConnectionUtil.getConnection();
 				statement = connection.createStatement();
-				String sql = "SELECT a.account_id, a.account_name, pm.payment_method_name "
-						+ "FROM account as a "
-						+ "INNER JOIN payment_method as pm ON a.payment_method_id=pm.payment_method_id;"; 
+				String sql = "SELECT account_note_date, account_note "
+						+ "FROM account_note WHERE account_id=" + id;
 				resultSet = statement.executeQuery(sql);
 				while (resultSet.next()) {
 		%>
 
 		<tr>
-			<td><%=resultSet.getInt("account_id")%></td>
-			<td><%=resultSet.getString("account_name")%></td>
-			<td><%=resultSet.getString("payment_method_name")%></td>
-			<td><a href="listAccountNotes.jsp?account_id=<%=resultSet.getInt("account_id")%>&account_Name=<%=resultSet.getInt("account_name")%>">Notes</a></td>
-			<td><a href="editAccount.jsp?account_id=<%=resultSet.getInt("account_id")%>">Edit</a></td>
-			<td><a href="deleteAccount.jsp?account_id=<%=resultSet.getInt("account_id")%>">Delete</a></td>
+			<td><%=resultSet.getString("account_note_date")%></td>
+			<td><%=resultSet.getString("account_note")%></td>
+			<td><a href="editAccountNote.jsp?account_note_id=<%=resultSet.getInt("account_note_id")%>">Edit</a></td>
+			<td><a href="deleteAccountNote.jsp?account_note_id=<%=resultSet.getInt("account_note_id")%>">Delete</a></td>
 		</tr>
 		<%
 			}
@@ -65,5 +65,6 @@
 			}
 		%>
 	</table>
+
 </body>
 </html>
