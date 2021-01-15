@@ -54,12 +54,12 @@ ALTER TABLE account_note AUTO_INCREMENT = 2000;
 Adds Sample records
 The order of insertion is significant due to foreign key dependencies
 */
-INSERT INTO payment_method (name, description, expiration_date) VALUES ('payment method 1', 'description 1', '2022-12-31');
+INSERT INTO payment_method (name, description, expiration_date) VALUES ('payment method 0', 'description 0', '2020-12-31');
+INSERT INTO payment_method (name, description, expiration_date) VALUES ('payment method 1', 'description 1', '2021-12-31');
 INSERT INTO payment_method (name, description, expiration_date) VALUES ('payment method 2', 'description 2', '2022-12-31');
-INSERT INTO payment_method (name, description, expiration_date) VALUES ('payment method 3', 'description 3', '2022-12-31');
 
 /*If needed, change payment method id values to match above ids when they are created*/
-INSERT INTO account (name, payment_method_id) VALUES ('Account 1', 3000);
-INSERT INTO account (name, payment_method_id) VALUES ('Account 2', 3001);
-INSERT INTO account (name, payment_method_id) VALUES ('Account 3', 3002);
+INSERT INTO account (name, payment_method_id) VALUES ('Account 0', 3000);
+INSERT INTO account (name, payment_method_id) VALUES ('Account 1', 3001);
+INSERT INTO account (name, payment_method_id) VALUES ('Account 2', 3002);
 
