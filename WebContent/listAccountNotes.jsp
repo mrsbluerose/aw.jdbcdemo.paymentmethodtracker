@@ -35,6 +35,7 @@ String name = request.getParameter("account_name");
 
 	<table>
 		<tr>
+
 			<th>Date</th>
 			<th>Note</th>
 			<th>Edit</th>
@@ -44,15 +45,16 @@ String name = request.getParameter("account_name");
 			try {
 				connection = ConnectionUtil.getConnection();
 				statement = connection.createStatement();
-				String sql = "SELECT account_note_date, account_note "
+				String sql = "SELECT account_note_id, account_note_date, account_note_text "
 						+ "FROM account_note WHERE account_id=" + id;
 				resultSet = statement.executeQuery(sql);
 				while (resultSet.next()) {
 		%>
 
 		<tr>
+
 			<td><%=resultSet.getString("account_note_date")%></td>
-			<td><%=resultSet.getString("account_note")%></td>
+			<td><%=resultSet.getString("account_note_text")%></td>
 			<td><a href="editAccountNote.jsp?account_note_id=<%=resultSet.getInt("account_note_id")%>">Edit</a></td>
 			<td><a href="deleteAccountNote.jsp?account_note_id=<%=resultSet.getInt("account_note_id")%>">Delete</a></td>
 		</tr>

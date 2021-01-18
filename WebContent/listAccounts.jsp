@@ -24,7 +24,7 @@
 </head>
 <body>
 	<a href="index.html">Home</a>
-	<h1>Accounts:</h1>
+	<h1>Accounts</h1>
 	<a href="createAccount.jsp">Create New</a>
 	<a href="searchAccount.jsp">Search</a>
 
@@ -52,7 +52,7 @@
 			<td><%=resultSet.getInt("account_id")%></td>
 			<td><%=resultSet.getString("account_name")%></td>
 			<td><%=resultSet.getString("payment_method_name")%></td>
-			<td><a href="listAccountNotes.jsp?account_id=<%=resultSet.getInt("account_id")%>&account_Name=<%=resultSet.getInt("account_name")%>">Notes</a></td>
+			<td><a href="listAccountNotes.jsp?account_id=<%=resultSet.getInt("account_id")%>&account_name=<%=resultSet.getString("account_name")%>">Notes</a></td>
 			<td><a href="editAccount.jsp?account_id=<%=resultSet.getInt("account_id")%>">Edit</a></td>
 			<td><a href="deleteAccount.jsp?account_id=<%=resultSet.getInt("account_id")%>">Delete</a></td>
 		</tr>
