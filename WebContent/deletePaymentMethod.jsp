@@ -43,11 +43,9 @@ Expiration Date: <%=resultSet.getString("payment_method_exp_date")%>
 </pre>
 	<form action="paymentMethodController" method="post">
 		<input type="hidden" name="id" value="<%=resultSet.getString("payment_method_id")%>" />
-		<input type="submit" name="action" value="delete" /> <input
-			type="submit" name="action" value="cancel" />
-
+		<input type="submit" name="action" value="delete" /> 
+		<input type="submit" name="action" value="cancel" />
 	</form>
-
 
 	<%
 		}

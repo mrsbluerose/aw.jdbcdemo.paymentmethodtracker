@@ -11,8 +11,8 @@
 <%@page import="aw.jdbcdemo.paymentmethodtracker.util.ConnectionUtil"%>
 <%@page import="aw.jdbcdemo.paymentmethodtracker.model.Account"%>
 <%
-String id = request.getParameter("account_id");
-String name = request.getParameter("account_name");
+	String id = request.getParameter("account_id");
+	String name = request.getParameter("account_name");
 	Connection connection = null;
 	Statement statement = null;
 	ResultSet resultSet = null;
@@ -29,13 +29,13 @@ String name = request.getParameter("account_name");
 	<a href='listAccounts.jsp'>Back to Accounts</a>
 	<h1>Account Notes</h1>
 	<a href="createAccountNote.jsp?account_id=<%=id%>&account_name=<%=name%>">Create New</a>
+	<a href="searchAccountNote.jsp">Search</a>
 
 <p>Account ID:  <%=id%></p>
 <p>Account Name: <%=name%></p>
 
 	<table>
 		<tr>
-
 			<th>Date</th>
 			<th>Note</th>
 			<th>Edit</th>
@@ -52,7 +52,6 @@ String name = request.getParameter("account_name");
 		%>
 
 		<tr>
-
 			<td><%=resultSet.getString("account_note_date")%></td>
 			<td><%=resultSet.getString("account_note_text")%></td>
 			<td><a href="editAccountNote.jsp?account_note_id=<%=resultSet.getInt("account_note_id")%>">Edit</a></td>

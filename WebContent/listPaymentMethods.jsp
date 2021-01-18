@@ -2,16 +2,14 @@
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
-<%@ page import="java.sql.*"%>
-<%@ page import="java.io.*"%>
+<%@page import="java.sql.*"%>
+<%@page import="java.io.*"%>
 <%@page import="java.sql.DriverManager"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.Connection"%>
 <%@page import="aw.jdbcdemo.paymentmethodtracker.util.ConnectionUtil"%>
-<%@page import="aw.jdbcdemo.paymentmethodtracker.model.PaymentMethod"%>
 <%
-	PaymentMethod paymentMethod = new PaymentMethod();
 	Connection connection = null;
 	Statement statement = null;
 	ResultSet resultSet = null;
@@ -51,10 +49,8 @@
 			<td><%=resultSet.getString("payment_method_name")%></td>
 			<td><%=resultSet.getString("payment_method_description")%></td>
 			<td><%=resultSet.getString("payment_method_exp_date")%></td>
-			<td><a
-				href="editPaymentMethod.jsp?payment_method_id=<%=resultSet.getInt("payment_method_id")%>">Edit</a></td>
-			<td><a
-				href="deletePaymentMethod.jsp?payment_method_id=<%=resultSet.getInt("payment_method_id")%>">Delete</a></td>
+			<td><a href="editPaymentMethod.jsp?payment_method_id=<%=resultSet.getInt("payment_method_id")%>">Edit</a></td>
+			<td><a href="deletePaymentMethod.jsp?payment_method_id=<%=resultSet.getInt("payment_method_id")%>">Delete</a></td>
 		</tr>
 		<%
 			}

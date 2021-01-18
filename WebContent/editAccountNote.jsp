@@ -39,13 +39,11 @@
 		<input type="hidden" name="id" value="<%=resultSet.getInt("account_note_id")%>">
 		<pre>
 		ID: <%=resultSet.getInt("account_note_id")%>
-		Date: <input type="text" name="date"
-				value="<%=resultSet.getString("account_note_date")%>" />
-		Note: <input type="text" name="accountNoteText"
-				value="<%=resultSet.getString("account_note_text")%>" />
-<input type="hidden" name="action" value="edit" />
-<input type="submit" value="Save">
-</pre>
+		Date: <input type="text" name="date" value="<%=resultSet.getString("account_note_date")%>" />
+		Note: <input type="text" name="accountNoteText"	value="<%=resultSet.getString("account_note_text")%>" />
+		<input type="hidden" name="action" value="edit" />
+		<input type="submit" value="Save">
+		</pre>
 	</form>
 
 	<%

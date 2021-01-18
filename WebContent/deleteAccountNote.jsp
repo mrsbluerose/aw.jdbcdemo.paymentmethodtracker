@@ -41,8 +41,8 @@ Note: <%=resultSet.getInt("account_note_text")%>
 </pre>
 	<form action="accountNoteController" method="post">
 		<input type="hidden" name="id" value="<%=resultSet.getString("account_note_id")%>" />
-		<input type="submit" name="action" value="delete" /> <input
-			type="submit" name="action" value="cancel" />
+		<input type="submit" name="action" value="delete" /> 
+		<input type="submit" name="action" value="cancel" />
 
 	</form>
 

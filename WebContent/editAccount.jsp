@@ -41,9 +41,9 @@
 		ID: <%=resultSet.getInt("account_id")%>
 		Name: <input type="text" name="name" value="<%=resultSet.getString("account_name")%>" />
 		Payment Method: <input type="text" name="paymentMethod"	value="<%=resultSet.getInt("payment_method_id")%>" />
-<input type="hidden" name="action" value="edit" />
-<input type="submit" value="Save">
-</pre>
+		<input type="hidden" name="action" value="edit" />
+		<input type="submit" value="Save">
+		</pre>
 	</form>
 
 	<%

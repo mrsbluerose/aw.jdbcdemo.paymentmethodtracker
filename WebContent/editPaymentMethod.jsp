@@ -42,15 +42,12 @@
 		<input type="hidden" name="id" value="<%=resultSet.getString("payment_method_id")%>">
 		<pre>
 		ID: <%=resultSet.getInt("payment_method_id")%>
-		Name: <input type="text" name="name"
-				value="<%=resultSet.getString("payment_method_name")%>" />
-		Description: <input type="text" name="description"
-				value="<%=resultSet.getString("payment_method_description")%>" />
-		Expiration: <input type="text" name="expDate"
-				value="<%=resultSet.getString("payment_method_exp_date")%>" />
-<input type="hidden" name="action" value="edit" />
-<input type="submit" value="Save">
-</pre>
+		Name: <input type="text" name="name" value="<%=resultSet.getString("payment_method_name")%>" />
+		Description: <input type="text" name="description" value="<%=resultSet.getString("payment_method_description")%>" />
+		Expiration: <input type="text" name="expDate" value="<%=resultSet.getString("payment_method_exp_date")%>" />
+		<input type="hidden" name="action" value="edit" />
+		<input type="submit" value="Save">
+		</pre>
 	</form>
 
 	<%
