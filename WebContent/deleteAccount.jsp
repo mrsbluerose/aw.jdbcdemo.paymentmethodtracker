@@ -9,11 +9,10 @@
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.Connection"%>
 <%@page import="aw.jdbcdemo.paymentmethodtracker.util.ConnectionUtil"%>
-<%@page import="aw.jdbcdemo.paymentmethodtracker.model.Account"%>
+
 
 <%
-	Account account = new Account();
-	String id = request.getParameter("id");
+	String id = request.getParameter("account_id");
 	Connection connection = null;
 	Statement statement = null;
 	ResultSet resultSet = null;
@@ -32,20 +31,19 @@
 <head>
 <meta charset="UTF-8">
 <title>Delete Account</title>
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
 	<a href="index.html">Home</a>
-	<h1>Delete Account ?</h1>
-	<pre>
-ID: <%=resultSet.getInt("account_id")%>
-Name: <%=resultSet.getString("account_name")%>
-Payment Method: <%=resultSet.getInt("payment_method_id")%>
-</pre>
+	<h1>Delete Account</h1>
 	<form action="accountController" method="post">
-		<input type="hidden" name="id" value="<%=resultSet.getString("account_id")%>" />
-		<input type="submit" name="action" value="delete" /> <input
-			type="submit" name="action" value="cancel" />
-
+		<input type="hidden" name="id" 	value="<%=resultSet.getString("account_id")%>" /> 
+		<pre>
+			ID: <%=id%>
+			Name: <%=resultSet.getString("account_name")%>
+			Payment Method: <%=resultSet.getInt("payment_method_id")%>
+		<input type="submit" name="action" value="delete" />
+		</pre>
 	</form>
 
 
