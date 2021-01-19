@@ -1,11 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@page import="java.util.ArrayList"%>
+
 <!DOCTYPE html>
 <html>
+
 <head>
 <meta charset="UTF-8">
 <title>Search Accounts</title>
 </head>
+
 <body>
 	<a href="index.html">Home</a>
 	<h1>Search Accounts</h1>
@@ -22,5 +26,6 @@
 		<input type="submit" value="Search" />
 		</pre>
 	</form>
+
 </body>
 </html>
