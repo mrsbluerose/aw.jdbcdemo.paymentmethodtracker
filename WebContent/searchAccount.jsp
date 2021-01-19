@@ -15,11 +15,13 @@
 	<form action="accountController" method="post">
 		<pre>
 		Search By: 
-		<select name="searchType" multiple size="1">
-			<option value="id">ID</option>
-			<option value="name">Name</option>
-			<option value="paymentMethodID">Payment Method ID</option>
-		</select>
+		<input type="radio" id="id" name="searchType" value="id">
+  			<label for="id">ID</label><br>
+  		<input type="radio" id="name" name="searchType" value="name">
+  			<label for="name">Name</label><br>
+  		<input type="radio" id="paymentMethodID" name="searchType" value="paymentMethodID">
+  			<label for="paymentMethodID">Payment Method ID</label>
+		
 		Search for: <input type="text" name="searchTerm" />
 		<input type="hidden" name="action" value="search" />
 		<input type="submit" value="Search" />
