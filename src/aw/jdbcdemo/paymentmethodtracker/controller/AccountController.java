@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -28,7 +29,9 @@ public class AccountController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String action= request.getParameter("action");
-		if(action.contentEquals("create")) {
+		if(action.contentEquals("list")) {
+			listAccount(request,response);
+		}else if(action.contentEquals("create")) {
 			createAccount(request,response);
 		} else if (action.contentEquals("search")) {
 			search(request,response);
@@ -37,6 +40,14 @@ public class AccountController extends HttpServlet {
 		} else if (action.contentEquals("delete")) {
 			deleteAccount(request,response);
 		} 
+	}
+	
+	private void listAccount (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		RequestDispatcher rd=request.getRequestDispatcher("listAccounts.jsp");
+		ArrayList<String[]> accountList = new ArrayList<>();
+		accountList = dao.listAccounts();
+		request.setAttribute("accountList",accountList);
+		rd.forward(request, response);
 	}
 	
 	private void createAccount(HttpServletRequest request, HttpServletResponse response) throws IOException {

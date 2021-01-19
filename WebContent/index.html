@@ -5,10 +5,14 @@
 <title>Home</title>
 </head>
 <body>
-<h1>Choose Option</h1>
-<pre>
-<a href="listAccounts.jsp">Accounts</a>
-<a href="listPaymentMethods.jsp">Payment Methods</a>
-</pre>
+	<h1>Welcome</h1>
+
+	<form action="accountController" method="post">
+		<pre>
+		<input type="hidden" name="action" value="list" />
+		<input type="submit" value="Enter Site">
+		</pre>
+	</form>
+
 </body>
 </html>

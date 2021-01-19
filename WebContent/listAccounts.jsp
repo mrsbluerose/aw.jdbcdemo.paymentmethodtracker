@@ -1,26 +1,15 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@page import="java.util.ArrayList"%>
+
 <!DOCTYPE html>
-
-<%@ page import="java.sql.*"%>
-<%@ page import="java.io.*"%>
-<%@page import="java.sql.DriverManager"%>
-<%@page import="java.sql.ResultSet"%>
-<%@page import="java.sql.Statement"%>
-<%@page import="java.sql.Connection"%>
-<%@page import="aw.jdbcdemo.paymentmethodtracker.util.ConnectionUtil"%>
-<%
-	Connection connection = null;
-	Statement statement = null;
-	ResultSet resultSet = null;
-%>
-
 <html>
+
 <head>
 <meta charset="UTF-8">
 <title>Accounts</title>
 <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
 	<a href="index.html">Home</a>
 	<h1>Accounts</h1>
@@ -37,31 +26,19 @@
 			<th>Delete</th>
 		</tr>
 		<%
-			try {
-				connection = ConnectionUtil.getConnection();
-				statement = connection.createStatement();
-				String sql = "SELECT a.account_id, a.account_name, pm.payment_method_name "
-						+ "FROM account as a "
-						+ "INNER JOIN payment_method as pm ON a.payment_method_id=pm.payment_method_id;"; 
-				resultSet = statement.executeQuery(sql);
-				while (resultSet.next()) {
+		ArrayList<String[]> accountList = (ArrayList<String[]>) request.getAttribute("accountList");
+		for (String[] s:accountList){
 		%>
-
 		<tr>
-			<td><%=resultSet.getInt("account_id")%></td>
-			<td><%=resultSet.getString("account_name")%></td>
-			<td><%=resultSet.getString("payment_method_name")%></td>
-			<td><a href="listAccountNotes.jsp?account_id=<%=resultSet.getInt("account_id")%>&account_name=<%=resultSet.getString("account_name")%>">Notes</a></td>
-			<td><a href="editAccount.jsp?account_id=<%=resultSet.getInt("account_id")%>">Edit</a></td>
-			<td><a href="deleteAccount.jsp?account_id=<%=resultSet.getInt("account_id")%>">Delete</a></td>
+			<td><%=s[0]%></td>
+			<td><%=s[1]%></td>
+			<td><%=s[2]%></td>
+			<td><a href="listAccountNotes.jsp?account_id=<%=s[0]%>&account_name=<%=s[1]%>">Notes</a></td>
+			<td><a href="editAccount.jsp?account_id=<%=s[0]%>">Edit</a></td>
+			<td><a href="deleteAccount.jsp?account_id=<%=s[0]%>">Delete</a></td>
 		</tr>
 		<%
-			}
-				connection.close();
-
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+		}
 		%>
 	</table>
 </body>
