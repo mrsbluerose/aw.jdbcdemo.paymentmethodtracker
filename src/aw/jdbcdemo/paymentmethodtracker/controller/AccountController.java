@@ -93,7 +93,7 @@ public class AccountController extends HttpServlet {
 		account.setID(id);
 		account.setName(name);
 		account.setPaymentMethodID(paymentMethod);
-		dao.edit(account);
+		dao.editAccount(account);
 		
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();

@@ -143,7 +143,11 @@ public class AccountDAO {
 		return accountList;
 	}
 	
-	public void edit(Account account) {
+	public void editSelectAccount(Account account) {
+		
+	}
+	
+	public void editAccount(Account account) {
 		Connection connection;
 		try {
 			connection = ConnectionUtil.getConnection();
