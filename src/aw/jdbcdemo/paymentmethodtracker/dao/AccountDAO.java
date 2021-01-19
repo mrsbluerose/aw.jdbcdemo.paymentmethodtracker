@@ -53,22 +53,27 @@ public class AccountDAO {
 		}
 	}
 	
-	public ArrayList<Account> searchByID(int id) {
-		ArrayList<Account> accountList = new ArrayList<>();
-		Account account = new Account();
+	public ArrayList<String[]> searchByID(int id) {
+		
+		ArrayList<String[]> accountList = new ArrayList<>();
+		String[] accountInfo;
 		Connection connection;
 		try {
 			connection = ConnectionUtil.getConnection();
-			PreparedStatement statement = connection.prepareStatement("SELECT * FROM account WHERE account_id=?");
+			PreparedStatement statement = connection.prepareStatement("SELECT a.account_id, a.account_name, pm.payment_method_name "
+					+ "FROM account AS a " 
+					+ "INNER JOIN payment_method AS pm ON a.payment_method_id=pm.payment_method_id "
+					+ "WHERE account_id=?;");
 			statement.setInt(1, id);
 			ResultSet resultSet = statement.executeQuery();
 			while(resultSet.next()) {
-				account = new Account();
-				account.setID(resultSet.getInt(1));
-				account.setName(resultSet.getString(2));
-				account.setPaymentMethodID(resultSet.getInt(3));
-				accountList.add(account);
+				accountInfo = new String[3];
+				accountInfo[0]=String.valueOf(resultSet.getInt(1));
+				accountInfo[1]=resultSet.getString(2);
+				accountInfo[2]=resultSet.getString(3);
+				accountList.add(accountInfo);
 			}
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
@@ -78,22 +83,27 @@ public class AccountDAO {
 		return accountList;
 	}
 	
-	public ArrayList<Account> searchByName(String name) {
-		ArrayList<Account> accountList = new ArrayList<>();
-		Account account;
+	public ArrayList<String[]> searchByName(String name) {
+		
+		ArrayList<String[]> accountList = new ArrayList<>();
+		String[] accountInfo;
 		Connection connection;
 		try {
 			connection = ConnectionUtil.getConnection();
-			PreparedStatement statement = connection.prepareStatement("SELECT * FROM account WHERE account_name LIKE ?");
+			PreparedStatement statement = connection.prepareStatement("SELECT a.account_id, a.account_name, pm.payment_method_name "
+					+ "FROM account AS a " 
+					+ "INNER JOIN payment_method AS pm ON a.payment_method_id=pm.payment_method_id "
+					+ "WHERE account_name LIKE ?;");
 			statement.setString(1, "%"+name+"%");
 			ResultSet resultSet = statement.executeQuery();
 			while(resultSet.next()) {
-				account = new Account();
-				account.setID(resultSet.getInt(1));
-				account.setName(resultSet.getString(2));
-				account.setPaymentMethodID(resultSet.getInt(3));
-				accountList.add(account);
+				accountInfo = new String[3];
+				accountInfo[0]=String.valueOf(resultSet.getInt(1));
+				accountInfo[1]=resultSet.getString(2);
+				accountInfo[2]=resultSet.getString(3);
+				accountList.add(accountInfo);
 			}
+		
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
@@ -103,22 +113,27 @@ public class AccountDAO {
 		return accountList;
 	}
 	
-	public ArrayList<Account> searchByPaymentMethodID(int paymentMethodID) {
-		ArrayList<Account> accountList = new ArrayList<>();
-		Account account;
+	public ArrayList<String[]> searchByPaymentMethodID(int paymentMethodID) {
+		
+		ArrayList<String[]> accountList = new ArrayList<>();
+		String[] accountInfo;
 		Connection connection;
 		try {
 			connection = ConnectionUtil.getConnection();
-			PreparedStatement statement = connection.prepareStatement("SELECT * FROM account WHERE payment_method_id=?");
+			PreparedStatement statement = connection.prepareStatement("SELECT a.account_id, a.account_name, pm.payment_method_name "
+					+ "FROM account AS a " 
+					+ "INNER JOIN payment_method AS pm ON a.payment_method_id=pm.payment_method_id "
+					+ "WHERE a.payment_method_id=?;");
 			statement.setInt(1, paymentMethodID);
 			ResultSet resultSet = statement.executeQuery();
 			while(resultSet.next()) {
-				account = new Account();
-				account.setID(resultSet.getInt(1));
-				account.setName(resultSet.getString(2));
-				account.setPaymentMethodID(resultSet.getInt(3));
-				accountList.add(account);
+				accountInfo = new String[3];
+				accountInfo[0]=String.valueOf(resultSet.getInt(1));
+				accountInfo[1]=resultSet.getString(2);
+				accountInfo[2]=resultSet.getString(3);
+				accountList.add(accountInfo);
 			}
+		
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
