@@ -16,6 +16,11 @@
 	<a href="createAccount.jsp">Create New</a>
 	<a href="searchAccount.jsp">Search</a>
 
+	<%
+	String message = (String) request.getAttribute("message");
+	%>
+	<p><h2><%=message%></p></h2>
+
 	<table>
 		<tr>
 			<th>ID</th>

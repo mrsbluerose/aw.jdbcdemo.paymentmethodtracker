@@ -18,10 +18,8 @@
 		<input type="submit" value="Back to Accounts">
 		<a href="createAccount.jsp">Create New</a>
 	<a href="searchAccount.jsp">Search</a>
-	
 	</form>
 	
-
 	<table>
 		<tr>
 			<th>ID</th>

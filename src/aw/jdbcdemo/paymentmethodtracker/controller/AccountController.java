@@ -21,17 +21,17 @@ import aw.jdbcdemo.paymentmethodtracker.dao.AccountDAO;
 public class AccountController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private AccountDAO dao = new AccountDAO();
+	private String message = "";
        
     public AccountController() {
         super();
     }
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		String action= request.getParameter("action");
 		if(action.contentEquals("list")) {
-			listAccounts(request,response);
-		}else if(action.contentEquals("create")) {
+			listAccounts(request,response," ");
+		} else if(action.contentEquals("create")) {
 			createAccount(request,response);
 		} else if (action.contentEquals("search")) {
 			search(request,response);
@@ -46,15 +46,16 @@ public class AccountController extends HttpServlet {
 		} 
 	}
 	
-	private void listAccounts (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	private void listAccounts (HttpServletRequest request, HttpServletResponse response, String message) throws ServletException, IOException {
 		RequestDispatcher rd=request.getRequestDispatcher("listAccounts.jsp");
 		ArrayList<String[]> accountList = new ArrayList<>();
 		accountList = dao.listAccounts();
 		request.setAttribute("accountList",accountList);
+		request.setAttribute("message", message);
 		rd.forward(request, response);
 	}
 	
-	private void createAccount(HttpServletRequest request, HttpServletResponse response) throws IOException {
+	private void createAccount(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		String name = request.getParameter("name");
 		int paymentMethod = Integer.parseInt(request.getParameter("paymentMethod"));
 		
@@ -63,10 +64,8 @@ public class AccountController extends HttpServlet {
 		account.setPaymentMethodID(paymentMethod);
 		dao.create(account);
 		
-		response.setContentType("text/html");
-		PrintWriter out = response.getWriter();
-		out.print("<b>Account Created!!</b><br />");
-		out.print("<a href='listAccounts.jsp'>Back to Accounts</a>");
+		message = "** Account " + account.getID() + " created! **";
+		listAccounts(request,response,message);
 	}
 	
 	private void search(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
@@ -79,7 +78,7 @@ public class AccountController extends HttpServlet {
 			accountList = dao.searchByID(Integer.parseInt(searchTerm));
 		} else if (searchType.contentEquals("name")) {
 			accountList = dao.searchByName(searchTerm);
-		}else if (searchType.contentEquals("paymentMethodID")) {
+		} else if (searchType.contentEquals("paymentMethodID")) {
 			accountList = dao.searchByPaymentMethodID(Integer.parseInt(searchTerm));
 		}
 		
@@ -112,11 +111,9 @@ public class AccountController extends HttpServlet {
 		account.setPaymentMethodID(paymentMethod);
 		dao.editAccount(account);
 		
-		response.setContentType("text/html");
-		PrintWriter out = response.getWriter();
-		out.print("<b>Account Updated!!</b><br/>");
-		out.print("<a href='listAccounts.jsp'>Back to Accounts</a>");
-		listAccounts(request,response);
+		message = "** Account " + id + " edited! **";
+		listAccounts(request,response,message);
+
 	}
 	
 	private void deleteSelectAccount(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
@@ -136,10 +133,8 @@ public class AccountController extends HttpServlet {
 		int id = Integer.parseInt(request.getParameter("id"));
 		dao.delete(id);
 		
-		response.setContentType("text/html");
-		PrintWriter out = response.getWriter();
-		out.print("<b>Account Deleted!!</b><br/>");
-		listAccounts(request,response);
+		message = "** Account " + id + " deleted! **";
+		listAccounts(request,response,message);
 	}
 	
 }
