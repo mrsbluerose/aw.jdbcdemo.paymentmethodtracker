@@ -53,6 +53,29 @@ public class AccountDAO {
 		}
 	}
 	
+	public Account searchAccount(int id) {
+		Account account = new Account();
+		Connection connection;
+		try {
+			connection = ConnectionUtil.getConnection();
+			PreparedStatement statement = connection.prepareStatement("SELECT * FROM account WHERE account_id=?");
+			statement.setInt(1, id);
+			ResultSet resultSet = statement.executeQuery();
+			while(resultSet.next()) {
+				account.setID(resultSet.getInt(1));
+				account.setName(resultSet.getString(2));
+				account.setPaymentMethodID(resultSet.getInt(3));
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+		return account;
+	}
+	
 	public ArrayList<String[]> searchByID(int id) {
 		
 		ArrayList<String[]> accountList = new ArrayList<>();
@@ -141,10 +164,6 @@ public class AccountDAO {
 		}
 		
 		return accountList;
-	}
-	
-	public void editSelectAccount(Account account) {
-		
 	}
 	
 	public void editAccount(Account account) {

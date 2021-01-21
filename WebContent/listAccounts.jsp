@@ -35,12 +35,19 @@
 			<td><%=s[2]%></td>
 			<td><a href="listAccountNotes.jsp?account_id=<%=s[0]%>&account_name=<%=s[1]%>">Notes</a></td>
 			<td>
-				<form>
+				<form action="accountController" method="post">
 					<input type="hidden" name="id" value=<%=s[0]%> />
 					<input type="hidden" name="action" value="editSelectAccount" />
 					<input type="submit" value="Edit">
-				</form><a href="editAccount.jsp?account_id=<%=s[0]%>">Edit</a></td>
-			<td><a href="deleteAccount.jsp?account_id=<%=s[0]%>">Delete</a></td>
+				</form>
+			</td>
+			<td>
+				<form action="accountController" method="post">
+					<input type="hidden" name="id" value=<%=s[0]%> />
+					<input type="hidden" name="action" value="deleteSelectAccount" />
+					<input type="submit" value="Delete">
+				</form>
+			</td>
 		</tr>
 		<%
 		}
