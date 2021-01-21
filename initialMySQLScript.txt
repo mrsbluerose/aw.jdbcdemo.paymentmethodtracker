@@ -23,6 +23,7 @@ CREATE TABLE payment_method_note (
   payment_method_note_text VARCHAR(255),
   PRIMARY KEY(payment_method_note_id),
   FOREIGN KEY(payment_method_id) REFERENCES payment_method(payment_method_id)
+  ON DELETE CASCADE
 );
 
 CREATE TABLE account (
@@ -40,6 +41,7 @@ CREATE TABLE account_note (
   account_note_text VARCHAR(255),
   PRIMARY KEY(account_note_id),
   FOREIGN KEY(account_id) REFERENCES account(account_id)
+  ON DELETE CASCADE
 );
 
 /*
