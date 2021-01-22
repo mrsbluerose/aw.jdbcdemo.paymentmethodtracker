@@ -60,6 +60,7 @@ public class AccountNoteController extends HttpServlet {
 	}
 	
 	private void createAccountNote(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+		RequestDispatcher rd=request.getRequestDispatcher("listAccountNotes.jsp");
 		int accountID = Integer.parseInt(request.getParameter("accountID"));
 		String date = request.getParameter("date");
 		String note = request.getParameter("note");
