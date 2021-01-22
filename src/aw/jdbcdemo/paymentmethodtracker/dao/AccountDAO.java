@@ -29,6 +29,7 @@ public class AccountDAO {
 				accountInfo[2]=resultSet.getString(3);
 				accountList.add(accountInfo);
 			}
+			ConnectionUtil.closeQuietly(connection);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
@@ -46,6 +47,7 @@ public class AccountDAO {
 			statement.setString(1, account.getName());
 			statement.setInt(2, account.getPaymentMethodID());
 			statement.executeUpdate();
+			ConnectionUtil.closeQuietly(connection);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
@@ -66,6 +68,7 @@ public class AccountDAO {
 				account.setName(resultSet.getString(2));
 				account.setPaymentMethodID(resultSet.getInt(3));
 			}
+			ConnectionUtil.closeQuietly(connection);
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -94,6 +97,7 @@ public class AccountDAO {
 				accountInfo[2]=resultSet.getString(3);
 				accountList.add(accountInfo);
 			}
+			ConnectionUtil.closeQuietly(connection);
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -131,11 +135,13 @@ public class AccountDAO {
 			statement.setInt(2, account.getPaymentMethodID());
 			statement.setInt(3, account.getID());
 			statement.executeUpdate();
+			ConnectionUtil.closeQuietly(connection);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
+		
 	}
 	
 	public void delete(int id) {
@@ -145,6 +151,7 @@ public class AccountDAO {
 			PreparedStatement statement = connection.prepareStatement("DELETE FROM account WHERE account_id=?");
 			statement.setInt(1, id);
 			statement.executeUpdate();
+			ConnectionUtil.closeQuietly(connection);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {

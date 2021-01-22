@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import aw.jdbcdemo.paymentmethodtracker.dao.AccountNoteDAO;
+import aw.jdbcdemo.paymentmethodtracker.dao.AccountDAO;
+import aw.jdbcdemo.paymentmethodtracker.model.Account;
 import aw.jdbcdemo.paymentmethodtracker.model.AccountNote;
 
 /**
@@ -48,9 +50,12 @@ public class AccountNoteController extends HttpServlet {
 	private void listAccountNotes (HttpServletRequest request, HttpServletResponse response, String message) throws ServletException, IOException {
 		RequestDispatcher rd=request.getRequestDispatcher("listAccountNotes.jsp");
 		ArrayList<String[]> accountNoteList = new ArrayList<>();
+		AccountDAO accountDAO = new AccountDAO();
 		accountNoteList = dao.listAccountNotes(Integer.parseInt(request.getParameter("id")));
+		Account account = accountDAO.searchAccount(Integer.parseInt(request.getParameter("id")));
 		request.setAttribute("accountNoteList",accountNoteList);
-		request.setAttribute("message", message);
+		request.setAttribute("accountName",account.getName());
+		request.setAttribute("message",message);
 		rd.forward(request, response);
 	}
 	
@@ -82,7 +87,6 @@ public class AccountNoteController extends HttpServlet {
 		} else if (searchType.contentEquals("date")) {
 			accountNoteList = dao.searchByYear(searchTerm);
 		} 
-
 		request.setAttribute("accountNoteList",accountNoteList);
 		rd.forward(request, response);
 		

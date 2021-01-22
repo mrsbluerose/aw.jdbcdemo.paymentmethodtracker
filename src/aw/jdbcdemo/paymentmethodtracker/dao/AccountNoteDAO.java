@@ -20,7 +20,7 @@ public class AccountNoteDAO {
 			PreparedStatement statement = connection.prepareStatement("SELECT an.account_note_id, an.account_note_date, an.account_note_text "
 					+ "FROM account_note AS an " 
 					+ "INNER JOIN account AS a ON an.account_id=a.account_id "
-					+ "WHERE an.account_id=?;");
+					+ "WHERE a.account_id=?;");
 			statement.setInt(1,id);
 			ResultSet resultSet = statement.executeQuery();
 			while(resultSet.next()) {
@@ -30,6 +30,7 @@ public class AccountNoteDAO {
 				accountNoteInfo[2]=resultSet.getString(3);
 				accountNoteList.add(accountNoteInfo);
 			}
+			ConnectionUtil.closeQuietly(connection);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
@@ -48,6 +49,7 @@ public class AccountNoteDAO {
 			statement.setString(2,accountNote.getDate());
 			statement.setString(3,accountNote.getNote());
 			statement.executeUpdate();
+			ConnectionUtil.closeQuietly(connection);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
@@ -70,7 +72,7 @@ public class AccountNoteDAO {
 				accountNote.setDate(resultSet.getString(3));
 				accountNote.setNote(resultSet.getString(3));
 			}
-
+			ConnectionUtil.closeQuietly(connection);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
@@ -98,7 +100,7 @@ public class AccountNoteDAO {
 				accountNoteInfo[2]=resultSet.getString(3);
 				accountNoteList.add(accountNoteInfo);
 			}
-
+			ConnectionUtil.closeQuietly(connection);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
@@ -137,6 +139,7 @@ public class AccountNoteDAO {
 			statement.setString(2, accountNote.getNote());
 			statement.setInt(3, accountNote.getID());
 			statement.executeUpdate();
+			ConnectionUtil.closeQuietly(connection);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
@@ -152,6 +155,7 @@ public class AccountNoteDAO {
 			PreparedStatement statement = connection.prepareStatement("DELETE FROM account_note WHERE account_note_id=?");
 			statement.setInt(1, id);
 			statement.executeUpdate();
+			ConnectionUtil.closeQuietly(connection);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {

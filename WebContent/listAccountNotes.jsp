@@ -23,9 +23,10 @@
 
 	
 	<%
-	ArrayList<String[]> accountNoteList = (ArrayList<String[]>) request.getAttribute("accountNoteList");
 	String accountID = request.getParameter("id");
-	String accountName = request.getParameter("accountName");
+	
+	ArrayList<String[]> accountNoteList = (ArrayList<String[]>) request.getAttribute("accountNoteList");
+	String accountName = (String) request.getAttribute("accountName");
 	String message = (String) request.getAttribute("message");
 	%>
 	<h2><%=message%></h2>
