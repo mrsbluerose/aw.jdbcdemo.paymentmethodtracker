@@ -40,7 +40,7 @@ public class AccountController extends HttpServlet {
 		} else if (action.contentEquals("edit")) {
 			editAccount(request,response);
 		} else if(action.contentEquals("deleteSelectAccount")) {
-				deleteSelectAccount(request,response);
+			deleteSelectAccount(request,response);
 		} else if (action.contentEquals("delete")) {
 			deleteAccount(request,response);
 		} 

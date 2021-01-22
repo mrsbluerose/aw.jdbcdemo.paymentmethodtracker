@@ -38,7 +38,12 @@
 			<td><%=s[0]%></td>
 			<td><%=s[1]%></td>
 			<td><%=s[2]%></td>
-			<td><a href="listAccountNotes.jsp?account_id=<%=s[0]%>&account_name=<%=s[1]%>">Notes</a></td>
+			<td><form action="accountNoteController" method="post">
+					<input type="hidden" name="id" value=<%=s[0]%> />
+					<input type="hidden" name="action" value="list" />
+					<input type="submit" value="Notes">
+				</form>
+			</td>
 			<td>
 				<form action="accountController" method="post">
 					<input type="hidden" name="id" value=<%=s[0]%> />
