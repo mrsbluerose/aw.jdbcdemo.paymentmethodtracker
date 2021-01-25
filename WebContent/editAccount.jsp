@@ -16,7 +16,7 @@
 		<%
 		String[] accountItems = (String[]) request.getAttribute("accountItems");
 		%>
-		<input type="hidden" name="id" value="<%=accountItems[0]%>">
+		<input type="hidden" name="accountID" value="<%=accountItems[0]%>">
 		<pre>
 		ID: <%=accountItems[0]%>
 		Name: <input type="text" name="name" value="<%=accountItems[1]%>" />

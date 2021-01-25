@@ -20,7 +20,7 @@ import aw.jdbcdemo.paymentmethodtracker.dao.AccountDAO;
 @WebServlet("/accountController")
 public class AccountController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private AccountDAO dao = new AccountDAO();
+	private AccountDAO accountDAO = new AccountDAO();
 	private String message = "";
        
     public AccountController() {
@@ -49,7 +49,7 @@ public class AccountController extends HttpServlet {
 	private void listAccounts (HttpServletRequest request, HttpServletResponse response, String message) throws ServletException, IOException {
 		RequestDispatcher rd=request.getRequestDispatcher("listAccounts.jsp");
 		ArrayList<String[]> accountList = new ArrayList<>();
-		accountList = dao.listAccounts();
+		accountList = accountDAO.listAccounts();
 		request.setAttribute("accountList",accountList);
 		request.setAttribute("message", message);
 		rd.forward(request, response);
@@ -62,7 +62,7 @@ public class AccountController extends HttpServlet {
 		Account account = new Account();
 		account.setName(name);
 		account.setPaymentMethodID(paymentMethod);
-		dao.create(account);
+		accountDAO.create(account);
 		
 		message = "** Account " + account.getID() + " created! **";
 		listAccounts(request,response,message);
@@ -75,11 +75,11 @@ public class AccountController extends HttpServlet {
 		ArrayList<String[]> accountList = new ArrayList<>();
 		
 		if (searchType.contentEquals("id")) {
-			accountList = dao.searchByID(Integer.parseInt(searchTerm));
+			accountList = accountDAO.searchByID(Integer.parseInt(searchTerm));
 		} else if (searchType.contentEquals("name")) {
-			accountList = dao.searchByName(searchTerm);
+			accountList = accountDAO.searchByName(searchTerm);
 		} else if (searchType.contentEquals("paymentMethodID")) {
-			accountList = dao.searchByPaymentMethodID(Integer.parseInt(searchTerm));
+			accountList = accountDAO.searchByPaymentMethodID(Integer.parseInt(searchTerm));
 		}
 		
 		request.setAttribute("accountList",accountList);
@@ -89,8 +89,8 @@ public class AccountController extends HttpServlet {
 	
 	private void editSelectAccount(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		RequestDispatcher rd=request.getRequestDispatcher("editAccount.jsp");
-		int id = Integer.parseInt(request.getParameter("id"));
-		Account account = dao.searchAccount(id);
+		int id = Integer.parseInt(request.getParameter("accountID"));
+		Account account = accountDAO.searchAccount(id);
 		String[] accountItems = new String[3];
 		accountItems[0]=String.valueOf(account.getID());
 		accountItems[1]=account.getName();
@@ -101,7 +101,7 @@ public class AccountController extends HttpServlet {
 	}
 	
 	private void editAccount(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-		int id = Integer.parseInt(request.getParameter("id"));
+		int id = Integer.parseInt(request.getParameter("accountID"));
 		String name = request.getParameter("name");
 		int paymentMethod = Integer.parseInt(request.getParameter("paymentMethod"));
 		
@@ -109,7 +109,7 @@ public class AccountController extends HttpServlet {
 		account.setID(id);
 		account.setName(name);
 		account.setPaymentMethodID(paymentMethod);
-		dao.editAccount(account);
+		accountDAO.editAccount(account);
 		
 		message = "** Account " + id + " edited! **";
 		listAccounts(request,response,message);
@@ -118,8 +118,8 @@ public class AccountController extends HttpServlet {
 	
 	private void deleteSelectAccount(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		RequestDispatcher rd=request.getRequestDispatcher("deleteAccount.jsp");
-		int id = Integer.parseInt(request.getParameter("id"));
-		Account account = dao.searchAccount(id);
+		int id = Integer.parseInt(request.getParameter("accountID"));
+		Account account = accountDAO.searchAccount(id);
 		String[] accountItems = new String[3];
 		accountItems[0]=String.valueOf(account.getID());
 		accountItems[1]=account.getName();
@@ -131,7 +131,7 @@ public class AccountController extends HttpServlet {
 	
 	private void deleteAccount(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		int id = Integer.parseInt(request.getParameter("id"));
-		dao.delete(id);
+		accountDAO.delete(id);
 		
 		message = "** Account " + id + " deleted! **";
 		listAccounts(request,response,message);

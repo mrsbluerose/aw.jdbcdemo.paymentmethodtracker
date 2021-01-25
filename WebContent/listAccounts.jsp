@@ -45,14 +45,14 @@
 			</td>
 			<td>
 				<form action="accountController" method="post">
-					<input type="hidden" name="id" value=<%=s[0]%> />
+					<input type="hidden" name="accountID" value=<%=s[0]%> />
 					<input type="hidden" name="action" value="editSelectAccount" />
 					<input type="submit" value="Edit">
 				</form>
 			</td>
 			<td>
 				<form action="accountController" method="post">
-					<input type="hidden" name="id" value=<%=s[0]%> />
+					<input type="hidden" name="accountID" value=<%=s[0]%> />
 					<input type="hidden" name="action" value="deleteSelectAccount" />
 					<input type="submit" value="Delete">
 				</form>
