@@ -11,7 +11,6 @@
 </head>
 
 <body>
-	<a href="index.html">Home</a>
 	<h1>Accounts</h1>
 	<a href="createAccount.jsp">Create New</a>
 	<a href="searchAccount.jsp">Search</a>
@@ -19,7 +18,7 @@
 	<%
 	String message = (String) request.getAttribute("message");
 	%>
-	<p><h2><%=message%></p></h2>
+	<h2><%=message%></h2>
 
 	<table>
 		<tr>
@@ -39,7 +38,7 @@
 			<td><%=s[1]%></td>
 			<td><%=s[2]%></td>
 			<td><form action="accountNoteController" method="post">
-					<input type="hidden" name="id" value=<%=s[0]%> />
+					<input type="hidden" name="accountID" value=<%=s[0]%> />
 					<input type="hidden" name="action" value="list" />
 					<input type="submit" value="Notes">
 				</form>

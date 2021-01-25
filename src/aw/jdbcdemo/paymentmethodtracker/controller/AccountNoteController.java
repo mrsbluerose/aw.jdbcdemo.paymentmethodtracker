@@ -21,7 +21,9 @@ import aw.jdbcdemo.paymentmethodtracker.model.AccountNote;
 @WebServlet("/accountNoteController")
 public class AccountNoteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private AccountNoteDAO dao = new AccountNoteDAO();
+	private AccountNoteDAO accountNoteDAO = new AccountNoteDAO();
+	private AccountDAO accountDAO = new AccountDAO();
+	Account account;
 	private String message = "";
 	
     public AccountNoteController() {
@@ -50,11 +52,10 @@ public class AccountNoteController extends HttpServlet {
 	private void listAccountNotes (HttpServletRequest request, HttpServletResponse response, String message) throws ServletException, IOException {
 		RequestDispatcher rd=request.getRequestDispatcher("listAccountNotes.jsp");
 		ArrayList<String[]> accountNoteList = new ArrayList<>();
-		AccountDAO accountDAO = new AccountDAO();
-		accountNoteList = dao.listAccountNotes(Integer.parseInt(request.getParameter("id")));
-		Account account = accountDAO.searchAccount(Integer.parseInt(request.getParameter("id")));
+		accountNoteList = accountNoteDAO.listAccountNotes(Integer.parseInt(request.getParameter("accountID")));
+		account = accountDAO.searchAccount(Integer.parseInt(request.getParameter("accountID")));
 		request.setAttribute("accountNoteList",accountNoteList);
-		request.setAttribute("accountName",account.getName());
+		request.setAttribute("accountName",account.getName()); 
 		request.setAttribute("message",message);
 		rd.forward(request, response);
 	}
@@ -69,7 +70,7 @@ public class AccountNoteController extends HttpServlet {
 		accountNote.setAccountID(accountID);
 		accountNote.setDate(date);
 		accountNote.setNote(note);
-		dao.create(accountNote);
+		accountNoteDAO.create(accountNote);
 		
 		message = "** Account Note " + accountNote.getID() + " created! **";
 		listAccountNotes(request,response,message);
@@ -82,11 +83,11 @@ public class AccountNoteController extends HttpServlet {
 		ArrayList<String[]> accountNoteList = new ArrayList<>();
 		
 		if (searchType.contentEquals("id")) {
-			accountNoteList = dao.searchByID(Integer.parseInt(searchTerm));
+			accountNoteList = accountNoteDAO.searchByID(Integer.parseInt(searchTerm));
 		} else if (searchType.contentEquals("accountID")) {
-			accountNoteList = dao.searchByAccountID(Integer.parseInt(searchTerm));
+			accountNoteList = accountNoteDAO.searchByAccountID(Integer.parseInt(searchTerm));
 		} else if (searchType.contentEquals("date")) {
-			accountNoteList = dao.searchByYear(searchTerm);
+			accountNoteList = accountNoteDAO.searchByYear(searchTerm);
 		} 
 		request.setAttribute("accountNoteList",accountNoteList);
 		rd.forward(request, response);
@@ -96,7 +97,7 @@ public class AccountNoteController extends HttpServlet {
 	private void editSelectAccountNote(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		RequestDispatcher rd=request.getRequestDispatcher("editAccountNote.jsp");
 		int id = Integer.parseInt(request.getParameter("id"));
-		AccountNote accountNote = dao.searchAccountNote(id);
+		AccountNote accountNote = accountNoteDAO.searchAccountNote(id);
 		String[] accountNoteItems = new String[3];
 		accountNoteItems[0]=String.valueOf(accountNote.getAccountID());
 		accountNoteItems[1]=accountNote.getDate();
@@ -117,7 +118,7 @@ public class AccountNoteController extends HttpServlet {
 		accountNote.setAccountID(accountID);
 		accountNote.setDate(date);
 		accountNote.setNote(note);
-		dao.editAccountNote(accountNote);
+		accountNoteDAO.editAccountNote(accountNote);
 		
 		message = "** Account Note " + id + " edited! **";
 		listAccountNotes(request,response,message);
@@ -127,7 +128,7 @@ public class AccountNoteController extends HttpServlet {
 	private void deleteSelectAccountNote(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		RequestDispatcher rd=request.getRequestDispatcher("deleteAccount.jsp");
 		int id = Integer.parseInt(request.getParameter("id"));
-		AccountNote accountNote = dao.searchAccountNote(id);
+		AccountNote accountNote = accountNoteDAO.searchAccountNote(id);
 		String[] accountNoteItems = new String[3];
 		accountNoteItems[0]=String.valueOf(accountNote.getAccountID());
 		accountNoteItems[1]=accountNote.getDate();
@@ -139,7 +140,7 @@ public class AccountNoteController extends HttpServlet {
 	
 	private void deleteAccountNote(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		int id = Integer.parseInt(request.getParameter("id"));
-		dao.delete(id);
+		accountNoteDAO.delete(id);
 		
 		message = "** Account Note " + id + " deleted! **";
 		listAccountNotes(request,response,message);

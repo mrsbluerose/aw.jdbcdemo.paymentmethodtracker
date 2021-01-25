@@ -15,7 +15,7 @@
 	<%
 	
 	ArrayList<String[]> accountNoteList = (ArrayList<String[]>) request.getAttribute("accountNoteList");
-	int accountID = Integer.parseInt(request.getParameter("id"));
+	String accountID = request.getParameter("accountID");
 	String accountName = (String) request.getAttribute("accountName");
 	String message = (String) request.getAttribute("message");
 	%>
@@ -25,17 +25,18 @@
 	<form action="accountController" method="post">
 		<input type="hidden" name="action" value="list" />
 		<input type="submit" value="Back to Accounts">
-		<form action="accountNoteController" method="post">
-			<input type="hidden" name="id" value=<%=accountID%> />
-			<input type="hidden" name="action" value="create" />
-			<input type="submit" value="Create New">
-		</form>
-		<form action="accountNoteController" method="post">
-			<input type="hidden" name="id" value=<%=accountID%> />
-			<input type="hidden" name="action" value="search" />
-			<input type="submit" value="Search">
-		</form>
 	</form>
+	<form action="accountNoteController" method="post">
+		<input type="hidden" name="id" value=<%=accountID%> />
+		<input type="hidden" name="action" value="create" />
+		<input type="submit" value="Create New">
+	</form>
+	<form action="accountNoteController" method="post">
+		<input type="hidden" name="id" value=<%=accountID%> />
+		<input type="hidden" name="action" value="search" />
+		<input type="submit" value="Search">
+	</form>
+	
 
 	<h2><%=message%></h2>
 
