@@ -11,13 +11,12 @@
 </head>
 
 <body>
-	<a href="index.html">Home</a>
 	<h1>Account Search Results</h1>
 	<form action="accountController" method="post">
 		<input type="hidden" name="action" value="list" />
 		<input type="submit" value="Back to Accounts">
 		<a href="createAccount.jsp">Create New</a>
-	<a href="searchAccount.jsp">Search</a>
+		<a href="searchAccount.jsp">Search</a>
 	</form>
 	
 	<table>

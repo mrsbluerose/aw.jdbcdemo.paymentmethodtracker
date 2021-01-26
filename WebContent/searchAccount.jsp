@@ -10,7 +10,6 @@
 </head>
 
 <body>
-	<a href="index.html">Home</a>
 	<h1>Search Accounts</h1>
 	<form action="accountController" method="post">
 		<pre>

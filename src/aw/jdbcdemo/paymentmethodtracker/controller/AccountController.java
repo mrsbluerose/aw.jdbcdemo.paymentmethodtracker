@@ -1,7 +1,6 @@
 package aw.jdbcdemo.paymentmethodtracker.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
@@ -69,7 +68,7 @@ public class AccountController extends HttpServlet {
 	}
 	
 	private void search(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-		RequestDispatcher rd=request.getRequestDispatcher("accountSearchResults.jsp");
+		RequestDispatcher rd=request.getRequestDispatcher("searchAccountResults.jsp");
 		String searchType = request.getParameter("searchType");
 		String searchTerm = request.getParameter("searchTerm");
 		ArrayList<String[]> accountList = new ArrayList<>();

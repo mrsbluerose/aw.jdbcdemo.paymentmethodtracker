@@ -88,7 +88,7 @@ public class AccountNoteDAO {
 		Connection connection;
 		try {
 			connection = ConnectionUtil.getConnection();
-			PreparedStatement statement = connection.prepareStatement("SELECT an.account_note_id, a.account_name, an.account_note_date, an.account_note_text "
+			PreparedStatement statement = connection.prepareStatement("SELECT an.account_note_id, an.account_note_date, an.account_note_text "
 					+ "FROM account_note AS an " 
 					+ "INNER JOIN account AS a ON an.account_id=a.account_id "
 					+ condition);
@@ -116,17 +116,19 @@ public class AccountNoteDAO {
 		return accountNoteList;
 	}
 
-	public ArrayList<String[]> searchByAccountID(int id) {
-		String condition = "WHERE account_id=" + id + ";";
+	public ArrayList<String[]> searchByYear(String year) {
+		String condition = "WHERE account_note_date LIKE '%" + year + "%';";
+		ArrayList<String[]> accountNoteList = searchAccountNote(condition);		
+		return accountNoteList;
+	}
+	
+	public ArrayList<String[]> searchByNoteText(String text) {
+		String condition = "WHERE account_note_text LIKE '%" + text + "%';";
 		ArrayList<String[]> accountNoteList = searchAccountNote(condition);		
 		return accountNoteList;
 	}
 
-	public ArrayList<String[]> searchByYear(String year) {
-		String condition = "WHERE account_name LIKE '%" + year + "%';";
-		ArrayList<String[]> accountNoteList = searchAccountNote(condition);		
-		return accountNoteList;
-	}
+	
 
 	
 

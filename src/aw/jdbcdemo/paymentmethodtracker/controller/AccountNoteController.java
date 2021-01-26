@@ -76,19 +76,21 @@ public class AccountNoteController extends HttpServlet {
 	}
 	
 	private void search(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-		RequestDispatcher rd=request.getRequestDispatcher("accountNoteSearchResults.jsp");
+		RequestDispatcher rd=request.getRequestDispatcher("searchAccountNoteResults.jsp");
 		String searchType = request.getParameter("searchType");
 		String searchTerm = request.getParameter("searchTerm");
 		ArrayList<String[]> accountNoteList = new ArrayList<>();
+		account = accountDAO.searchAccount(Integer.parseInt(request.getParameter("accountID")));
 		
-		if (searchType.contentEquals("id")) {
+		if (searchType.contentEquals("accountNoteID")) {
 			accountNoteList = accountNoteDAO.searchByID(Integer.parseInt(searchTerm));
-		} else if (searchType.contentEquals("accountID")) {
-			accountNoteList = accountNoteDAO.searchByAccountID(Integer.parseInt(searchTerm));
 		} else if (searchType.contentEquals("date")) {
 			accountNoteList = accountNoteDAO.searchByYear(searchTerm);
+		} else if (searchType.contentEquals("noteText")) {
+			accountNoteList = accountNoteDAO.searchByNoteText(searchTerm);
 		} 
 		request.setAttribute("accountNoteList",accountNoteList);
+		request.setAttribute("accountName",account.getName()); 
 		rd.forward(request, response);
 		
 	}

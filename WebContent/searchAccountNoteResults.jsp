@@ -6,24 +6,25 @@
 
 <head>
 <meta charset="UTF-8">
-<title>Account Notes</title>
+<title>Account Note Search Results</title>
 <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
 
-	<%
-	ArrayList<String[]> accountNoteList = (ArrayList<String[]>) request.getAttribute("accountNoteList");
-	String accountID = request.getParameter("accountID");
-	String accountName = (String) request.getAttribute("accountName");
-	String message = (String) request.getAttribute("message");
-	%>
+<%
+ArrayList<String[]> accountNoteList = (ArrayList<String[]>) request.getAttribute("accountNoteList");
+String accountID = request.getParameter("accountID");
+String accountName = (String) request.getAttribute("accountName");
+%>
 
-	<form action="accountController" method="post">
+	<h1>Account Note Search Results</h1>
+	<form action="accountNoteController" method="post">
+	<input type="hidden" name="accountID" value=<%=accountID%> />
 		<input type="hidden" name="action" value="list" />
-		<input type="submit" value="Back to Accounts">
+		<input type="submit" value="Back to Notes">
 	</form>
-<form action="accountNoteController" method="post">
+	<form action="accountNoteController" method="post">
 		<pre>
 		Search By: 
 		<input type="radio" id="accountNoteID" name="searchType" value="accountNoteID">
@@ -41,18 +42,15 @@
 	</form>
 	<form action="accountNoteController" method="post">
 		<pre>
-		New Note
 		Date: <input type="text" name="date" />
 		Note: <input type="text" name="note" />
-		<input type="hidden" name="accountID" value=<%=accountID%> />
+		<input type="hidden" name="accountNoteID" value=<%=accountID%> />
 		<input type="hidden" name="action" value="create" />
 		<input type="submit" value="Save">
 		</pre>
 	</form>
 	
 
-	<h2><%=message%></h2>
-	<h1>Account Notes</h1>
 <p>Account ID:  <%=accountID%></p>
 <p>Account Name: <%=accountName%></p>
 
