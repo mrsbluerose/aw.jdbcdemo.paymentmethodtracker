@@ -61,7 +61,6 @@ public class AccountNoteController extends HttpServlet {
 	}
 	
 	private void createAccountNote(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-		RequestDispatcher rd=request.getRequestDispatcher("listAccountNotes.jsp");
 		int accountID = Integer.parseInt(request.getParameter("accountID"));
 		String date = request.getParameter("date");
 		String note = request.getParameter("note");
@@ -72,7 +71,7 @@ public class AccountNoteController extends HttpServlet {
 		accountNote.setNote(note);
 		accountNoteDAO.create(accountNote);
 		
-		message = "** Account Note " + accountNote.getID() + " created! **";
+		message = "** Account Note created! **";
 		listAccountNotes(request,response,message);
 	}
 	
@@ -96,25 +95,26 @@ public class AccountNoteController extends HttpServlet {
 	
 	private void editSelectAccountNote(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		RequestDispatcher rd=request.getRequestDispatcher("editAccountNote.jsp");
-		int id = Integer.parseInt(request.getParameter("id"));
+		int id = Integer.parseInt(request.getParameter("accountNoteID"));
 		AccountNote accountNote = accountNoteDAO.searchAccountNote(id);
-		String[] accountNoteItems = new String[3];
-		accountNoteItems[0]=String.valueOf(accountNote.getAccountID());
-		accountNoteItems[1]=accountNote.getDate();
-		accountNoteItems[2]=accountNote.getNote();
+		String[] accountNoteItems = new String[4];
+		accountNoteItems[0]=String.valueOf(accountNote.getID());
+		accountNoteItems[1]=String.valueOf(accountNote.getAccountID());
+		accountNoteItems[2]=accountNote.getDate();
+		accountNoteItems[3]=accountNote.getNote();
 		
 		request.setAttribute("accountNoteItems",accountNoteItems);
 		rd.forward(request, response);
 	}
 	
 	private void editAccountNote(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-		int id = Integer.parseInt(request.getParameter("id"));
+		int id = Integer.parseInt(request.getParameter("accountNoteID"));
 		int accountID = Integer.parseInt(request.getParameter("accountID"));
 		String date = request.getParameter("date");
-		String note = request.getParameter("note");
+		String note = request.getParameter("accountNoteText");
 		
 		AccountNote accountNote = new AccountNote();
-		accountNote.setID(accountID);
+		accountNote.setID(id);
 		accountNote.setAccountID(accountID);
 		accountNote.setDate(date);
 		accountNote.setNote(note);
@@ -122,24 +122,24 @@ public class AccountNoteController extends HttpServlet {
 		
 		message = "** Account Note " + id + " edited! **";
 		listAccountNotes(request,response,message);
-
 	}
 	
 	private void deleteSelectAccountNote(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-		RequestDispatcher rd=request.getRequestDispatcher("deleteAccount.jsp");
-		int id = Integer.parseInt(request.getParameter("id"));
+		RequestDispatcher rd=request.getRequestDispatcher("deleteAccountNote.jsp");
+		int id = Integer.parseInt(request.getParameter("accountNoteID"));
 		AccountNote accountNote = accountNoteDAO.searchAccountNote(id);
-		String[] accountNoteItems = new String[3];
-		accountNoteItems[0]=String.valueOf(accountNote.getAccountID());
-		accountNoteItems[1]=accountNote.getDate();
-		accountNoteItems[2]=accountNote.getNote();
+		String[] accountNoteItems = new String[4];
+		accountNoteItems[0]=String.valueOf(accountNote.getID());
+		accountNoteItems[1]=String.valueOf(accountNote.getAccountID());
+		accountNoteItems[2]=accountNote.getDate();
+		accountNoteItems[3]=accountNote.getNote();
 		
 		request.setAttribute("accountNoteItems",accountNoteItems);
 		rd.forward(request, response);
 	}
 	
 	private void deleteAccountNote(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-		int id = Integer.parseInt(request.getParameter("id"));
+		int id = Integer.parseInt(request.getParameter("accountNoteID"));
 		accountNoteDAO.delete(id);
 		
 		message = "** Account Note " + id + " deleted! **";

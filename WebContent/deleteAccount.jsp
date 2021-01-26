@@ -10,19 +10,22 @@
 </head>
 
 <body>
-	<a href="index.html">Home</a>
+
 	<h1>Delete Account</h1>
 	<form action="accountController" method="post">
 		<%
 		String[] accountItems = (String[]) request.getAttribute("accountItems");
 		%>
-		<input type="hidden" name="id" 	value="<%=accountItems[0]%>" /> 
+		
 		<pre>
 		ID: <%=accountItems[0]%>
 		Name: <%=accountItems[1]%>
 		Payment Method: <%=accountItems[2]%>
-		<input type="submit" name="action" value="delete" />
 		</pre>
+		
+		<input type="hidden" name="id" 	value="<%=accountItems[0]%>" /> 
+		<input type="submit" name="action" value="delete" />
+		
 	</form>
 
 </body>

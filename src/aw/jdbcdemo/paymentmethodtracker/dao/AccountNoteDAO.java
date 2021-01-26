@@ -70,7 +70,7 @@ public class AccountNoteDAO {
 				accountNote.setID(resultSet.getInt(1));
 				accountNote.setAccountID(resultSet.getInt(2));
 				accountNote.setDate(resultSet.getString(3));
-				accountNote.setNote(resultSet.getString(3));
+				accountNote.setNote(resultSet.getString(4));
 			}
 			ConnectionUtil.closeQuietly(connection);
 		} catch (SQLException e) {

@@ -13,13 +13,11 @@
 <body>
 
 	<%
-	
 	ArrayList<String[]> accountNoteList = (ArrayList<String[]>) request.getAttribute("accountNoteList");
 	String accountID = request.getParameter("accountID");
 	String accountName = (String) request.getAttribute("accountName");
 	String message = (String) request.getAttribute("message");
 	%>
-	<a href="index.html">Home</a>
 
 	<h1>Account Notes</h1>
 	<form action="accountController" method="post">
@@ -28,13 +26,17 @@
 	</form>
 	<form action="accountNoteController" method="post">
 		<input type="hidden" name="id" value=<%=accountID%> />
-		<input type="hidden" name="action" value="create" />
-		<input type="submit" value="Create New">
-	</form>
-	<form action="accountNoteController" method="post">
-		<input type="hidden" name="id" value=<%=accountID%> />
 		<input type="hidden" name="action" value="search" />
 		<input type="submit" value="Search">
+	</form>
+	<form action="accountNoteController" method="post">
+		<pre>
+		Date: <input type="text" name="date" />
+		Note: <input type="text" name="note" />
+		<input type="hidden" name="accountID" value=<%=accountID%> />
+		<input type="hidden" name="action" value="create" />
+		<input type="submit" value="Save">
+		</pre>
 	</form>
 	
 
@@ -63,14 +65,14 @@
 			<td><%=s[2]%></td>
 			<td>
 				<form action="accountNoteController" method="post">
-					<input type="hidden" name="id" value=<%=s[0]%> />
+					<input type="hidden" name="accountNoteID" value=<%=s[0]%> />
 					<input type="hidden" name="action" value="editSelectAccountNote" />
 					<input type="submit" value="Edit">
 				</form>
 			</td>
 			<td>
 				<form action="accountNoteController" method="post">
-					<input type="hidden" name="id" value=<%=s[0]%> />
+					<input type="hidden" name="accountNoteID" value=<%=s[0]%> />
 					<input type="hidden" name="action" value="deleteSelectAccountNote" />
 					<input type="submit" value="Delete">
 				</form>

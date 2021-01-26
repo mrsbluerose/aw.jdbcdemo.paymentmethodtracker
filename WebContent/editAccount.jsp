@@ -10,7 +10,6 @@
 </head>
 
 <body>
-	<a href="index.html">Home</a>
 	<h1>Edit Account</h1>
 	<form action="accountController" method="post">
 		<%
