@@ -1,6 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@page import="java.util.ArrayList"%>
+<%@ page import="java.util.ArrayList"%>
 
+
+<%
+	String message = (String) request.getAttribute("message");
+	ArrayList<String[]> accountList = (ArrayList<String[]>) request.getAttribute("accountList");
+%>
+	
 <!DOCTYPE html>
 <html>
 
@@ -14,10 +20,7 @@
 	<h1>Accounts</h1>
 	<a href="createAccount.jsp">Create New</a>
 	<a href="searchAccount.jsp">Search</a>
-
-	<%
-	String message = (String) request.getAttribute("message");
-	%>
+	
 	<h2><%=message%></h2>
 
 	<table>
@@ -30,7 +33,6 @@
 			<th>Delete</th>
 		</tr>
 		<%
-		ArrayList<String[]> accountList = (ArrayList<String[]>) request.getAttribute("accountList");
 		for (String[] s:accountList){
 		%>
 		<tr>
@@ -62,5 +64,6 @@
 		}
 		%>
 	</table>
+	
 </body>
 </html>
