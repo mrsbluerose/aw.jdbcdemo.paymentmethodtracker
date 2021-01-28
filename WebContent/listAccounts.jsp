@@ -17,12 +17,15 @@
 </head>
 
 <body>
+
+	<!-- Confirmation message (if there is one) -->
+	<h2><%=message%></h2>
+	
 	<h1>Accounts</h1>
 	<a href="createAccount.jsp">Create New</a>
 	<a href="searchAccount.jsp">Search</a>
-	
-	<h2><%=message%></h2>
 
+	<!-- Table of accounts -->
 	<table>
 		<tr>
 			<th>ID</th>
@@ -46,6 +49,7 @@
 				</form>
 			</td>
 			<td>
+			<!-- Edit button -->
 				<form action="accountController" method="post">
 					<input type="hidden" name="accountID" value=<%=s[0]%> />
 					<input type="hidden" name="action" value="editSelectAccount" />
@@ -53,6 +57,7 @@
 				</form>
 			</td>
 			<td>
+			<!-- Delete button -->
 				<form action="accountController" method="post">
 					<input type="hidden" name="accountID" value=<%=s[0]%> />
 					<input type="hidden" name="action" value="deleteSelectAccount" />

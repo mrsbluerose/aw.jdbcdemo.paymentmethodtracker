@@ -62,12 +62,12 @@ public class AccountController extends HttpServlet {
 	 * Sends new account information to account DAO
 	 */
 	private void createAccount(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-		String name = request.getParameter("name");
-		int paymentMethod = Integer.parseInt(request.getParameter("paymentMethod"));
+		String accountName = request.getParameter("accountName");
+		int paymentMethodID = Integer.parseInt(request.getParameter("paymentMethodID"));
 		
 		Account account = new Account();
-		account.setName(name);
-		account.setPaymentMethodID(paymentMethod);
+		account.setName(accountName);
+		account.setPaymentMethodID(paymentMethodID);
 		accountDAO.create(account);
 		
 		message = "** Account " + account.getID() + " created! **";

@@ -1,6 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@page import="java.util.ArrayList"%>
 
+	<%
+	ArrayList<String[]> accountNoteList = (ArrayList<String[]>) request.getAttribute("accountNoteList");
+	String accountID = request.getParameter("accountID");
+	String accountName = (String) request.getAttribute("accountName");
+	String message = (String) request.getAttribute("message");
+	%>
+
 <!DOCTYPE html>
 <html>
 
@@ -12,17 +19,20 @@
 
 <body>
 
-	<%
-	ArrayList<String[]> accountNoteList = (ArrayList<String[]>) request.getAttribute("accountNoteList");
-	String accountID = request.getParameter("accountID");
-	String accountName = (String) request.getAttribute("accountName");
-	String message = (String) request.getAttribute("message");
-	%>
+	<!-- Confirmation message (if there is one) -->
+	<h2><%=message%></h2>
 
+	<!-- Back to accounts button -->
 	<form action="accountController" method="post">
 		<input type="hidden" name="action" value="list" />
 		<input type="submit" value="Back to Accounts">
 	</form>
+	
+	<h1>Account Notes</h1>
+	<p>Account ID:  <%=accountID%></p>
+	<p>Account Name: <%=accountName%></p>
+	
+	<!-- search type and term form -->
 	<form action="accountNoteController" method="post">
 		<pre>
 		Search By: 
@@ -39,23 +49,20 @@
 		<input type="submit" value="Search" />
 		</pre>
 	</form>
+	
+	<!-- new note form -->
 	<form action="accountNoteController" method="post">
 		<pre>
 		New Note
-		Date: <input type="text" name="date" />
-		Note: <input type="text" name="note" />
+		Date: <input type="text" name="accountNoteDate" />
+		Note: <input type="text" name="accountNoteText" />
 		<input type="hidden" name="accountID" value=<%=accountID%> />
 		<input type="hidden" name="action" value="create" />
 		<input type="submit" value="Save">
 		</pre>
 	</form>
-	
 
-	<h2><%=message%></h2>
-	<h1>Account Notes</h1>
-	<p>Account ID:  <%=accountID%></p>
-	<p>Account Name: <%=accountName%></p>
-
+	<!-- Table of account notes -->
 	<table>
 		<tr>
 			<th>Note ID</th>
@@ -64,17 +71,15 @@
 			<th>Edit</th>
 			<th>Delete</th>
 		</tr>
-
 		<%
-		
 		for (String[] s:accountNoteList){
 		%>
-
 		<tr>
 			<td><%=s[0]%></td>
 			<td><%=s[1]%></td>
 			<td><%=s[2]%></td>
 			<td>
+			<!-- Edit button -->
 				<form action="accountNoteController" method="post">
 					<input type="hidden" name="accountNoteID" value=<%=s[0]%> />
 					<input type="hidden" name="action" value="editSelectAccountNote" />
@@ -82,6 +87,7 @@
 				</form>
 			</td>
 			<td>
+			<!-- Delete button -->
 				<form action="accountNoteController" method="post">
 					<input type="hidden" name="accountNoteID" value=<%=s[0]%> />
 					<input type="hidden" name="action" value="deleteSelectAccountNote" />

@@ -68,13 +68,13 @@ public class AccountNoteController extends HttpServlet {
 	 */
 	private void createAccountNote(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		int accountID = Integer.parseInt(request.getParameter("accountID"));
-		String date = request.getParameter("date");
-		String note = request.getParameter("note");
+		String date = request.getParameter("accountNoteDate");
+		String text = request.getParameter("accountNoteText");
 		
 		AccountNote accountNote = new AccountNote();
 		accountNote.setAccountID(accountID);
 		accountNote.setDate(date);
-		accountNote.setNote(note);
+		accountNote.setText(text);
 		accountNoteDAO.create(accountNote);
 		
 		message = "** Account Note created! **";
@@ -115,7 +115,7 @@ public class AccountNoteController extends HttpServlet {
 		accountNoteItems[0]=String.valueOf(accountNote.getID());
 		accountNoteItems[1]=String.valueOf(accountNote.getAccountID());
 		accountNoteItems[2]=accountNote.getDate();
-		accountNoteItems[3]=accountNote.getNote();
+		accountNoteItems[3]=accountNote.getText();
 		
 		request.setAttribute("accountNoteItems",accountNoteItems);
 		rd.forward(request, response);
@@ -134,7 +134,7 @@ public class AccountNoteController extends HttpServlet {
 		accountNote.setID(id);
 		accountNote.setAccountID(accountID);
 		accountNote.setDate(date);
-		accountNote.setNote(note);
+		accountNote.setText(note);
 		accountNoteDAO.editAccountNote(accountNote);
 		
 		message = "** Account Note " + id + " edited! **";
@@ -152,7 +152,7 @@ public class AccountNoteController extends HttpServlet {
 		accountNoteItems[0]=String.valueOf(accountNote.getID());
 		accountNoteItems[1]=String.valueOf(accountNote.getAccountID());
 		accountNoteItems[2]=accountNote.getDate();
-		accountNoteItems[3]=accountNote.getNote();
+		accountNoteItems[3]=accountNote.getText();
 		
 		request.setAttribute("accountNoteItems",accountNoteItems);
 		rd.forward(request, response);

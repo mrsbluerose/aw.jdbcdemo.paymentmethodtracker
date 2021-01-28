@@ -58,7 +58,7 @@ public class AccountNoteDAO {
 					+ "(account_id,account_note_date,account_note_text) VALUES(?,?,?)");
 			statement.setInt(1, accountNote.getAccountID());
 			statement.setString(2,accountNote.getDate());
-			statement.setString(3,accountNote.getNote());
+			statement.setString(3,accountNote.getText());
 			statement.executeUpdate();
 			ConnectionUtil.closeQuietly(connection);
 		} catch (SQLException e) {
@@ -85,7 +85,7 @@ public class AccountNoteDAO {
 				accountNote.setID(resultSet.getInt(1));
 				accountNote.setAccountID(resultSet.getInt(2));
 				accountNote.setDate(resultSet.getString(3));
-				accountNote.setNote(resultSet.getString(4));
+				accountNote.setText(resultSet.getString(4));
 			}
 			ConnectionUtil.closeQuietly(connection);
 		} catch (SQLException e) {
@@ -170,7 +170,7 @@ public class AccountNoteDAO {
 			connection = ConnectionUtil.getConnection();
 			PreparedStatement statement = connection.prepareStatement("UPDATE account_note SET account_note_date=?, account_note_text=? WHERE account_note_id=?");
 			statement.setString(1, accountNote.getDate());
-			statement.setString(2, accountNote.getNote());
+			statement.setString(2, accountNote.getText());
 			statement.setInt(3, accountNote.getID());
 			statement.executeUpdate();
 			ConnectionUtil.closeQuietly(connection);

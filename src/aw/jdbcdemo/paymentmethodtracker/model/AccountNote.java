@@ -4,7 +4,7 @@ public class AccountNote {
 	private int id;
 	private int accountID;
 	private String date;
-	private String note;
+	private String text;
 
 	public int getID() {
 		return id;
@@ -30,17 +30,17 @@ public class AccountNote {
 		this.date = date;
 	}
 
-	public String getNote() {
-		return note;
+	public String getText() {
+		return text;
 	}
 
-	public void setNote(String note) {
-		this.note = note;
+	public void setText(String text) {
+		this.text = text;
 	}
 
 	@Override
 	public String toString() {
-		return "AccountNote [id=" + id + ", accountID=" + accountID + ", date=" + date + ", note=" + note + "]";
+		return "AccountNote [id=" + id + ", accountID=" + accountID + ", date=" + date + ", text=" + text + "]";
 	}
 
 }
