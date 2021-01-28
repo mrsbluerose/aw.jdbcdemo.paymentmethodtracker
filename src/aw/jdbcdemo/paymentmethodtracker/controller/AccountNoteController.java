@@ -109,8 +109,8 @@ public class AccountNoteController extends HttpServlet {
 	 */
 	private void editSelectAccountNote(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		RequestDispatcher rd=request.getRequestDispatcher("editAccountNote.jsp");
-		int id = Integer.parseInt(request.getParameter("accountNoteID"));
-		AccountNote accountNote = accountNoteDAO.searchAccountNote(id);
+		int accountNoteID = Integer.parseInt(request.getParameter("accountNoteID"));
+		AccountNote accountNote = accountNoteDAO.searchAccountNote(accountNoteID);
 		String[] accountNoteItems = new String[4];
 		accountNoteItems[0]=String.valueOf(accountNote.getID());
 		accountNoteItems[1]=String.valueOf(accountNote.getAccountID());
@@ -125,19 +125,19 @@ public class AccountNoteController extends HttpServlet {
 	 * Sends updated fields information to account note DAO
 	 */
 	private void editAccountNote(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-		int id = Integer.parseInt(request.getParameter("accountNoteID"));
+		int accountNoteID = Integer.parseInt(request.getParameter("accountNoteID"));
 		int accountID = Integer.parseInt(request.getParameter("accountID"));
-		String date = request.getParameter("date");
-		String note = request.getParameter("accountNoteText");
+		String date = request.getParameter("accountNoteDate");
+		String text = request.getParameter("accountNoteText");
 		
 		AccountNote accountNote = new AccountNote();
-		accountNote.setID(id);
+		accountNote.setID(accountNoteID);
 		accountNote.setAccountID(accountID);
 		accountNote.setDate(date);
-		accountNote.setText(note);
+		accountNote.setText(text);
 		accountNoteDAO.editAccountNote(accountNote);
 		
-		message = "** Account Note " + id + " edited! **";
+		message = "** Account Note " + accountNoteID + " edited! **";
 		listAccountNotes(request,response,message);
 	}
 	
@@ -146,8 +146,8 @@ public class AccountNoteController extends HttpServlet {
 	 */
 	private void deleteSelectAccountNote(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		RequestDispatcher rd=request.getRequestDispatcher("deleteAccountNote.jsp");
-		int id = Integer.parseInt(request.getParameter("accountNoteID"));
-		AccountNote accountNote = accountNoteDAO.searchAccountNote(id);
+		int accountNoteID = Integer.parseInt(request.getParameter("accountNoteID"));
+		AccountNote accountNote = accountNoteDAO.searchAccountNote(accountNoteID);
 		String[] accountNoteItems = new String[4];
 		accountNoteItems[0]=String.valueOf(accountNote.getID());
 		accountNoteItems[1]=String.valueOf(accountNote.getAccountID());

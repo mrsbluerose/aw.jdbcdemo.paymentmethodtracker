@@ -101,8 +101,8 @@ public class AccountController extends HttpServlet {
 	 */
 	private void editSelectAccount(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		RequestDispatcher rd=request.getRequestDispatcher("editAccount.jsp");
-		int id = Integer.parseInt(request.getParameter("accountID"));
-		Account account = accountDAO.searchAccount(id);
+		int accountID = Integer.parseInt(request.getParameter("accountID"));
+		Account account = accountDAO.searchAccount(accountID);
 		String[] accountItems = new String[3];
 		accountItems[0]=String.valueOf(account.getID());
 		accountItems[1]=account.getName();
@@ -116,17 +116,17 @@ public class AccountController extends HttpServlet {
 	 * Sends updated fields information to account DAO
 	 */
 	private void editAccount(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-		int id = Integer.parseInt(request.getParameter("accountID"));
-		String name = request.getParameter("name");
-		int paymentMethod = Integer.parseInt(request.getParameter("paymentMethod"));
+		int accountID = Integer.parseInt(request.getParameter("accountID"));
+		String accountName = request.getParameter("accountName");
+		int paymentMethodID = Integer.parseInt(request.getParameter("paymentMethod"));
 		
 		Account account = new Account();
-		account.setID(id);
-		account.setName(name);
-		account.setPaymentMethodID(paymentMethod);
+		account.setID(accountID);
+		account.setName(accountName);
+		account.setPaymentMethodID(paymentMethodID);
 		accountDAO.editAccount(account);
 		
-		message = "** Account " + id + " edited! **";
+		message = "** Account " + accountID + " edited! **";
 		listAccounts(request,response,message);
 
 	}
@@ -136,8 +136,8 @@ public class AccountController extends HttpServlet {
 	 */
 	private void deleteSelectAccount(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		RequestDispatcher rd=request.getRequestDispatcher("deleteAccount.jsp");
-		int id = Integer.parseInt(request.getParameter("accountID"));
-		Account account = accountDAO.searchAccount(id);
+		int accountID = Integer.parseInt(request.getParameter("accountID"));
+		Account account = accountDAO.searchAccount(accountID);
 		String[] accountItems = new String[3];
 		accountItems[0]=String.valueOf(account.getID());
 		accountItems[1]=account.getName();
@@ -151,7 +151,7 @@ public class AccountController extends HttpServlet {
 	 * Sends account id to account DAO for deletion
 	 */
 	private void deleteAccount(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-		int id = Integer.parseInt(request.getParameter("id"));
+		int id = Integer.parseInt(request.getParameter("accounID"));
 		accountDAO.delete(id);
 		
 		message = "** Account " + id + " deleted! **";

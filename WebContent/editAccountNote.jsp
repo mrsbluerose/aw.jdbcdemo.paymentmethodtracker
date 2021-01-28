@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
+<%
+	String[] accountNoteItems = (String[]) request.getAttribute("accountNoteItems");
+%>
+
 <!DOCTYPE html>
 <html>
 
@@ -10,15 +15,15 @@
 </head>
 
 <body>
+
 	<h1>Edit Account Note</h1>
+	
+	<!-- Form to enter new account note date or text (pre-filled with existing data) -->
 	<form action="accountNoteController" method="post">
-		<%
-		String[] accountNoteItems = (String[]) request.getAttribute("accountNoteItems");
-		%>
 		<pre>
 		Account Note ID: <%=accountNoteItems[0]%>
 		Account ID: <%=accountNoteItems[1]%>
-		Date: <input type="text" name="date" value="<%=accountNoteItems[2]%>" />
+		Date: <input type="text" name="accountNoteDate" value="<%=accountNoteItems[2]%>" />
 		Note: <input type="text" name="accountNoteText"	value="<%=accountNoteItems[3]%>" />
 		<input type="hidden" name="accountNoteID" value="<%=accountNoteItems[0]%>">
 		<input type="hidden" name="accountID" value="<%=accountNoteItems[1]%>">
