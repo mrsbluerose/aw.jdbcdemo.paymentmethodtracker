@@ -34,7 +34,7 @@ public class AccountController extends HttpServlet {
 		} else if(action.contentEquals("create")) {
 			createAccount(request,response);
 		} else if (action.contentEquals("search")) {
-			search(request,response);
+			searchAccount(request,response);
 		} else if(action.contentEquals("editSelectAccount")) {
 			editSelectAccount(request,response);
 		} else if (action.contentEquals("edit")) {
@@ -77,7 +77,7 @@ public class AccountController extends HttpServlet {
 	/*
 	 * Accepts search type and term and fetches list of relevant account records
 	 */
-	private void search(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+	private void searchAccount(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		RequestDispatcher rd=request.getRequestDispatcher("searchAccountResults.jsp");
 		String searchType = request.getParameter("searchType");
 		String searchTerm = request.getParameter("searchTerm");

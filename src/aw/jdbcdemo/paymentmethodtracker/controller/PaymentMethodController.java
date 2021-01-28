@@ -4,12 +4,14 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import aw.jdbcdemo.paymentmethodtracker.model.Account;
 import aw.jdbcdemo.paymentmethodtracker.model.PaymentMethod;
 import aw.jdbcdemo.paymentmethodtracker.dao.PaymentMethodDAO;
 
@@ -19,7 +21,8 @@ import aw.jdbcdemo.paymentmethodtracker.dao.PaymentMethodDAO;
 @WebServlet("/paymentMethodController")
 public class PaymentMethodController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private PaymentMethodDAO dao = new PaymentMethodDAO();
+	private PaymentMethodDAO paymentMethodDAO = new PaymentMethodDAO();
+	private String message = "";
        
     public PaymentMethodController() {
         super();
@@ -28,82 +31,139 @@ public class PaymentMethodController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String action= request.getParameter("action");
-		if(action.contentEquals("create")) {
+		if(action.contentEquals("list")) {
+			listPaymentMethods(request, response, " ");
+		} else if(action.contentEquals("create")) {
 			createPaymentMethod(request,response);
 		} else if (action.contentEquals("search")) {
 			searchPaymentMethod(request,response);
+		} else if (action.contentEquals("editSelectPaymentMethod")) {
+			editSelectPaymentMethod(request,response);
 		} else if (action.contentEquals("edit")) {
 			editPaymentMethod(request,response);
+		} else if (action.contentEquals("deleteSelectPaymentMethod")) {
+			deleteSelectPaymentMethod(request,response);
 		} else if (action.contentEquals("delete")) {
 			deletePaymentMethod(request,response);
 		}
 	}
 	
-	private void createPaymentMethod(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		String name = request.getParameter("name");
-		String description = request.getParameter("description");
-		String expDate = request.getParameter("expDate");
+	/*
+	 * Fetches list of all payment method records. Accepts message for methods that have confirmation messages
+	 */
+	private void listPaymentMethods (HttpServletRequest request, HttpServletResponse response, String message) throws ServletException, IOException {
+		RequestDispatcher rd=request.getRequestDispatcher("listPaymentMethods.jsp");
+		ArrayList<String[]> paymentMethodList = new ArrayList<>();
+		paymentMethodList = paymentMethodDAO.listPaymentMethods();
+		request.setAttribute("paymentMethodList",paymentMethodList);
+		request.setAttribute("message", message);
+		rd.forward(request, response);
+	}
+	
+	/*
+	 * Sends new payment method information to payment method DAO
+	 */
+	private void createPaymentMethod(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+		String name = request.getParameter("paymentMethodName");
+		String description = request.getParameter("paymentMethodDescription");
+		String expDate = request.getParameter("paymentMethodExpDate");
 		
 		PaymentMethod paymentMethod = new PaymentMethod();
 		paymentMethod.setName(name);
 		paymentMethod.setDescription(description);
 		paymentMethod.setExpDate(expDate);
-		dao.create(paymentMethod);
+		paymentMethodDAO.create(paymentMethod);
 		
-		response.setContentType("text/html");
-		PrintWriter out = response.getWriter();
-		out.print("<b>Payment Method Created!!</b><br/>");
-		out.print("<a href='listPaymentMethods.jsp'>Back to Payment Methods</a>");	}
+		message = "** Payment Method " + paymentMethod.getID() + " created! **";
+		listPaymentMethods(request,response,message);
+	}
 	
-	private void searchPaymentMethod(HttpServletRequest request, HttpServletResponse response) throws IOException {
+	/*
+	 * Accepts search type and term and fetches list of relevant payment method records
+	 */
+	private void searchPaymentMethod(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+		RequestDispatcher rd=request.getRequestDispatcher("searchPaymentMethodResults.jsp");
 		String searchType = request.getParameter("searchType");
 		String searchTerm = request.getParameter("searchTerm");
-		ArrayList<PaymentMethod> paymentMethodList = new ArrayList<>();
+		ArrayList<String[]> paymentMethodList = new ArrayList<>();
 		
-		if (searchType.contentEquals("id")) {
-			paymentMethodList = dao.searchByID(Integer.parseInt(searchTerm));
-		} else if (searchType.contentEquals("name")) {
-			paymentMethodList = dao.searchByName(searchTerm);
-		} else if (searchType.contentEquals("expYear")) {
-			paymentMethodList = dao.searchByExpirationYear(searchTerm);
+		if (searchType.contentEquals("paymentMethodID")) {
+			paymentMethodList = paymentMethodDAO.searchByID(Integer.parseInt(searchTerm));
+		} else if (searchType.contentEquals("paymentMethodName")) {
+			paymentMethodList = paymentMethodDAO.searchByName(searchTerm);
+		} else if (searchType.contentEquals("paymentMethodDescription")) {
+			paymentMethodList = paymentMethodDAO.searchByDescription(searchTerm);
+		} else if (searchType.contentEquals("paymentMethodExpYear")) {
+			paymentMethodList = paymentMethodDAO.searchByExpirationYear(searchTerm);
 		}
 		
-		response.setContentType("text/html");
-		PrintWriter out = response.getWriter();
-		out.print("<a href='listPaymentMethods.jsp'>Back to Payment Methods</a><br/>");
-		out.print("<b>Payment Methods Found:</b><br/>");
-		for(PaymentMethod a:paymentMethodList) {
-			out.print(a + "<br/>");
-		}
+		request.setAttribute("paymentMethodList",paymentMethodList);
+		rd.forward(request, response);
 	}
 	
-	private void editPaymentMethod(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		int id = Integer.parseInt(request.getParameter("id"));
-		String name = request.getParameter("name");
-		String description = request.getParameter("description");
-		String expDate = request.getParameter("expDate");
+	/*
+	 * Fetches payment method record to populate editable fields
+	 */
+	private void editSelectPaymentMethod(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+		RequestDispatcher rd=request.getRequestDispatcher("editPaymentMethod.jsp");
+		int paymentMethodID = Integer.parseInt(request.getParameter("paymentMethodID"));
+		PaymentMethod paymentMethod = paymentMethodDAO.searchPaymentMethod(paymentMethodID);
+		String[] paymentMethodItems = new String[4];
+		paymentMethodItems[0]=String.valueOf(paymentMethod.getID());
+		paymentMethodItems[1]=paymentMethod.getName();
+		paymentMethodItems[2]=paymentMethod.getDescription();
+		paymentMethodItems[3]=paymentMethod.getExpDate();
+		
+		request.setAttribute("paymentMethodItems",paymentMethodItems);
+		rd.forward(request, response);
+	}
+	
+	/*
+	 * Sends updated fields information to payment method DAO
+	 */
+	private void editPaymentMethod(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+		int paymentMethodID = Integer.parseInt(request.getParameter("paymentMethodID"));
+		String name = request.getParameter("paymentMethodName");
+		String description = request.getParameter("paymentMethodDescription");
+		String expDate = request.getParameter("paymentMethodExpDate");
 		
 		PaymentMethod paymentMethod = new PaymentMethod();
-		paymentMethod.setID(id);
+		paymentMethod.setID(paymentMethodID);
 		paymentMethod.setName(name);
 		paymentMethod.setDescription(description);
 		paymentMethod.setExpDate(expDate);
-		dao.edit(paymentMethod);
+		paymentMethodDAO.edit(paymentMethod);
 		
-		response.setContentType("text/html");
-		PrintWriter out = response.getWriter();
-		out.print("<b>Payment Method Updated!!</b><br/>");
-		out.print("<a href='listPaymentMethods.jsp'>Back to Payment Methods</a>");
+		message = "** Payment Method " + paymentMethodID + " edited! **";
+		listPaymentMethods(request,response,message);
 	}
 	
-	private void deletePaymentMethod(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		int id = Integer.parseInt(request.getParameter("id"));
-		dao.delete(id);
+	/*
+	 *  Fetches payment method record to populate payment method fields for verification
+	 */
+	private void deleteSelectPaymentMethod(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+		RequestDispatcher rd=request.getRequestDispatcher("deletePaymentMethod.jsp");
+		int paymentMethodID = Integer.parseInt(request.getParameter("paymentMethodID"));
+		PaymentMethod paymentMethod = paymentMethodDAO.searchPaymentMethod(paymentMethodID);
+		String[] paymentMethodItems = new String[4];
+		paymentMethodItems[0]=String.valueOf(paymentMethod.getID());
+		paymentMethodItems[1]=paymentMethod.getName();
+		paymentMethodItems[2]=paymentMethod.getDescription();
+		paymentMethodItems[3]=paymentMethod.getExpDate();
 		
-		response.setContentType("text/html");
-		PrintWriter out = response.getWriter();
-		out.print("<b>Payment Method Deleted!!</b><br/>");
-		out.print("<a href='listPaymentMethods.jsp'>Back to Payment Methods</a>");
+		request.setAttribute("paymentMethodItems",paymentMethodItems);
+		rd.forward(request, response);
+	}
+	
+	/*
+	 * Sends payment method id to payment method DAO for deletion
+	 */
+	private void deletePaymentMethod(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+		int paymentMethodID = Integer.parseInt(request.getParameter("paymentMethodID"));
+		paymentMethodDAO.delete(paymentMethodID);
+		
+		message = "** Payment method " + paymentMethodID + " deleted! **";
+		listPaymentMethods(request,response,message);
 	}
 	
 }

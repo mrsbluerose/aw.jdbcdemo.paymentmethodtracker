@@ -24,6 +24,12 @@
 	<h1>Accounts</h1>
 	<a href="createAccount.jsp">Create New</a>
 	<a href="searchAccount.jsp">Search</a>
+	
+	<!-- List payment methods button -->
+	<form action="paymentMethodController" method="post">
+		<input type="hidden" name="action" value="list" />
+		<input type="submit" value="Payment Methods">
+	</form>
 
 	<!-- Table of accounts -->
 	<table>
