@@ -89,6 +89,7 @@
 			<td>
 			<!-- Delete button -->
 				<form action="accountNoteController" method="post">
+					<input type="hidden" name="accountID" value=<%=accountID%> />
 					<input type="hidden" name="accountNoteID" value=<%=s[0]%> />
 					<input type="hidden" name="action" value="deleteSelectAccountNote" />
 					<input type="submit" value="Delete">

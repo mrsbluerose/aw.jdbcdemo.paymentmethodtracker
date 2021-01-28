@@ -25,7 +25,8 @@
 		Name: <%=accountItems[1]%>
 		Payment Method: <%=accountItems[2]%>	
 		<input type="hidden" name="accountID" value="<%=accountItems[0]%>" /> 
-		<input type="submit" name="action" value="Delete" />
+		<input type="hidden" name="action" value="delete" />
+		<input type="submit" value="Delete" />
 		</pre>
 		
 	</form>

@@ -93,7 +93,6 @@ public class AccountController extends HttpServlet {
 		
 		request.setAttribute("accountList",accountList);
 		rd.forward(request, response);
-		
 	}
 	
 	/*
@@ -118,7 +117,7 @@ public class AccountController extends HttpServlet {
 	private void editAccount(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		int accountID = Integer.parseInt(request.getParameter("accountID"));
 		String accountName = request.getParameter("accountName");
-		int paymentMethodID = Integer.parseInt(request.getParameter("paymentMethod"));
+		int paymentMethodID = Integer.parseInt(request.getParameter("paymentMethodID"));
 		
 		Account account = new Account();
 		account.setID(accountID);
@@ -151,7 +150,7 @@ public class AccountController extends HttpServlet {
 	 * Sends account id to account DAO for deletion
 	 */
 	private void deleteAccount(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-		int id = Integer.parseInt(request.getParameter("accounID"));
+		int id = Integer.parseInt(request.getParameter("accountID"));
 		accountDAO.delete(id);
 		
 		message = "** Account " + id + " deleted! **";

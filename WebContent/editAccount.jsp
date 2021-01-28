@@ -23,7 +23,7 @@
 		<pre>
 		ID: <%=accountItems[0]%>
 		Name: <input type="text" name="accountName" value="<%=accountItems[1]%>" />
-		Payment Method: <input type="text" name="paymentMethodID"	value="<%=accountItems[2]%>" />
+		Payment Method: <input type="text" name="paymentMethodID" value="<%=accountItems[2]%>" />
 		<input type="hidden" name="accountID" value="<%=accountItems[0]%>">
 		<input type="hidden" name="action" value="edit" />
 		<input type="submit" value="Save">
