@@ -23,7 +23,7 @@
 		<input type="hidden" name="action" value="list" />
 		<input type="submit" value="Back to Accounts">
 	</form>
-<form action="accountNoteController" method="post">
+	<form action="accountNoteController" method="post">
 		<pre>
 		Search By: 
 		<input type="radio" id="accountNoteID" name="searchType" value="accountNoteID">
@@ -53,8 +53,8 @@
 
 	<h2><%=message%></h2>
 	<h1>Account Notes</h1>
-<p>Account ID:  <%=accountID%></p>
-<p>Account Name: <%=accountName%></p>
+	<p>Account ID:  <%=accountID%></p>
+	<p>Account Name: <%=accountName%></p>
 
 	<table>
 		<tr>
