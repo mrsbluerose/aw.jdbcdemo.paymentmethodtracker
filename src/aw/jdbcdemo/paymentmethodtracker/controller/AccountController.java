@@ -18,6 +18,7 @@ import aw.jdbcdemo.paymentmethodtracker.dao.AccountDAO;
  */
 @WebServlet("/accountController")
 public class AccountController extends HttpServlet {
+
 	private static final long serialVersionUID = 1L;
 	private AccountDAO accountDAO = new AccountDAO();
 	private String message = "";
@@ -45,6 +46,9 @@ public class AccountController extends HttpServlet {
 		} 
 	}
 	
+	/*
+	 * Fetches list of all account records. Accepts message for methods that have confirmation messages
+	 */
 	private void listAccounts (HttpServletRequest request, HttpServletResponse response, String message) throws ServletException, IOException {
 		RequestDispatcher rd=request.getRequestDispatcher("listAccounts.jsp");
 		ArrayList<String[]> accountList = new ArrayList<>();
@@ -54,6 +58,9 @@ public class AccountController extends HttpServlet {
 		rd.forward(request, response);
 	}
 	
+	/*
+	 * Sends new account information to account DAO
+	 */
 	private void createAccount(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		String name = request.getParameter("name");
 		int paymentMethod = Integer.parseInt(request.getParameter("paymentMethod"));
@@ -67,6 +74,9 @@ public class AccountController extends HttpServlet {
 		listAccounts(request,response,message);
 	}
 	
+	/*
+	 * Accepts search type and term and fetches list of relevant account records
+	 */
 	private void search(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		RequestDispatcher rd=request.getRequestDispatcher("searchAccountResults.jsp");
 		String searchType = request.getParameter("searchType");
@@ -86,6 +96,9 @@ public class AccountController extends HttpServlet {
 		
 	}
 	
+	/*
+	 * Fetches account record to populate editable fields
+	 */
 	private void editSelectAccount(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		RequestDispatcher rd=request.getRequestDispatcher("editAccount.jsp");
 		int id = Integer.parseInt(request.getParameter("accountID"));
@@ -99,6 +112,9 @@ public class AccountController extends HttpServlet {
 		rd.forward(request, response);
 	}
 	
+	/*
+	 * Sends updated fields information to account DAO
+	 */
 	private void editAccount(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		int id = Integer.parseInt(request.getParameter("accountID"));
 		String name = request.getParameter("name");
@@ -115,6 +131,9 @@ public class AccountController extends HttpServlet {
 
 	}
 	
+	/*
+	 *  Fetches account record to populate account fields for verification
+	 */
 	private void deleteSelectAccount(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		RequestDispatcher rd=request.getRequestDispatcher("deleteAccount.jsp");
 		int id = Integer.parseInt(request.getParameter("accountID"));
@@ -128,6 +147,9 @@ public class AccountController extends HttpServlet {
 		rd.forward(request, response);
 	}
 	
+	/*
+	 * Sends account id to account DAO for deletion
+	 */
 	private void deleteAccount(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		int id = Integer.parseInt(request.getParameter("id"));
 		accountDAO.delete(id);
