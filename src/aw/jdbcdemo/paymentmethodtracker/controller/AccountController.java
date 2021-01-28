@@ -83,9 +83,9 @@ public class AccountController extends HttpServlet {
 		String searchTerm = request.getParameter("searchTerm");
 		ArrayList<String[]> accountList = new ArrayList<>();
 		
-		if (searchType.contentEquals("id")) {
+		if (searchType.contentEquals("accountID")) {
 			accountList = accountDAO.searchByID(Integer.parseInt(searchTerm));
-		} else if (searchType.contentEquals("name")) {
+		} else if (searchType.contentEquals("accountName")) {
 			accountList = accountDAO.searchByName(searchTerm);
 		} else if (searchType.contentEquals("paymentMethodID")) {
 			accountList = accountDAO.searchByPaymentMethodID(Integer.parseInt(searchTerm));

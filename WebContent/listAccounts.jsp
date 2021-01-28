@@ -42,6 +42,8 @@
 			<td><%=s[0]%></td>
 			<td><%=s[1]%></td>
 			<td><%=s[2]%></td>
+			
+			<!-- button to see list of notes for specified account -->
 			<td><form action="accountNoteController" method="post">
 					<input type="hidden" name="accountID" value=<%=s[0]%> />
 					<input type="hidden" name="action" value="list" />
@@ -49,6 +51,7 @@
 				</form>
 			</td>
 			<td>
+			
 			<!-- Edit button -->
 				<form action="accountController" method="post">
 					<input type="hidden" name="accountID" value=<%=s[0]%> />
@@ -57,6 +60,7 @@
 				</form>
 			</td>
 			<td>
+			
 			<!-- Delete button -->
 				<form action="accountController" method="post">
 					<input type="hidden" name="accountID" value=<%=s[0]%> />

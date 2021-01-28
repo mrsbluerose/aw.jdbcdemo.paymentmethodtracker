@@ -10,14 +10,17 @@
 </head>
 
 <body>
+
 	<h1>Search Accounts</h1>
+	
+	<!-- Form to search accounts by id, name or payment method id -->
 	<form action="accountController" method="post">
 		<pre>
 		Search By: 
-		<input type="radio" id="id" name="searchType" value="id">
-  			<label for="id">ID</label><br>
-  		<input type="radio" id="name" name="searchType" value="name">
-  			<label for="name">Name</label><br>
+		<input type="radio" id="accountID" name="searchType" value="accountID">
+  			<label for="accountID">ID</label><br>
+  		<input type="radio" id="accountName" name="searchType" value="accountName">
+  			<label for="accountName">Name</label><br>
   		<input type="radio" id="paymentMethodID" name="searchType" value="paymentMethodID">
   			<label for="paymentMethodID">Payment Method ID</label>
 		
