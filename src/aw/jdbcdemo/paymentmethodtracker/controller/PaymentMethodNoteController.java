@@ -77,12 +77,12 @@ public class PaymentMethodNoteController extends HttpServlet {
 		paymentMethodNote.setText(text);
 		paymentMethodNoteDAO.create(paymentMethodNote);
 		
-		message = "** PaymentMethod Note created! **";
+		message = "** Payment Method note created! **";
 		listPaymentMethodNotes(request,response,message);
 	}
 	
 	/*
-	 * Accepts search type and term and fetches list of relevant paymentMethod records
+	 * Accepts search type and term and fetches list of relevant payment method records
 	 */
 	private void search(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		RequestDispatcher rd=request.getRequestDispatcher("searchPaymentMethodNoteResults.jsp");
@@ -105,7 +105,7 @@ public class PaymentMethodNoteController extends HttpServlet {
 	}
 	
 	/*
-	 * Fetches paymentMethod note record to populate editable fields
+	 * Fetches payment method note record to populate editable fields
 	 */
 	private void editSelectPaymentMethodNote(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		RequestDispatcher rd=request.getRequestDispatcher("editPaymentMethodNote.jsp");
@@ -122,7 +122,7 @@ public class PaymentMethodNoteController extends HttpServlet {
 	}
 	
 	/*
-	 * Sends updated fields information to paymentMethod note DAO
+	 * Sends updated fields information to payment method note DAO
 	 */
 	private void editPaymentMethodNote(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		int paymentMethodNoteID = Integer.parseInt(request.getParameter("paymentMethodNoteID"));
@@ -137,12 +137,12 @@ public class PaymentMethodNoteController extends HttpServlet {
 		paymentMethodNote.setText(text);
 		paymentMethodNoteDAO.editPaymentMethodNote(paymentMethodNote);
 		
-		message = "** PaymentMethod Note " + paymentMethodNoteID + " edited! **";
+		message = "** Payment Method Note " + paymentMethodNoteID + " edited! **";
 		listPaymentMethodNotes(request,response,message);
 	}
 	
 	/*
-	 *  Fetches paymentMethod note record to populate paymentMethod note fields for verification
+	 *  Fetches payment method note record to populate payment method note fields for verification
 	 */
 	private void deleteSelectPaymentMethodNote(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		RequestDispatcher rd=request.getRequestDispatcher("deletePaymentMethodNote.jsp");
@@ -159,13 +159,13 @@ public class PaymentMethodNoteController extends HttpServlet {
 	}
 	
 	/*
-	 * Sends paymentMethod note id to paymentMethod note DAO for deletion
+	 * Sends payment method note id to payment method note DAO for deletion
 	 */
 	private void deletePaymentMethodNote(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		int id = Integer.parseInt(request.getParameter("paymentMethodNoteID"));
 		paymentMethodNoteDAO.delete(id);
 		
-		message = "** PaymentMethod Note " + id + " deleted! **";
+		message = "** Payment Method Note " + id + " deleted! **";
 		listPaymentMethodNotes(request,response,message);
 	}
 }
