@@ -89,19 +89,19 @@ public class PaymentMethodNoteController extends HttpServlet {
 		String searchType = request.getParameter("searchType");
 		String searchTerm = request.getParameter("searchTerm");
 		ArrayList<String[]> paymentMethodNoteList = new ArrayList<>();
-		paymentMethod = paymentMethodDAO.searchPaymentMethod(Integer.parseInt(request.getParameter("paymentMethodID")));
+		int paymentMethodID = Integer.parseInt(request.getParameter("paymentMethodID"));
+		paymentMethod = paymentMethodDAO.searchPaymentMethod(paymentMethodID);
 		
 		if (searchType.contentEquals("paymentMethodNoteID")) {
 			paymentMethodNoteList = paymentMethodNoteDAO.searchByID(Integer.parseInt(searchTerm));
 		} else if (searchType.contentEquals("paymentMethodNoteDate")) {
-			paymentMethodNoteList = paymentMethodNoteDAO.searchByYear(searchTerm);
+			paymentMethodNoteList = paymentMethodNoteDAO.searchByYear(searchTerm,paymentMethodID);
 		} else if (searchType.contentEquals("paymentMethodNoteText")) {
-			paymentMethodNoteList = paymentMethodNoteDAO.searchByNoteText(searchTerm);
+			paymentMethodNoteList = paymentMethodNoteDAO.searchByNoteText(searchTerm,paymentMethodID);
 		} 
 		request.setAttribute("paymentMethodNoteList",paymentMethodNoteList);
 		request.setAttribute("paymentMethodName",paymentMethod.getName()); 
 		rd.forward(request, response);
-		
 	}
 	
 	/*

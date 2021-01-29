@@ -89,19 +89,19 @@ public class AccountNoteController extends HttpServlet {
 		String searchType = request.getParameter("searchType");
 		String searchTerm = request.getParameter("searchTerm");
 		ArrayList<String[]> accountNoteList = new ArrayList<>();
-		account = accountDAO.searchAccount(Integer.parseInt(request.getParameter("accountID")));
+		int accountID = Integer.parseInt(request.getParameter("accountID"));
+		account = accountDAO.searchAccount(accountID);
 		
 		if (searchType.contentEquals("accountNoteID")) {
 			accountNoteList = accountNoteDAO.searchByID(Integer.parseInt(searchTerm));
 		} else if (searchType.contentEquals("accountNoteDate")) {
-			accountNoteList = accountNoteDAO.searchByYear(searchTerm);
+			accountNoteList = accountNoteDAO.searchByYear(searchTerm,accountID);
 		} else if (searchType.contentEquals("accountNoteText")) {
-			accountNoteList = accountNoteDAO.searchByNoteText(searchTerm);
+			accountNoteList = accountNoteDAO.searchByNoteText(searchTerm,accountID);
 		} 
 		request.setAttribute("accountNoteList",accountNoteList);
 		request.setAttribute("accountName",account.getName()); 
 		rd.forward(request, response);
-		
 	}
 	
 	/*

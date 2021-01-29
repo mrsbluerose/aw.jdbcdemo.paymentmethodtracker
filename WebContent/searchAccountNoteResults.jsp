@@ -35,10 +35,10 @@ String accountName = (String) request.getAttribute("accountName");
 		Search By: 
 		<input type="radio" id="accountNoteID" name="searchType" value="accountNoteID">
   			<label for="accountNoteID">Account Note ID</label><br>
-  		<input type="radio" id="date" name="searchType" value="date">
-  			<label for="date">Year</label>
-  		<input type="radio" id="noteText" name="searchType" value="noteText">
-  			<label for="noteText">Note Text</label>
+  		<input type="radio" id="accountNoteDate" name="searchType" value="accountNoteDate">
+  			<label for="accountNoteDate">Year</label>
+  		<input type="radio" id="accountNoteText" name="searchType" value="accountNoteText">
+  			<label for="accountNoteText">Note Text</label>
 		
 		Search for: <input type="text" name="searchTerm" />
 		<input type="hidden" name="accountID" value=<%=accountID%> />

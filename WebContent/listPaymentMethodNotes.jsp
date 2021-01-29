@@ -13,7 +13,7 @@
 
 <head>
 <meta charset="UTF-8">
-<title>PaymentMethod Notes</title>
+<title>Payment Method Notes</title>
 <link rel="stylesheet" href="styles.css">
 </head>
 
@@ -25,7 +25,7 @@
 	<!-- Back to paymentMethods button -->
 	<form action="paymentMethodController" method="post">
 		<input type="hidden" name="action" value="list" />
-		<input type="submit" value="Back to PaymentMethods">
+		<input type="submit" value="Back to Payment Methods">
 	</form>
 	
 	<h1>PaymentMethod Notes</h1>

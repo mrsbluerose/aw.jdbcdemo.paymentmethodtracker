@@ -21,6 +21,12 @@
 	<!-- Confirmation message (if there is one) -->
 	<h2><%=message%></h2>
 
+	<!-- Back to accounts button -->
+	<form action="accountController" method="post">
+		<input type="hidden" name="action" value="list" />
+		<input type="submit" value="Back to Accounts">
+	</form>
+	
 	<h1>Payment Methods</h1>
 	<a href="createPaymentMethod.jsp">Create New</a>
 	<a href="searchPaymentMethod.jsp">Search</a>

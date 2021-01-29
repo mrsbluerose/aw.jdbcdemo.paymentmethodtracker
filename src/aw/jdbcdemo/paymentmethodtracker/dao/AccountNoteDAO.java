@@ -107,10 +107,9 @@ public class AccountNoteDAO {
 		Connection connection;
 		try {
 			connection = ConnectionUtil.getConnection();
-			PreparedStatement statement = connection.prepareStatement("SELECT an.account_note_id, "
-					+ "an.account_note_date, an.account_note_text "
-					+ "FROM account_note AS an " 
-					+ "INNER JOIN account AS a ON an.account_id=a.account_id "
+			PreparedStatement statement = connection.prepareStatement("SELECT account_note_id, "
+					+ "account_note_date, account_note_text "
+					+ "FROM account_note " 
 					+ condition);
 			ResultSet resultSet = statement.executeQuery();
 			
@@ -146,8 +145,9 @@ public class AccountNoteDAO {
 	/*
 	 * Returns a list of string arrays with account note information based on the given year character sequence
 	 */
-	public ArrayList<String[]> searchByYear(String year) {
-		String condition = "WHERE account_note_date LIKE '%" + year + "%';";
+	public ArrayList<String[]> searchByYear(String year,int accountID) {
+		String condition = "WHERE account_note_date LIKE '%" + year + "%' "
+				+ "AND account_id=" + accountID + ";";
 		ArrayList<String[]> accountNoteList = searchAccountNote(condition);		
 		return accountNoteList;
 	}
@@ -155,8 +155,9 @@ public class AccountNoteDAO {
 	/*
 	 * Returns a list of string arrays with account note information based on the given text character sequence
 	 */
-	public ArrayList<String[]> searchByNoteText(String text) {
-		String condition = "WHERE account_note_text LIKE '%" + text + "%';";
+	public ArrayList<String[]> searchByNoteText(String text, int accountID) {
+		String condition = "WHERE account_note_text LIKE '%" + text + "%' "
+				+ "AND account_id=" + accountID + ";";
 		ArrayList<String[]> accountNoteList = searchAccountNote(condition);		
 		return accountNoteList;
 	}

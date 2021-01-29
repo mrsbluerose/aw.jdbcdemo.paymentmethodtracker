@@ -21,11 +21,11 @@ public class PaymentMethodNoteDAO {
 		Connection connection;
 		try {
 			connection = ConnectionUtil.getConnection();
-			PreparedStatement statement = connection.prepareStatement("SELECT an.payment_method_note_id, "
-					+ "an.payment_method_note_date, an.payment_method_note_text "
-					+ "FROM paymentMethod_note AS an " 
-					+ "INNER JOIN payment_method AS a ON an.payment_method_id=a.payment_method_id "
-					+ "WHERE a.payment_method_id=?;");
+			PreparedStatement statement = connection.prepareStatement("SELECT pmn.payment_method_note_id, "
+					+ "pmn.payment_method_note_date, pmn.payment_method_note_text "
+					+ "FROM payment_method_note AS pmn " 
+					+ "INNER JOIN payment_method AS pm ON pmn.payment_method_id=pm.payment_method_id "
+					+ "WHERE pm.payment_method_id=?;");
 			statement.setInt(1,id);
 			ResultSet resultSet = statement.executeQuery();
 			
@@ -70,7 +70,7 @@ public class PaymentMethodNoteDAO {
 	}
 	
 	/*
-	 * Returns an paymentMethod that matches the given paymentMethod note id
+	 * Returns an payment method that matches the given payment method note id
 	 */
 	public PaymentMethodNote searchPaymentMethodNote(int id) {
 		PaymentMethodNote paymentMethodNote = new PaymentMethodNote();
@@ -107,10 +107,9 @@ public class PaymentMethodNoteDAO {
 		Connection connection;
 		try {
 			connection = ConnectionUtil.getConnection();
-			PreparedStatement statement = connection.prepareStatement("SELECT an.payment_method_note_id, "
-					+ "an.payment_method_note_date, an.payment_method_note_text "
-					+ "FROM payment_method_note AS an " 
-					+ "INNER JOIN payment_method AS a ON an.payment_method_id=a.payment_method_id "
+			PreparedStatement statement = connection.prepareStatement("SELECT payment_method_note_id, "
+					+ "payment_method_note_date, payment_method_note_text "
+					+ "FROM payment_method_note " 
 					+ condition);
 			ResultSet resultSet = statement.executeQuery();
 			
@@ -146,8 +145,9 @@ public class PaymentMethodNoteDAO {
 	/*
 	 * Returns a list of string arrays with paymentMethod note information based on the given year character sequence
 	 */
-	public ArrayList<String[]> searchByYear(String year) {
-		String condition = "WHERE payment_method_note_date LIKE '%" + year + "%';";
+	public ArrayList<String[]> searchByYear(String year, int paymentMethodID) {
+		String condition = "WHERE payment_method_note_date LIKE '%" + year + "%'; "
+				+ "AND payment_method_id=" + paymentMethodID + ";";
 		ArrayList<String[]> paymentMethodNoteList = searchPaymentMethodNote(condition);		
 		return paymentMethodNoteList;
 	}
@@ -155,8 +155,9 @@ public class PaymentMethodNoteDAO {
 	/*
 	 * Returns a list of string arrays with paymentMethod note information based on the given text character sequence
 	 */
-	public ArrayList<String[]> searchByNoteText(String text) {
-		String condition = "WHERE payment_method_note_text LIKE '%" + text + "%';";
+	public ArrayList<String[]> searchByNoteText(String text,int paymentMethodID) {
+		String condition = "WHERE payment_method_note_text LIKE '%" + text + "%'"
+				+ "AND payment_method_id=" + paymentMethodID + ";";
 		ArrayList<String[]> paymentMethodNoteList = searchPaymentMethodNote(condition);		
 		return paymentMethodNoteList;
 	}
