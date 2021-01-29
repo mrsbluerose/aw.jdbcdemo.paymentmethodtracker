@@ -4,13 +4,13 @@ public class PaymentMethodNote {
 	private int id;
 	private int paymentMethodID;
 	private String date;
-	private String note;
+	private String text;
 
-	public int getId() {
+	public int getID() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setID(int id) {
 		this.id = id;
 	}
 
@@ -30,18 +30,18 @@ public class PaymentMethodNote {
 		this.date = date;
 	}
 
-	public String getNote() {
-		return note;
+	public String getText() {
+		return text;
 	}
 
-	public void setNote(String note) {
-		this.note = note;
+	public void setText(String text) {
+		this.text = text;
 	}
 
 	@Override
 	public String toString() {
-		return "PaymentMethodNote [id=" + id + ", paymentMethodID=" + paymentMethodID + ", date=" + date + ", note="
-				+ note + "]";
+		return "PaymentMethodNote [id=" + id + ", paymentMethodID=" + paymentMethodID + ", date=" + date + ", text="
+				+ text + "]";
 	}
 
 }
