@@ -38,10 +38,10 @@
 		Search By: 
 		<input type="radio" id="accountNoteID" name="searchType" value="accountNoteID">
   			<label for="accountNoteID">Account Note ID</label><br>
-  		<input type="radio" id="date" name="searchType" value="date">
-  			<label for="date">Year</label>
-  		<input type="radio" id="noteText" name="searchType" value="noteText">
-  			<label for="noteText">Note Text</label>
+  		<input type="radio" id="paymentMethodNoteDate" name="searchType" value="paymentMethodNoteDate">
+  			<label for="paymentMethodNoteDate">Year</label>
+  		<input type="radio" id="paymentMethodNoteText" name="searchType" value="paymentMethodNoteText">
+  			<label for="paymentMethodNoteText">Note Text</label>
 		
 		Search for: <input type="text" name="searchTerm" />
 		<input type="hidden" name="accountID" value=<%=accountID%> />

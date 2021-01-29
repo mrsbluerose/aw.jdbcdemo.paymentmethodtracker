@@ -93,9 +93,9 @@ public class AccountNoteController extends HttpServlet {
 		
 		if (searchType.contentEquals("accountNoteID")) {
 			accountNoteList = accountNoteDAO.searchByID(Integer.parseInt(searchTerm));
-		} else if (searchType.contentEquals("date")) {
+		} else if (searchType.contentEquals("accountNoteDate")) {
 			accountNoteList = accountNoteDAO.searchByYear(searchTerm);
-		} else if (searchType.contentEquals("noteText")) {
+		} else if (searchType.contentEquals("accountNoteText")) {
 			accountNoteList = accountNoteDAO.searchByNoteText(searchTerm);
 		} 
 		request.setAttribute("accountNoteList",accountNoteList);

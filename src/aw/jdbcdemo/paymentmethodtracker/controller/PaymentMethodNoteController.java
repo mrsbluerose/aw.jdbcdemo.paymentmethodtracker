@@ -93,9 +93,9 @@ public class PaymentMethodNoteController extends HttpServlet {
 		
 		if (searchType.contentEquals("paymentMethodNoteID")) {
 			paymentMethodNoteList = paymentMethodNoteDAO.searchByID(Integer.parseInt(searchTerm));
-		} else if (searchType.contentEquals("date")) {
+		} else if (searchType.contentEquals("paymentMethodNoteDate")) {
 			paymentMethodNoteList = paymentMethodNoteDAO.searchByYear(searchTerm);
-		} else if (searchType.contentEquals("noteText")) {
+		} else if (searchType.contentEquals("paymentMethodNoteText")) {
 			paymentMethodNoteList = paymentMethodNoteDAO.searchByNoteText(searchTerm);
 		} 
 		request.setAttribute("paymentMethodNoteList",paymentMethodNoteList);
