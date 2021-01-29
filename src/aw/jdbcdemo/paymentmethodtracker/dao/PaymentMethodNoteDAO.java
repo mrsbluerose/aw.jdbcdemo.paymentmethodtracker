@@ -21,11 +21,11 @@ public class PaymentMethodNoteDAO {
 		Connection connection;
 		try {
 			connection = ConnectionUtil.getConnection();
-			PreparedStatement statement = connection.prepareStatement("SELECT an.paymentMethod_note_id, "
-					+ "an.paymentMethod_note_date, an.paymentMethod_note_text "
+			PreparedStatement statement = connection.prepareStatement("SELECT an.payment_method_note_id, "
+					+ "an.payment_method_note_date, an.payment_method_note_text "
 					+ "FROM paymentMethod_note AS an " 
-					+ "INNER JOIN paymentMethod AS a ON an.paymentMethod_id=a.paymentMethod_id "
-					+ "WHERE a.paymentMethod_id=?;");
+					+ "INNER JOIN payment_method AS a ON an.payment_method_id=a.payment_method_id "
+					+ "WHERE a.payment_method_id=?;");
 			statement.setInt(1,id);
 			ResultSet resultSet = statement.executeQuery();
 			
@@ -54,8 +54,8 @@ public class PaymentMethodNoteDAO {
 		Connection connection;
 		try {
 			connection = ConnectionUtil.getConnection();
-			PreparedStatement statement = connection.prepareStatement("INSERT INTO paymentMethod_note "
-					+ "(paymentMethod_id,paymentMethod_note_date,paymentMethod_note_text) VALUES(?,?,?)");
+			PreparedStatement statement = connection.prepareStatement("INSERT INTO payment_method_note "
+					+ "(payment_method_id,payment_method_note_date,payment_method_note_text) VALUES(?,?,?)");
 			statement.setInt(1, paymentMethodNote.getPaymentMethodID());
 			statement.setString(2,paymentMethodNote.getDate());
 			statement.setString(3,paymentMethodNote.getText());
@@ -78,7 +78,7 @@ public class PaymentMethodNoteDAO {
 		try {
 			connection = ConnectionUtil.getConnection();
 			PreparedStatement statement = connection.prepareStatement("SELECT * FROM "
-					+ "paymentMethod_note WHERE paymentMethod_note_id=?");
+					+ "payment_method_note WHERE payment_method_note_id=?");
 			statement.setInt(1, id);
 			ResultSet resultSet = statement.executeQuery();
 			while(resultSet.next()) {
@@ -107,10 +107,10 @@ public class PaymentMethodNoteDAO {
 		Connection connection;
 		try {
 			connection = ConnectionUtil.getConnection();
-			PreparedStatement statement = connection.prepareStatement("SELECT an.paymentMethod_note_id, "
-					+ "an.paymentMethod_note_date, an.paymentMethod_note_text "
-					+ "FROM paymentMethod_note AS an " 
-					+ "INNER JOIN paymentMethod AS a ON an.paymentMethod_id=a.paymentMethod_id "
+			PreparedStatement statement = connection.prepareStatement("SELECT an.payment_method_note_id, "
+					+ "an.payment_method_note_date, an.payment_method_note_text "
+					+ "FROM payment_method_note AS an " 
+					+ "INNER JOIN payment_method AS a ON an.payment_method_id=a.payment_method_id "
 					+ condition);
 			ResultSet resultSet = statement.executeQuery();
 			
@@ -138,7 +138,7 @@ public class PaymentMethodNoteDAO {
 	 * Returns a list of string arrays with paymentMethod note information based on paymentMethod note id 
 	 */
 	public ArrayList<String[]> searchByID(int id) {
-		String condition = "WHERE paymentMethod_note_id=" + id + ";";
+		String condition = "WHERE payment_method_note_id=" + id + ";";
 		ArrayList<String[]> paymentMethodNoteList = searchPaymentMethodNote(condition);		
 		return paymentMethodNoteList;
 	}
@@ -147,7 +147,7 @@ public class PaymentMethodNoteDAO {
 	 * Returns a list of string arrays with paymentMethod note information based on the given year character sequence
 	 */
 	public ArrayList<String[]> searchByYear(String year) {
-		String condition = "WHERE paymentMethod_note_date LIKE '%" + year + "%';";
+		String condition = "WHERE payment_method_note_date LIKE '%" + year + "%';";
 		ArrayList<String[]> paymentMethodNoteList = searchPaymentMethodNote(condition);		
 		return paymentMethodNoteList;
 	}
@@ -156,7 +156,7 @@ public class PaymentMethodNoteDAO {
 	 * Returns a list of string arrays with paymentMethod note information based on the given text character sequence
 	 */
 	public ArrayList<String[]> searchByNoteText(String text) {
-		String condition = "WHERE paymentMethod_note_text LIKE '%" + text + "%';";
+		String condition = "WHERE payment_method_note_text LIKE '%" + text + "%';";
 		ArrayList<String[]> paymentMethodNoteList = searchPaymentMethodNote(condition);		
 		return paymentMethodNoteList;
 	}
@@ -168,7 +168,8 @@ public class PaymentMethodNoteDAO {
 		Connection connection;
 		try {
 			connection = ConnectionUtil.getConnection();
-			PreparedStatement statement = connection.prepareStatement("UPDATE paymentMethod_note SET paymentMethod_note_date=?, paymentMethod_note_text=? WHERE paymentMethod_note_id=?");
+			PreparedStatement statement = connection.prepareStatement("UPDATE payment_method_note "
+					+ "SET payment_method_note_date=?, payment_method_note_text=? WHERE payment_method_note_id=?");
 			statement.setString(1, paymentMethodNote.getDate());
 			statement.setString(2, paymentMethodNote.getText());
 			statement.setInt(3, paymentMethodNote.getID());
@@ -189,7 +190,8 @@ public class PaymentMethodNoteDAO {
 		Connection connection;
 		try {
 			connection = ConnectionUtil.getConnection();
-			PreparedStatement statement = connection.prepareStatement("DELETE FROM paymentMethod_note WHERE paymentMethod_note_id=?");
+			PreparedStatement statement = connection.prepareStatement("DELETE FROM payment_method_note "
+					+ "WHERE payment_method_note_id=?");
 			statement.setInt(1, id);
 			statement.executeUpdate();
 			ConnectionUtil.closeQuietly(connection);

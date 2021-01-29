@@ -56,7 +56,7 @@ public class PaymentMethodNoteController extends HttpServlet {
 		RequestDispatcher rd=request.getRequestDispatcher("listPaymentMethodNotes.jsp");
 		ArrayList<String[]> paymentMethodNoteList = new ArrayList<>();
 		paymentMethodNoteList = paymentMethodNoteDAO.listPaymentMethodNotes(Integer.parseInt(request.getParameter("paymentMethodID")));
-		paymentMethod = paymentMethodDAO.searchPaymentMethod(Integer.parseInt(request.getParameter("accountID")));
+		paymentMethod = paymentMethodDAO.searchPaymentMethod(Integer.parseInt(request.getParameter("paymentMethodID")));
 		request.setAttribute("paymentMethodNoteList",paymentMethodNoteList);
 		request.setAttribute("paymentMethodName",paymentMethod.getName()); 
 		request.setAttribute("message",message);

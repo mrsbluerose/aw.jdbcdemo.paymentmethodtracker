@@ -2,9 +2,9 @@
 <%@page import="java.util.ArrayList"%>
 
 	<%
-	ArrayList<String[]> accountNoteList = (ArrayList<String[]>) request.getAttribute("accountNoteList");
-	String accountID = request.getParameter("accountID");
-	String accountName = (String) request.getAttribute("accountName");
+	ArrayList<String[]> paymentMethodNoteList = (ArrayList<String[]>) request.getAttribute("paymentMethodNoteList");
+	String paymentMethodID = request.getParameter("paymentMethodID");
+	String paymentMethodName = (String) request.getAttribute("paymentMethodName");
 	String message = (String) request.getAttribute("message");
 	%>
 
@@ -13,7 +13,7 @@
 
 <head>
 <meta charset="UTF-8">
-<title>Account Notes</title>
+<title>PaymentMethod Notes</title>
 <link rel="stylesheet" href="styles.css">
 </head>
 
@@ -22,47 +22,47 @@
 	<!-- Confirmation message (if there is one) -->
 	<h2><%=message%></h2>
 
-	<!-- Back to accounts button -->
-	<form action="accountController" method="post">
+	<!-- Back to paymentMethods button -->
+	<form action="paymentMethodController" method="post">
 		<input type="hidden" name="action" value="list" />
-		<input type="submit" value="Back to Accounts">
+		<input type="submit" value="Back to PaymentMethods">
 	</form>
 	
-	<h1>Account Notes</h1>
-	<p>Account ID:  <%=accountID%></p>
-	<p>Account Name: <%=accountName%></p>
+	<h1>PaymentMethod Notes</h1>
+	<p>PaymentMethod ID:  <%=paymentMethodID%></p>
+	<p>PaymentMethod Name: <%=paymentMethodName%></p>
 	
 	<!-- search type and term form -->
-	<form action="accountNoteController" method="post">
+	<form action="paymentMethodNoteController" method="post">
 		<pre>
 		Search By: 
-		<input type="radio" id="accountNoteID" name="searchType" value="accountNoteID">
-  			<label for="accountNoteID">Account Note ID</label><br>
+		<input type="radio" id="paymentMethodNoteID" name="searchType" value="paymentMethodNoteID">
+  			<label for="paymentMethodNoteID">PaymentMethod Note ID</label><br>
   		<input type="radio" id="paymentMethodNoteDate" name="searchType" value="paymentMethodNoteDate">
   			<label for="paymentMethodNoteDate">Year</label>
   		<input type="radio" id="paymentMethodNoteText" name="searchType" value="paymentMethodNoteText">
   			<label for="paymentMethodNoteText">Note Text</label>
 		
 		Search for: <input type="text" name="searchTerm" />
-		<input type="hidden" name="accountID" value=<%=accountID%> />
+		<input type="hidden" name="paymentMethodID" value=<%=paymentMethodID%> />
 		<input type="hidden" name="action" value="search" />
 		<input type="submit" value="Search" />
 		</pre>
 	</form>
 	
 	<!-- new note form -->
-	<form action="accountNoteController" method="post">
+	<form action="paymentMethodNoteController" method="post">
 		<pre>
 		New Note
-		Date: <input type="text" name="accountNoteDate" />
-		Note: <input type="text" name="accountNoteText" />
-		<input type="hidden" name="accountID" value=<%=accountID%> />
+		Date: <input type="text" name="paymentMethodNoteDate" />
+		Note: <input type="text" name="paymentMethodNoteText" />
+		<input type="hidden" name="paymentMethodID" value=<%=paymentMethodID%> />
 		<input type="hidden" name="action" value="create" />
 		<input type="submit" value="Save">
 		</pre>
 	</form>
 
-	<!-- Table of account notes -->
+	<!-- Table of paymentMethod notes -->
 	<table>
 		<tr>
 			<th>Note ID</th>
@@ -72,7 +72,7 @@
 			<th>Delete</th>
 		</tr>
 		<%
-		for (String[] s:accountNoteList){
+		for (String[] s:paymentMethodNoteList){
 		%>
 		<tr>
 			<td><%=s[0]%></td>
@@ -80,18 +80,18 @@
 			<td><%=s[2]%></td>
 			<td>
 			<!-- Edit button -->
-				<form action="accountNoteController" method="post">
-					<input type="hidden" name="accountNoteID" value=<%=s[0]%> />
-					<input type="hidden" name="action" value="editSelectAccountNote" />
+				<form action="paymentMethodNoteController" method="post">
+					<input type="hidden" name="paymentMethodNoteID" value=<%=s[0]%> />
+					<input type="hidden" name="action" value="editSelectPaymentMethodNote" />
 					<input type="submit" value="Edit">
 				</form>
 			</td>
 			<td>
 			<!-- Delete button -->
-				<form action="accountNoteController" method="post">
-					<input type="hidden" name="accountID" value=<%=accountID%> />
-					<input type="hidden" name="accountNoteID" value=<%=s[0]%> />
-					<input type="hidden" name="action" value="deleteSelectAccountNote" />
+				<form action="paymentMethodNoteController" method="post">
+					<input type="hidden" name="paymentMethodID" value=<%=paymentMethodID%> />
+					<input type="hidden" name="paymentMethodNoteID" value=<%=s[0]%> />
+					<input type="hidden" name="action" value="deleteSelectPaymentMethodNote" />
 					<input type="submit" value="Delete">
 				</form>
 			</td>
