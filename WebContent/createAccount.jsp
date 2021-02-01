@@ -4,8 +4,6 @@
 	
 <%
 	ArrayList<PaymentMethod> paymentMethodList = (ArrayList<PaymentMethod>) request.getAttribute("paymentMethodList");
-	String paymentMethodIDText;
-	String paymentMethodName;
 %>
 
 <!DOCTYPE html>

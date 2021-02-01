@@ -74,6 +74,35 @@ public class PaymentMethodDAO {
 		}
 		return paymentMethodList;
 	}
+	
+	public ArrayList<PaymentMethod> paymentMethods(int paymentMethodID){
+		ArrayList<PaymentMethod> paymentMethodList = new ArrayList<>();
+		PaymentMethod paymentMethod = searchPaymentMethod(paymentMethodID);
+		paymentMethodList.add(paymentMethod);
+		Connection connection;
+		try {
+			connection = ConnectionUtil.getConnection();
+			PreparedStatement statement = connection.prepareStatement("SELECT * "
+					+ "FROM payment_method ORDER BY payment_method_name ASC;");
+			ResultSet resultSet = statement.executeQuery();
+			
+			//This array list all payment methods
+			while(resultSet.next()) {
+				paymentMethod = new PaymentMethod();
+				paymentMethod.setID(resultSet.getInt(1));
+				paymentMethod.setName(resultSet.getString(2));
+				paymentMethod.setDescription(resultSet.getString(3));
+				paymentMethod.setExpDate(resultSet.getString(4));
+				paymentMethodList.add(paymentMethod);
+			}
+			ConnectionUtil.closeQuietly(connection);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		return paymentMethodList;
+	}
 
 	/*
 	 * Creates a new payment method record in payment method table

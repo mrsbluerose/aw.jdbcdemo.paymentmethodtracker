@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	
+<%@ page import="java.util.ArrayList"%>
+<%@ page import="aw.jdbcdemo.paymentmethodtracker.model.PaymentMethod"%>
 <%
 	String[] accountItems = (String[]) request.getAttribute("accountItems");
+	ArrayList<PaymentMethod> paymentMethodList = (ArrayList<PaymentMethod>) request.getAttribute("paymentMethodList");
 %>
 
 <!DOCTYPE html>
@@ -23,7 +25,12 @@
 		<pre>
 		ID: <%=accountItems[0]%>
 		Name: <input type="text" name="accountName" value="<%=accountItems[1]%>" />
-		Payment Method: <input type="text" name="paymentMethodID" value="<%=accountItems[2]%>" />
+		Payment Method: 
+		<select name="paymentMethod">
+		<%for (PaymentMethod pm : paymentMethodList) {%>
+            <option value="<%=String.valueOf(pm.getID())%>"><%=pm.getName()%></option>
+		<%} %>
+    	</select>
 		<input type="hidden" name="accountID" value="<%=accountItems[0]%>">
 		<input type="hidden" name="action" value="edit" />
 		<input type="submit" value="Save">
