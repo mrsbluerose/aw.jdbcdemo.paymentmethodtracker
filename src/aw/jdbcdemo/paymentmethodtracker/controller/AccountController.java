@@ -11,7 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import aw.jdbcdemo.paymentmethodtracker.model.Account;
+import aw.jdbcdemo.paymentmethodtracker.model.PaymentMethod;
 import aw.jdbcdemo.paymentmethodtracker.dao.AccountDAO;
+import aw.jdbcdemo.paymentmethodtracker.dao.PaymentMethodDAO;
 
 /**
  * Servlet implementation class AccountController
@@ -21,6 +23,7 @@ public class AccountController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	private AccountDAO accountDAO = new AccountDAO();
+	private PaymentMethodDAO paymentMethodDAO = new PaymentMethodDAO();
 	private String message = "";
        
     public AccountController() {
@@ -31,6 +34,8 @@ public class AccountController extends HttpServlet {
 		String action= request.getParameter("action");
 		if(action.contentEquals("list")) {
 			listAccounts(request,response," ");
+		} else if(action.contentEquals("createNew")) {
+				createNewAccount(request,response);
 		} else if(action.contentEquals("create")) {
 			createAccount(request,response);
 		} else if (action.contentEquals("search")) {
@@ -59,11 +64,21 @@ public class AccountController extends HttpServlet {
 	}
 	
 	/*
+	 * Propagates create account page with list of payment methods
+	 */
+	private void createNewAccount(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+		RequestDispatcher rd=request.getRequestDispatcher("createAccount.jsp");
+		ArrayList<PaymentMethod> paymentMethodList = paymentMethodDAO.paymentMethods();
+		request.setAttribute("paymentMethodList", paymentMethodList);
+		rd.forward(request, response);
+	}
+	
+	/*
 	 * Sends new account information to account DAO
 	 */
 	private void createAccount(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		String accountName = request.getParameter("accountName");
-		int paymentMethodID = Integer.parseInt(request.getParameter("paymentMethodID"));
+		int paymentMethodID = Integer.parseInt(request.getParameter("paymentMethod"));
 		
 		Account account = new Account();
 		account.setName(accountName);

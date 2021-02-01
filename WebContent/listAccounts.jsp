@@ -22,7 +22,11 @@
 	<h2><%=message%></h2>
 	
 	<h1>Accounts</h1>
-	<a href="createAccount.jsp">Create New</a>
+		<!-- create new account button -->
+	<form action="accountController" method="post">
+		<input type="hidden" name="action" value="createNew" />
+		<input type="submit" value="Create New">
+	</form>
 	<a href="searchAccount.jsp">Search</a>
 	
 	<!-- List payment methods button -->
