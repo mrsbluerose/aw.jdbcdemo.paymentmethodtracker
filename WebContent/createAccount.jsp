@@ -33,6 +33,11 @@
 		<input type="submit" value="Save">
 		</pre>
 	</form>
+	<form action="accountController" method="post">
+		<input type="hidden" name="action" value="cancel" />
+		<input type="hidden" name="page" value="listAccounts.jsp" />
+		<input type="submit" value="Cancel">
+	</form>
 
 </body>
 </html>

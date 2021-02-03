@@ -5,6 +5,8 @@
 <%
 	String[] accountItems = (String[]) request.getAttribute("accountItems");
 	ArrayList<PaymentMethod> paymentMethodList = (ArrayList<PaymentMethod>) request.getAttribute("paymentMethodList");
+	String searchType = request.getParameter("searchType");
+	String searchTerm = request.getParameter("searchTerm");
 %>
 
 <!DOCTYPE html>
@@ -35,6 +37,11 @@
 		<input type="hidden" name="action" value="edit" />
 		<input type="submit" value="Save">
 		</pre>
+	</form>
+	<form action="accountController" method="post">
+		<input type="hidden" name="action" value="cancel" />
+		<input type="hidden" name="page" value="listAccounts.jsp" />
+		<input type="submit" value="Cancel">
 	</form>
 
 </body>

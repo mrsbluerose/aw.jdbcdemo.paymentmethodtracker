@@ -48,7 +48,9 @@ public class AccountController extends HttpServlet {
 			deleteSelectAccount(request,response);
 		} else if (action.contentEquals("delete")) {
 			deleteAccount(request,response);
-		} 
+		} else if (action.contentEquals("cancel")) {
+			cancelAction(request,response);
+		}
 	}
 	
 	/*
@@ -174,4 +176,13 @@ public class AccountController extends HttpServlet {
 		listAccounts(request,response,message);
 	}
 	
+	public void cancelAction (HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+		String page = request.getParameter("page");
+		if(page.contentEquals("listAccounts.jsp")) {
+			listAccounts(request,response," ");
+		} else if(page.contentEquals("pageSearch")) {
+			
+		}
+			
+	}
 }
