@@ -3,6 +3,8 @@
 
 <%
 	ArrayList<String[]> accountList = (ArrayList<String[]>) request.getAttribute("accountList");
+	String searchType = request.getParameter("searchType");
+	String searchTerm = request.getParameter("searchTerm");
 %>
 
 <!DOCTYPE html>
@@ -56,6 +58,8 @@
 			<!-- Edit button -->
 				<form action="accountController" method="post">
 					<input type="hidden" name="accountID" value=<%=s[0]%> />
+					<input type="hidden" name="searchType" value=<%=searchType%> />
+					<input type="hidden" name="searchTerm" value=<%=searchTerm%> />
 					<input type="hidden" name="action" value="editSelectAccount" />
 					<input type="submit" value="Edit">
 				</form>
@@ -65,6 +69,8 @@
 			<!-- Delete button -->
 				<form action="accountController" method="post">
 					<input type="hidden" name="accountID" value=<%=s[0]%> />
+					<input type="hidden" name="searchType" value=<%=searchType%> />
+					<input type="hidden" name="searchTerm" value=<%=searchTerm%> />
 					<input type="hidden" name="action" value="deleteSelectAccount" />
 					<input type="submit" value="Delete">
 				</form>

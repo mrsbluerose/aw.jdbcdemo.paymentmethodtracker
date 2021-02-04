@@ -38,9 +38,12 @@
 		<input type="submit" value="Save">
 		</pre>
 	</form>
-	<form action="accountController" method="post">
+	</form>
+		<form action="accountController" method="post">
 		<input type="hidden" name="action" value="cancel" />
-		<input type="hidden" name="page" value="listAccounts.jsp" />
+		<input type="hidden" name="page" value="searchAccountResults.jsp" />
+		<input type="hidden" name="searchType" value=<%=searchType%> />
+		<input type="hidden" name="searchTerm" value=<%=searchTerm%> />
 		<input type="submit" value="Cancel">
 	</form>
 

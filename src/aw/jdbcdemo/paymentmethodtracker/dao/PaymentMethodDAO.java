@@ -64,7 +64,6 @@ public class PaymentMethodDAO {
 				paymentMethod.setDescription(resultSet.getString(3));
 				paymentMethod.setExpDate(resultSet.getString(4));
 				paymentMethodList.add(paymentMethod);
-				System.out.println(paymentMethod);
 			}
 			ConnectionUtil.closeQuietly(connection);
 		} catch (SQLException e) {

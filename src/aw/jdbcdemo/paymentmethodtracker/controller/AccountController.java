@@ -107,7 +107,6 @@ public class AccountController extends HttpServlet {
 		} else if (searchType.contentEquals("paymentMethodID")) {
 			accountList = accountDAO.searchByPaymentMethodID(Integer.parseInt(searchTerm));
 		}
-		
 		request.setAttribute("accountList",accountList);
 		rd.forward(request, response);
 	}
@@ -176,12 +175,15 @@ public class AccountController extends HttpServlet {
 		listAccounts(request,response,message);
 	}
 	
+	/*
+	 * Sends user back to previous page of results.
+	 */
 	public void cancelAction (HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		String page = request.getParameter("page");
 		if(page.contentEquals("listAccounts.jsp")) {
 			listAccounts(request,response," ");
-		} else if(page.contentEquals("pageSearch")) {
-			
+		} else if(page.contentEquals("searchAccountResults.jsp")) {
+			searchAccount(request,response);
 		}
 			
 	}
