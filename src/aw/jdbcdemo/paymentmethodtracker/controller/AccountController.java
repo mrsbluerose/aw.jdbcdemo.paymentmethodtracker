@@ -180,7 +180,6 @@ public class AccountController extends HttpServlet {
 	 */
 	public void cancelAction (HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		String originPage = request.getParameter("originPage");
-		System.out.println("origin page cancel action: " + originPage);
 		if(originPage.contentEquals("listAccounts")) {
 			listAccounts(request,response," ");
 		} else if(originPage.contentEquals("searchAccountResults")) {

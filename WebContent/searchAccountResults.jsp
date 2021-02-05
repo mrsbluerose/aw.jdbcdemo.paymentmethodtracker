@@ -72,6 +72,7 @@
 			
 			<!-- Delete button -->
 				<form action="accountController" method="post">
+					<input type="hidden" name="originPage" value="searchAccountResults" />
 					<input type="hidden" name="accountID" value=<%=s[0]%> />
 					<input type="hidden" name="searchType" value=<%=searchType%> />
 					<input type="hidden" name="searchTerm" value=<%=searchTerm%> />

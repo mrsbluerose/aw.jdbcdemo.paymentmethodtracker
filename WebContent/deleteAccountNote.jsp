@@ -2,6 +2,12 @@
 	pageEncoding="UTF-8"%>
 	
 <%
+	//Forwarding information	
+	String originPage = request.getParameter("originPage");
+	String searchType = request.getParameter("searchType");
+	String searchTerm = request.getParameter("searchTerm");
+	
+	//Data
 	String[] accountNoteItems = (String[]) request.getAttribute("accountNoteItems");
 %>
 
@@ -29,7 +35,15 @@
 		<input type="hidden" name="action" value="delete" />
 		<input type="submit" value="Delete" /> 
 		</pre>
-		
+	</form>
+	
+	<form action="accountNoteController" method="post">
+		<input type="hidden" name="action" value="cancel" />
+		<input type="hidden" name="originPage" value=<%=originPage%> />
+		<input type="hidden" name="searchType" value=<%=searchType%> />
+		<input type="hidden" name="searchTerm" value=<%=searchTerm%> />
+		<input type="hidden" name="accountID" value="<%=accountNoteItems[1]%>">
+		<input type="submit" value="Cancel">
 	</form>
 
 </body>

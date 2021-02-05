@@ -37,8 +37,7 @@
 		<input type="submit" value="Save">
 		</pre>
 	</form>
-	</form>
-		<form action="accountNoteController" method="post">
+	<form action="accountNoteController" method="post">
 		<input type="hidden" name="action" value="cancel" />
 		<input type="hidden" name="originPage" value=<%=originPage%> />
 		<input type="hidden" name="searchType" value=<%=searchType%> />
