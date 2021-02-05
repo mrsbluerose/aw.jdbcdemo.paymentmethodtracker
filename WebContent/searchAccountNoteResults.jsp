@@ -2,9 +2,14 @@
 <%@page import="java.util.ArrayList"%>
 
 <%
-ArrayList<String[]> accountNoteList = (ArrayList<String[]>) request.getAttribute("accountNoteList");
-String accountID = request.getParameter("accountID");
-String accountName = (String) request.getAttribute("accountName");
+	//Forwarding information	
+	String searchType = request.getParameter("searchType");
+	String searchTerm = request.getParameter("searchTerm");
+	
+	//Data
+	ArrayList<String[]> accountNoteList = (ArrayList<String[]>) request.getAttribute("accountNoteList");
+	String accountID = request.getParameter("accountID");
+	String accountName = (String) request.getAttribute("accountName");
 %>
 
 <!DOCTYPE html>
@@ -78,6 +83,9 @@ String accountName = (String) request.getAttribute("accountName");
 			<td>
 			<!-- Edit button -->
 				<form action="accountNoteController" method="post">
+					<input type="hidden" name="originPage" value="searchAccountNoteResults" />
+					<input type="hidden" name="searchType" value=<%=searchType%> />
+					<input type="hidden" name="searchTerm" value=<%=searchTerm%> />
 					<input type="hidden" name="accountNoteID" value=<%=s[0]%> />
 					<input type="hidden" name="action" value="editSelectAccountNote" />
 					<input type="submit" value="Edit">

@@ -64,6 +64,7 @@
 			
 			<!-- Edit button -->
 				<form action="accountController" method="post">
+					<input type="hidden" name="originPage" value="listAccounts" />
 					<input type="hidden" name="accountID" value=<%=s[0]%> />
 					<input type="hidden" name="action" value="editSelectAccount" />
 					<input type="submit" value="Edit">
@@ -73,6 +74,7 @@
 			
 			<!-- Delete button -->
 				<form action="accountController" method="post">
+					<input type="hidden" name="originPage" value="listAccounts" />
 					<input type="hidden" name="accountID" value=<%=s[0]%> />
 					<input type="hidden" name="action" value="deleteSelectAccount" />
 					<input type="submit" value="Delete">

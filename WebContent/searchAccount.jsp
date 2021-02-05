@@ -31,7 +31,7 @@
 	</form>
 		<form action="accountController" method="post">
 		<input type="hidden" name="action" value="cancel" />
-		<input type="hidden" name="page" value="listAccounts.jsp" />
+		<input type="hidden" name="originPage" value="listAccounts" />
 		<input type="submit" value="Cancel">
 	</form>
 

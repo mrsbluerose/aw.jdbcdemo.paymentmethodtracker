@@ -81,6 +81,7 @@
 			<td>
 			<!-- Edit button -->
 				<form action="accountNoteController" method="post">
+					<input type="hidden" name="originPage" value="listAccountNotes" />
 					<input type="hidden" name="accountNoteID" value=<%=s[0]%> />
 					<input type="hidden" name="action" value="editSelectAccountNote" />
 					<input type="submit" value="Edit">

@@ -179,10 +179,11 @@ public class AccountController extends HttpServlet {
 	 * Sends user back to previous page of results.
 	 */
 	public void cancelAction (HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-		String page = request.getParameter("page");
-		if(page.contentEquals("listAccounts.jsp")) {
+		String originPage = request.getParameter("originPage");
+		System.out.println("origin page cancel action: " + originPage);
+		if(originPage.contentEquals("listAccounts")) {
 			listAccounts(request,response," ");
-		} else if(page.contentEquals("searchAccountResults.jsp")) {
+		} else if(originPage.contentEquals("searchAccountResults")) {
 			searchAccount(request,response);
 		}
 			

@@ -37,7 +37,7 @@ public class AccountNoteController extends HttpServlet {
 		} else if(action.contentEquals("create")) {
 			createAccountNote(request,response);
 		} else if (action.contentEquals("search")) {
-			search(request,response);
+			searchAccountNotes(request,response);
 		} else if(action.contentEquals("editSelectAccountNote")) {
 			editSelectAccountNote(request,response);
 		} else if (action.contentEquals("edit")) {
@@ -46,7 +46,9 @@ public class AccountNoteController extends HttpServlet {
 			deleteSelectAccountNote(request,response);
 		} else if (action.contentEquals("delete")) {
 			deleteAccountNote(request,response);
-		} 
+		} else if (action.contentEquals("cancel")) {
+			cancelAction(request,response);
+		}
 	}
 	
     /*
@@ -84,7 +86,7 @@ public class AccountNoteController extends HttpServlet {
 	/*
 	 * Accepts search type and term and fetches list of relevant account records
 	 */
-	private void search(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+	private void searchAccountNotes(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		RequestDispatcher rd=request.getRequestDispatcher("searchAccountNoteResults.jsp");
 		String searchType = request.getParameter("searchType");
 		String searchTerm = request.getParameter("searchTerm");
@@ -167,6 +169,19 @@ public class AccountNoteController extends HttpServlet {
 		
 		message = "** Account Note " + id + " deleted! **";
 		listAccountNotes(request,response,message);
+	}
+	
+	/*
+	 * Sends user back to previous page of results.
+	 */
+	public void cancelAction (HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+		String originPage = request.getParameter("originPage");
+		if(originPage.contentEquals("listAccountNotes")) {
+			listAccountNotes(request,response," ");
+		} else if(originPage.contentEquals("searchAccountNoteResults")) {
+			searchAccountNotes(request,response);
+		}
+			
 	}
 	
 }

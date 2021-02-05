@@ -2,9 +2,12 @@
 <%@page import="java.util.ArrayList"%>
 
 <%
-	ArrayList<String[]> accountList = (ArrayList<String[]>) request.getAttribute("accountList");
+	//Forwarding information	
 	String searchType = request.getParameter("searchType");
-	String searchTerm = request.getParameter("searchTerm");
+	String searchTerm = request.getParameter("searchTerm");	
+
+	//Data
+	ArrayList<String[]> accountList = (ArrayList<String[]>) request.getAttribute("accountList");
 %>
 
 <!DOCTYPE html>
@@ -57,6 +60,7 @@
 			
 			<!-- Edit button -->
 				<form action="accountController" method="post">
+					<input type="hidden" name="originPage" value="searchAccountResults" />
 					<input type="hidden" name="accountID" value=<%=s[0]%> />
 					<input type="hidden" name="searchType" value=<%=searchType%> />
 					<input type="hidden" name="searchTerm" value=<%=searchTerm%> />
