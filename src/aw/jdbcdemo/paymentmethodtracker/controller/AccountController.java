@@ -30,24 +30,31 @@ public class AccountController extends HttpServlet {
         super();
     }
 
+    /*
+	 * Determines appropriate action. 
+	 * "JSP" means it is directing to the appropriate JSP and populating any necessary data.
+	 * "DAO" means it is calling the DAO to access data.
+	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String action= request.getParameter("action");
 		if(action.contentEquals("list")) {
 			listAccounts(request,response," ");
-		} else if(action.contentEquals("createNew")) {
-				createNewAccount(request,response);
-		} else if(action.contentEquals("create")) {
-			createAccount(request,response);
-		} else if (action.contentEquals("search")) {
-			searchAccount(request,response);
-		} else if(action.contentEquals("editSelectAccount")) {
-			editSelectAccount(request,response);
-		} else if (action.contentEquals("edit")) {
-			editAccount(request,response);
-		} else if(action.contentEquals("deleteSelectAccount")) {
-			deleteSelectAccount(request,response);
-		} else if (action.contentEquals("delete")) {
-			deleteAccount(request,response);
+		} else if(action.contentEquals("createAccountJSP")) {
+			createAccountJSP(request,response);
+		} else if(action.contentEquals("createAccountDAO")) {
+			createAccountDAO(request,response);
+		} else if (action.contentEquals("searchAccountsJSP")) {
+			searchAccountsJSP(request,response);
+		} else if (action.contentEquals("searchAccountsDAO")) {
+			searchAccountsDAO(request,response);
+		} else if(action.contentEquals("editAccountJSP")) {
+			editAccountJSP(request,response);
+		} else if (action.contentEquals("editAccountDAO")) {
+			editAccountDAO(request,response);
+		} else if(action.contentEquals("deleteAccountJSP")) {
+			deleteAccountJSP(request,response);
+		} else if (action.contentEquals("deleteAccountDAO")) {
+			deleteAccountDAO(request,response);
 		} else if (action.contentEquals("cancel")) {
 			cancelAction(request,response);
 		}
@@ -68,7 +75,7 @@ public class AccountController extends HttpServlet {
 	/*
 	 * Propagates create account page with list of payment methods
 	 */
-	private void createNewAccount(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+	private void createAccountJSP(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		RequestDispatcher rd=request.getRequestDispatcher("createAccount.jsp");
 		ArrayList<PaymentMethod> paymentMethodList = paymentMethodDAO.paymentMethods();
 		request.setAttribute("paymentMethodList", paymentMethodList);
@@ -78,7 +85,7 @@ public class AccountController extends HttpServlet {
 	/*
 	 * Sends new account information to account DAO
 	 */
-	private void createAccount(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+	private void createAccountDAO(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		String accountName = request.getParameter("accountName");
 		int paymentMethodID = Integer.parseInt(request.getParameter("paymentMethod"));
 		
@@ -92,9 +99,17 @@ public class AccountController extends HttpServlet {
 	}
 	
 	/*
+	 * Sends user to search page with origin page info
+	 */
+	private void searchAccountsJSP(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+		RequestDispatcher rd=request.getRequestDispatcher("searchAccount.jsp");
+		rd.forward(request, response);
+	}
+	
+	/*
 	 * Accepts search type and term and fetches list of relevant account records
 	 */
-	private void searchAccount(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+	private void searchAccountsDAO(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		RequestDispatcher rd=request.getRequestDispatcher("searchAccountResults.jsp");
 		String searchType = request.getParameter("searchType");
 		String searchTerm = request.getParameter("searchTerm");
@@ -114,7 +129,7 @@ public class AccountController extends HttpServlet {
 	/*
 	 * Fetches account record to populate editable fields
 	 */
-	private void editSelectAccount(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+	private void editAccountJSP(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		RequestDispatcher rd=request.getRequestDispatcher("editAccount.jsp");
 		int accountID = Integer.parseInt(request.getParameter("accountID"));
 		Account account = accountDAO.searchAccount(accountID);
@@ -132,7 +147,7 @@ public class AccountController extends HttpServlet {
 	/*
 	 * Sends updated fields information to account DAO
 	 */
-	private void editAccount(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+	private void editAccountDAO(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		int accountID = Integer.parseInt(request.getParameter("accountID"));
 		String accountName = request.getParameter("accountName");
 		int paymentMethodID = Integer.parseInt(request.getParameter("paymentMethod"));
@@ -151,7 +166,7 @@ public class AccountController extends HttpServlet {
 	/*
 	 *  Fetches account record to populate account fields for verification
 	 */
-	private void deleteSelectAccount(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+	private void deleteAccountJSP(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		RequestDispatcher rd=request.getRequestDispatcher("deleteAccount.jsp");
 		int accountID = Integer.parseInt(request.getParameter("accountID"));
 		Account account = accountDAO.searchAccount(accountID);
@@ -167,7 +182,7 @@ public class AccountController extends HttpServlet {
 	/*
 	 * Sends account id to account DAO for deletion
 	 */
-	private void deleteAccount(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+	private void deleteAccountDAO(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		int id = Integer.parseInt(request.getParameter("accountID"));
 		accountDAO.delete(id);
 		
@@ -183,7 +198,7 @@ public class AccountController extends HttpServlet {
 		if(originPage.contentEquals("listAccounts")) {
 			listAccounts(request,response," ");
 		} else if(originPage.contentEquals("searchAccountResults")) {
-			searchAccount(request,response);
+			searchAccountsDAO(request,response);
 		}
 			
 	}

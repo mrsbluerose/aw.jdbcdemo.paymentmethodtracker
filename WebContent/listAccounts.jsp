@@ -5,6 +5,7 @@
 <%
 	String message = (String) request.getAttribute("message");
 	ArrayList<String[]> accountList = (ArrayList<String[]>) request.getAttribute("accountList");
+	String originPage = "listAccounts";
 %>
 	
 <!DOCTYPE html>
@@ -22,12 +23,20 @@
 	<h2><%=message%></h2>
 	
 	<h1>Accounts</h1>
-		<!-- create new account button -->
+	
+	<!-- create new account button -->
 	<form action="accountController" method="post">
-		<input type="hidden" name="action" value="createNew" />
+		<input type="hidden" name="originPage" value=<%=originPage %> />
+		<input type="hidden" name="action" value="createAccountJSP" />
 		<input type="submit" value="Create New">
 	</form>
-	<a href="searchAccount.jsp">Search</a>
+	
+	<!-- search account button -->
+	<form action="accountController" method="post">
+		<input type="hidden" name="originPage" value=<%=originPage %> />
+		<input type="hidden" name="action" value="searchAccountsJSP" />
+		<input type="submit" value="Search">
+	</form>
 	
 	<!-- List payment methods button -->
 	<form action="paymentMethodController" method="post">
@@ -64,9 +73,9 @@
 			
 			<!-- Edit button -->
 				<form action="accountController" method="post">
-					<input type="hidden" name="originPage" value="listAccounts" />
+					<input type="hidden" name="originPage" value=<%=originPage %> />
 					<input type="hidden" name="accountID" value=<%=s[0]%> />
-					<input type="hidden" name="action" value="editSelectAccount" />
+					<input type="hidden" name="action" value="editAccountJSP" />
 					<input type="submit" value="Edit">
 				</form>
 			</td>
@@ -74,9 +83,9 @@
 			
 			<!-- Delete button -->
 				<form action="accountController" method="post">
-					<input type="hidden" name="originPage" value="listAccounts" />
+					<input type="hidden" name="originPage" value=<%=originPage %> />
 					<input type="hidden" name="accountID" value=<%=s[0]%> />
-					<input type="hidden" name="action" value="deleteSelectAccount" />
+					<input type="hidden" name="action" value="deleteAccountJSP" />
 					<input type="submit" value="Delete">
 				</form>
 			</td>

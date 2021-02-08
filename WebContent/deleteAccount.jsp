@@ -31,12 +31,13 @@
 		Name: <%=accountItems[1]%>
 		Payment Method: <%=accountItems[2]%>	
 		<input type="hidden" name="accountID" value="<%=accountItems[0]%>" /> 
-		<input type="hidden" name="action" value="delete" />
+		<input type="hidden" name="action" value="deleteAccountDAO" />
 		<input type="submit" value="Delete" />
 		</pre>
-		
 	</form>
-		<form action="accountController" method="post">
+	
+	<!-- Form to cancel action -->
+	<form action="accountController" method="post">
 		<input type="hidden" name="action" value="cancel" />
 		<input type="hidden" name="originPage" value=<%=originPage%> />
 		<input type="hidden" name="searchType" value=<%=searchType%> />

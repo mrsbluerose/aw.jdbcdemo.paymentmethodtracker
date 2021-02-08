@@ -38,10 +38,20 @@
 		<%} %>
     	</select>
 		<input type="hidden" name="accountID" value="<%=accountItems[0]%>">
-		<input type="hidden" name="action" value="edit" />
+		<input type="hidden" name="action" value="editAccountDAO" />
 		<input type="submit" value="Save">
 		</pre>
 	</form>
+	
+	<!-- Form to delete account -->
+	<form action="accountController" method="post">	
+		<input type="hidden" name="accountID" value="<%=accountItems[0]%>" /> 
+		<input type="hidden" name="action" value="deleteAccountDAO" />
+		<input type="submit" value="Delete Account" />
+		</pre>
+	</form>
+	
+	<!-- Form to cancel action -->
 	</form>
 		<form action="accountController" method="post">
 		<input type="hidden" name="action" value="cancel" />

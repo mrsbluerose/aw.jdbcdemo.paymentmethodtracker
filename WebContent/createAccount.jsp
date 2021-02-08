@@ -3,6 +3,13 @@
 <%@ page import="aw.jdbcdemo.paymentmethodtracker.model.PaymentMethod"%>
 	
 <%
+
+	//Forwarding information	
+	String originPage = request.getParameter("originPage");
+	String searchType = request.getParameter("searchType");
+	String searchTerm = request.getParameter("searchTerm");
+	
+	//Data
 	ArrayList<PaymentMethod> paymentMethodList = (ArrayList<PaymentMethod>) request.getAttribute("paymentMethodList");
 %>
 
@@ -29,13 +36,15 @@
 		<%} %>
     	</select>
     	<br/>
-		<input type="hidden" name="action" value="create" />
+		<input type="hidden" name="action" value="createAccountDAO" />
 		<input type="submit" value="Save">
 		</pre>
 	</form>
 	<form action="accountController" method="post">
 		<input type="hidden" name="action" value="cancel" />
-		<input type="hidden" name="page" value="listAccounts.jsp" />
+		<input type="hidden" name="originPage" value=<%=originPage%> />
+		<input type="hidden" name="searchType" value=<%=searchType%> />
+		<input type="hidden" name="searchTerm" value=<%=searchTerm%> />
 		<input type="submit" value="Cancel">
 	</form>
 

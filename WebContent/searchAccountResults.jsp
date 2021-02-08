@@ -7,6 +7,7 @@
 	String searchTerm = request.getParameter("searchTerm");	
 
 	//Data
+	String originPage = "searchAccountResults";
 	ArrayList<String[]> accountList = (ArrayList<String[]>) request.getAttribute("accountList");
 %>
 
@@ -25,8 +26,24 @@
 	<form action="accountController" method="post">
 		<input type="hidden" name="action" value="list" />
 		<input type="submit" value="Back to Accounts">
-		<a href="createAccount.jsp">Create New</a>
-		<a href="searchAccount.jsp">Search</a>
+	</form>
+	
+	<!-- create new account button -->
+	<form action="accountController" method="post">
+		<input type="hidden" name="originPage" value=<%=originPage%> />
+		<input type="hidden" name="searchType" value=<%=searchType%> />
+		<input type="hidden" name="searchTerm" value=<%=searchTerm%> />
+		<input type="hidden" name="action" value="createAccountJSP" />
+		<input type="submit" value="Create New">
+	</form>
+	
+	<!-- search account button -->
+	<form action="accountController" method="post">
+		<input type="hidden" name="originPage" value=<%=originPage%> />
+		<input type="hidden" name="searchType" value=<%=searchType%> />
+		<input type="hidden" name="searchTerm" value=<%=searchTerm%> />
+		<input type="hidden" name="action" value="searchAccountsJSP" />
+		<input type="submit" value="Search">
 	</form>
 
 	<h1>Account Search Results</h1>
@@ -60,11 +77,11 @@
 			
 			<!-- Edit button -->
 				<form action="accountController" method="post">
-					<input type="hidden" name="originPage" value="searchAccountResults" />
+					<input type="hidden" name="originPage" value=<%=originPage%> />
 					<input type="hidden" name="accountID" value=<%=s[0]%> />
 					<input type="hidden" name="searchType" value=<%=searchType%> />
 					<input type="hidden" name="searchTerm" value=<%=searchTerm%> />
-					<input type="hidden" name="action" value="editSelectAccount" />
+					<input type="hidden" name="action" value="editAccountJSP" />
 					<input type="submit" value="Edit">
 				</form>
 			</td>
@@ -72,11 +89,11 @@
 			
 			<!-- Delete button -->
 				<form action="accountController" method="post">
-					<input type="hidden" name="originPage" value="searchAccountResults" />
+					<input type="hidden" name="originPage" value=<%=originPage%> />
 					<input type="hidden" name="accountID" value=<%=s[0]%> />
 					<input type="hidden" name="searchType" value=<%=searchType%> />
 					<input type="hidden" name="searchTerm" value=<%=searchTerm%> />
-					<input type="hidden" name="action" value="deleteSelectAccount" />
+					<input type="hidden" name="action" value="deleteAccountJSP" />
 					<input type="submit" value="Delete">
 				</form>
 			</td>

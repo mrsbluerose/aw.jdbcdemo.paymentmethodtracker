@@ -1,6 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
+<%
+	//Forwarding information	
+	String originPage = request.getParameter("originPage");
+	String searchType = request.getParameter("searchType");
+	String searchTerm = request.getParameter("searchTerm");
+%>
+
 <!DOCTYPE html>
 <html>
 
@@ -25,13 +32,15 @@
   			<label for="paymentMethodID">Payment Method ID</label>
 		
 		Search for: <input type="text" name="searchTerm" />
-		<input type="hidden" name="action" value="search" />
+		<input type="hidden" name="action" value="searchAccountsDAO" />
 		<input type="submit" value="Search" />
 		</pre>
 	</form>
 		<form action="accountController" method="post">
 		<input type="hidden" name="action" value="cancel" />
-		<input type="hidden" name="originPage" value="listAccounts" />
+		<input type="hidden" name="originPage" value=<%=originPage%> />
+		<input type="hidden" name="searchType" value=<%=searchType%> />
+		<input type="hidden" name="searchTerm" value=<%=searchTerm%> />
 		<input type="submit" value="Cancel">
 	</form>
 
