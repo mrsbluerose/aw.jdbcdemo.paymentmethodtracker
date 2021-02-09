@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList"%>
 
-
 <%
 	String message = (String) request.getAttribute("message");
 	ArrayList<String[]> accountList = (ArrayList<String[]>) request.getAttribute("accountList");
