@@ -28,23 +28,34 @@ public class PaymentMethodController extends HttpServlet {
         super();
     }
 
+    /*
+	 * Determines appropriate action. 
+	 * "JSP" means it is directing to the appropriate JSP and populating any necessary data.
+	 * "DAO" means it is calling the DAO to access data.
+	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String action= request.getParameter("action");
 		if(action.contentEquals("list")) {
 			listPaymentMethods(request, response, " ");
-		} else if(action.contentEquals("create")) {
-			createPaymentMethod(request,response);
-		} else if (action.contentEquals("search")) {
-			searchPaymentMethod(request,response);
-		} else if (action.contentEquals("editSelectPaymentMethod")) {
-			editSelectPaymentMethod(request,response);
-		} else if (action.contentEquals("edit")) {
-			editPaymentMethod(request,response);
-		} else if (action.contentEquals("deleteSelectPaymentMethod")) {
-			deleteSelectPaymentMethod(request,response);
-		} else if (action.contentEquals("delete")) {
-			deletePaymentMethod(request,response);
+		} else if(action.contentEquals("createPaymentMethodJSP")) {
+			createPaymentMethodJSP(request,response);
+		} else if(action.contentEquals("createPaymentMethodDAO")) {
+			createPaymentMethodDAO(request,response);
+		} else if (action.contentEquals("searchPaymentMethodJSP")) {
+			searchPaymentMethodJSP(request,response);
+		} else if (action.contentEquals("searchPaymentMethodDAO")) {
+			searchPaymentMethodDAO(request,response);
+		} else if(action.contentEquals("editPaymentMethodJSP")) {
+			editPaymentMethodJSP(request,response);
+		} else if (action.contentEquals("editPaymentMethodDAO")) {
+			editPaymentMethodDAO(request,response);
+		} else if(action.contentEquals("deletePaymentMethodJSP")) {
+			deletePaymentMethodJSP(request,response);
+		} else if (action.contentEquals("deletePaymentMethodDAO")) {
+			deletePaymentMethodDAO(request,response);
+		} else if (action.contentEquals("cancel")) {
+			cancelAction(request,response);
 		}
 	}
 	
@@ -61,9 +72,17 @@ public class PaymentMethodController extends HttpServlet {
 	}
 	
 	/*
+	 * Forwards request to create payment methods page
+	 */
+	private void createPaymentMethodJSP(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+		RequestDispatcher rd=request.getRequestDispatcher("createPaymentMethod.jsp");
+		rd.forward(request, response);
+	}
+	
+	/*
 	 * Sends new payment method information to payment method DAO
 	 */
-	private void createPaymentMethod(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+	private void createPaymentMethodDAO(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		String name = request.getParameter("paymentMethodName");
 		String description = request.getParameter("paymentMethodDescription");
 		String expDate = request.getParameter("paymentMethodExpDate");
@@ -79,9 +98,17 @@ public class PaymentMethodController extends HttpServlet {
 	}
 	
 	/*
+	 * Sends user to search page with origin page info
+	 */
+	private void searchPaymentMethodJSP(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+		RequestDispatcher rd=request.getRequestDispatcher("searchPaymentMethod.jsp");
+		rd.forward(request, response);
+	}
+	
+	/*
 	 * Accepts search type and term and fetches list of relevant payment method records
 	 */
-	private void searchPaymentMethod(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+	private void searchPaymentMethodDAO(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		RequestDispatcher rd=request.getRequestDispatcher("searchPaymentMethodResults.jsp");
 		String searchType = request.getParameter("searchType");
 		String searchTerm = request.getParameter("searchTerm");
@@ -104,7 +131,7 @@ public class PaymentMethodController extends HttpServlet {
 	/*
 	 * Fetches payment method record to populate editable fields
 	 */
-	private void editSelectPaymentMethod(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+	private void editPaymentMethodJSP(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		RequestDispatcher rd=request.getRequestDispatcher("editPaymentMethod.jsp");
 		int paymentMethodID = Integer.parseInt(request.getParameter("paymentMethodID"));
 		PaymentMethod paymentMethod = paymentMethodDAO.searchPaymentMethod(paymentMethodID);
@@ -121,7 +148,7 @@ public class PaymentMethodController extends HttpServlet {
 	/*
 	 * Sends updated fields information to payment method DAO
 	 */
-	private void editPaymentMethod(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+	private void editPaymentMethodDAO(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		int paymentMethodID = Integer.parseInt(request.getParameter("paymentMethodID"));
 		String name = request.getParameter("paymentMethodName");
 		String description = request.getParameter("paymentMethodDescription");
@@ -141,7 +168,7 @@ public class PaymentMethodController extends HttpServlet {
 	/*
 	 *  Fetches payment method record to populate payment method fields for verification
 	 */
-	private void deleteSelectPaymentMethod(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+	private void deletePaymentMethodJSP(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		RequestDispatcher rd=request.getRequestDispatcher("deletePaymentMethod.jsp");
 		int paymentMethodID = Integer.parseInt(request.getParameter("paymentMethodID"));
 		PaymentMethod paymentMethod = paymentMethodDAO.searchPaymentMethod(paymentMethodID);
@@ -158,12 +185,25 @@ public class PaymentMethodController extends HttpServlet {
 	/*
 	 * Sends payment method id to payment method DAO for deletion
 	 */
-	private void deletePaymentMethod(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+	private void deletePaymentMethodDAO(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		int paymentMethodID = Integer.parseInt(request.getParameter("paymentMethodID"));
 		paymentMethodDAO.delete(paymentMethodID);
 		
 		message = "** Payment method " + paymentMethodID + " deleted! **";
 		listPaymentMethods(request,response,message);
+	}
+	
+	/*
+	 * Sends user back to previous page of results.
+	 */
+	public void cancelAction(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+		String originPage = request.getParameter("originPage");
+		if(originPage.contentEquals("listPaymentMethods")) {
+			listPaymentMethods(request,response," ");
+		} else if(originPage.contentEquals("searchPaymentMethodResults")) {
+			searchPaymentMethodDAO(request,response);
+		}
+			
 	}
 	
 }

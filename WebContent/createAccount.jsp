@@ -40,6 +40,8 @@
 		<input type="submit" value="Save">
 		</pre>
 	</form>
+	
+	<!-- Form to cancel action -->
 	<form action="accountController" method="post">
 		<input type="hidden" name="action" value="cancel" />
 		<input type="hidden" name="originPage" value=<%=originPage%> />

@@ -5,6 +5,7 @@
 <%
 	String message = (String) request.getAttribute("message");
 	ArrayList<String[]> paymentMethodList = (ArrayList<String[]>) request.getAttribute("paymentMethodList");
+	String originPage = "listPaymentMethods";
 %>
 		
 <!DOCTYPE html>
@@ -28,8 +29,20 @@
 	</form>
 	
 	<h1>Payment Methods</h1>
-	<a href="createPaymentMethod.jsp">Create New</a>
-	<a href="searchPaymentMethod.jsp">Search</a>
+	
+	<!-- create new account button -->
+	<form action="PaymentMethodController" method="post">
+		<input type="hidden" name="originPage" value=<%=originPage %> />
+		<input type="hidden" name="action" value="createPaymentMethodJSP" />
+		<input type="submit" value="Create New">
+	</form>
+	
+	<!-- search account button -->
+	<form action="PaymentMethodController" method="post">
+		<input type="hidden" name="originPage" value=<%=originPage %> />
+		<input type="hidden" name="action" value="searchPaymentMethodJSP" />
+		<input type="submit" value="Search">
+	</form>
 	
 	<!-- Table of payment methods -->
 	<table>
@@ -63,8 +76,9 @@
 			
 			<!-- Edit button -->
 				<form action="paymentMethodController" method="post">
+					<input type="hidden" name="originPage" value=<%=originPage %> />
 					<input type="hidden" name="paymentMethodID" value=<%=s[0]%> />
-					<input type="hidden" name="action" value="editSelectPaymentMethod" />
+					<input type="hidden" name="action" value="editPaymentMethodJSP" />
 					<input type="submit" value="Edit">
 				</form>
 			</td>
@@ -72,8 +86,9 @@
 			
 			<!-- Delete button -->
 				<form action="paymentMethodController" method="post">
+					<input type="hidden" name="originPage" value=<%=originPage %> />
 					<input type="hidden" name="paymentMethodID" value=<%=s[0]%> />
-					<input type="hidden" name="action" value="deleteSelectPaymentMethod" />
+					<input type="hidden" name="action" value="deletePaymentMethodJSP" />
 					<input type="submit" value="Delete">
 				</form>
 			</td>

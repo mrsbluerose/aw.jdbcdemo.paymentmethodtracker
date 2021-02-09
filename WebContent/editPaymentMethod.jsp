@@ -3,6 +3,12 @@
 
 
 <%
+	//Forwarding information	
+	String originPage = request.getParameter("originPage");
+	String searchType = request.getParameter("searchType");
+	String searchTerm = request.getParameter("searchTerm");
+	
+	//Data
 	String[] paymentMethodItems = (String[]) request.getAttribute("paymentMethodItems");
 %>
 
@@ -26,9 +32,27 @@
 		Description: <input type="text" name="paymentMethodDescription" value="<%=paymentMethodItems[2]%>" />
 		Expiration: <input type="text" name="paymentMethodExpDate" value="<%=paymentMethodItems[3]%>" />
 		<input type="hidden" name="paymentMethodID" value="<%=paymentMethodItems[0]%>">
-		<input type="hidden" name="action" value="edit" />
+		<input type="hidden" name="action" value="editPaymentMethodDAO" />
 		<input type="submit" value="Save">
 		</pre>
+	</form>
+	
+	<!-- Form to delete payment method -->
+	<form action="paymentMethodController" method="post">	
+		<input type="hidden" name="accountID" value="<%=paymentMethodItems[0]%>" /> 
+		<input type="hidden" name="action" value="deletePaymentMethodDAO" />
+		<input type="submit" value="Delete Account" />
+		</pre>
+	</form>
+	
+	<!-- Form to cancel action -->
+	</form>
+		<form action="paymentMethodController" method="post">
+		<input type="hidden" name="action" value="cancel" />
+		<input type="hidden" name="originPage" value=<%=originPage%> />
+		<input type="hidden" name="searchType" value=<%=searchType%> />
+		<input type="hidden" name="searchTerm" value=<%=searchTerm%> />
+		<input type="submit" value="Cancel">
 	</form>
 
 </body>

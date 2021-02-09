@@ -36,7 +36,9 @@
 		<input type="submit" value="Search" />
 		</pre>
 	</form>
-		<form action="accountController" method="post">
+	
+	<!-- Form to cancel action -->
+	<form action="accountController" method="post">
 		<input type="hidden" name="action" value="cancel" />
 		<input type="hidden" name="originPage" value=<%=originPage%> />
 		<input type="hidden" name="searchType" value=<%=searchType%> />
