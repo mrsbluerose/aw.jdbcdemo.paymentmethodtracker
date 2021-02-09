@@ -34,18 +34,18 @@ public class AccountNoteController extends HttpServlet {
 		String action= request.getParameter("action");
 		if(action.contentEquals("list")) {
 			listAccountNotes(request,response," ");
-		} else if(action.contentEquals("create")) {
-			createAccountNote(request,response);
-		} else if (action.contentEquals("search")) {
-			searchAccountNotes(request,response);
-		} else if(action.contentEquals("editSelectAccountNote")) {
-			editSelectAccountNote(request,response);
-		} else if (action.contentEquals("edit")) {
-			editAccountNote(request,response);
-		} else if(action.contentEquals("deleteSelectAccountNote")) {
-			deleteSelectAccountNote(request,response);
-		} else if (action.contentEquals("delete")) {
-			deleteAccountNote(request,response);
+		} else if(action.contentEquals("createAccountNoteDAO")) {
+			createAccountNoteDAO(request,response);
+		} else if (action.contentEquals("searchAccountNoteDAO")) {
+			searchAccountNoteDAO(request,response);
+		} else if(action.contentEquals("editAccountNoteJSP")) {
+			editAccountNoteJSP(request,response);
+		} else if (action.contentEquals("editAccountNoteDAO")) {
+			editAccountNoteDAO(request,response);
+		} else if(action.contentEquals("deleteAccountNoteJSP")) {
+			deleteAccountNoteJSP(request,response);
+		} else if (action.contentEquals("deleteAccountNoteDAO")) {
+			deleteAccountNoteDAO(request,response);
 		} else if (action.contentEquals("cancel")) {
 			cancelAction(request,response);
 		}
@@ -68,7 +68,7 @@ public class AccountNoteController extends HttpServlet {
 	/*
 	 * Sends new account note information to account note DAO
 	 */
-	private void createAccountNote(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+	private void createAccountNoteDAO(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		int accountID = Integer.parseInt(request.getParameter("accountID"));
 		String date = request.getParameter("accountNoteDate");
 		String text = request.getParameter("accountNoteText");
@@ -86,7 +86,7 @@ public class AccountNoteController extends HttpServlet {
 	/*
 	 * Accepts search type and term and fetches list of relevant account records
 	 */
-	private void searchAccountNotes(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+	private void searchAccountNoteDAO(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		RequestDispatcher rd=request.getRequestDispatcher("searchAccountNoteResults.jsp");
 		String searchType = request.getParameter("searchType");
 		String searchTerm = request.getParameter("searchTerm");
@@ -109,7 +109,7 @@ public class AccountNoteController extends HttpServlet {
 	/*
 	 * Fetches account note record to populate editable fields
 	 */
-	private void editSelectAccountNote(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+	private void editAccountNoteJSP(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		RequestDispatcher rd=request.getRequestDispatcher("editAccountNote.jsp");
 		int accountNoteID = Integer.parseInt(request.getParameter("accountNoteID"));
 		AccountNote accountNote = accountNoteDAO.searchAccountNote(accountNoteID);
@@ -126,7 +126,7 @@ public class AccountNoteController extends HttpServlet {
 	/*
 	 * Sends updated fields information to account note DAO
 	 */
-	private void editAccountNote(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+	private void editAccountNoteDAO(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		int accountNoteID = Integer.parseInt(request.getParameter("accountNoteID"));
 		int accountID = Integer.parseInt(request.getParameter("accountID"));
 		String date = request.getParameter("accountNoteDate");
@@ -146,7 +146,7 @@ public class AccountNoteController extends HttpServlet {
 	/*
 	 *  Fetches account note record to populate account note fields for verification
 	 */
-	private void deleteSelectAccountNote(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+	private void deleteAccountNoteJSP(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		RequestDispatcher rd=request.getRequestDispatcher("deleteAccountNote.jsp");
 		int accountNoteID = Integer.parseInt(request.getParameter("accountNoteID"));
 		AccountNote accountNote = accountNoteDAO.searchAccountNote(accountNoteID);
@@ -163,7 +163,7 @@ public class AccountNoteController extends HttpServlet {
 	/*
 	 * Sends account note id to account note DAO for deletion
 	 */
-	private void deleteAccountNote(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+	private void deleteAccountNoteDAO(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		int id = Integer.parseInt(request.getParameter("accountNoteID"));
 		accountNoteDAO.delete(id);
 		
@@ -179,7 +179,7 @@ public class AccountNoteController extends HttpServlet {
 		if(originPage.contentEquals("listAccountNotes")) {
 			listAccountNotes(request,response," ");
 		} else if(originPage.contentEquals("searchAccountNoteResults")) {
-			searchAccountNotes(request,response);
+			searchAccountNoteDAO(request,response);
 		}
 			
 	}

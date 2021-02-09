@@ -6,6 +6,7 @@
 	String accountID = request.getParameter("accountID");
 	String accountName = (String) request.getAttribute("accountName");
 	String message = (String) request.getAttribute("message");
+	String originPage = "listAccountNotes";
 	%>
 
 <!DOCTYPE html>
@@ -45,7 +46,7 @@
 		
 		Search for: <input type="text" name="searchTerm" />
 		<input type="hidden" name="accountID" value=<%=accountID%> />
-		<input type="hidden" name="action" value="search" />
+		<input type="hidden" name="action" value="searchAccountNoteDAO" />
 		<input type="submit" value="Search" />
 		</pre>
 	</form>
@@ -57,7 +58,7 @@
 		Date: <input type="text" name="accountNoteDate" />
 		Note: <input type="text" name="accountNoteText" />
 		<input type="hidden" name="accountID" value=<%=accountID%> />
-		<input type="hidden" name="action" value="create" />
+		<input type="hidden" name="action" value="createAccountNoteDAO" />
 		<input type="submit" value="Save">
 		</pre>
 	</form>
@@ -81,19 +82,19 @@
 			<td>
 			<!-- Edit button -->
 				<form action="accountNoteController" method="post">
-					<input type="hidden" name="originPage" value="listAccountNotes" />
+					<input type="hidden" name="originPage" value=<%=originPage%> />
 					<input type="hidden" name="accountNoteID" value=<%=s[0]%> />
-					<input type="hidden" name="action" value="editSelectAccountNote" />
+					<input type="hidden" name="action" value="editAccountNoteJSP" />
 					<input type="submit" value="Edit">
 				</form>
 			</td>
 			<td>
 			<!-- Delete button -->
 				<form action="accountNoteController" method="post">
-					<input type="hidden" name="originPage" value="listAccountNotes" />
+					<input type="hidden" name="originPage" value=<%=originPage%> />
 					<input type="hidden" name="accountID" value=<%=accountID%> />
 					<input type="hidden" name="accountNoteID" value=<%=s[0]%> />
-					<input type="hidden" name="action" value="deleteSelectAccountNote" />
+					<input type="hidden" name="action" value="deleteAccountNoteJSP" />
 					<input type="submit" value="Delete">
 				</form>
 			</td>
