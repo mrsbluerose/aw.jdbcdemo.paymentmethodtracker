@@ -34,19 +34,21 @@ public class PaymentMethodNoteController extends HttpServlet {
 		String action= request.getParameter("action");
 		if(action.contentEquals("list")) {
 			listPaymentMethodNotes(request,response," ");
-		} else if(action.contentEquals("create")) {
-			createPaymentMethodNote(request,response);
-		} else if (action.contentEquals("search")) {
-			search(request,response);
-		} else if(action.contentEquals("editSelectPaymentMethodNote")) {
-			editSelectPaymentMethodNote(request,response);
-		} else if (action.contentEquals("edit")) {
-			editPaymentMethodNote(request,response);
-		} else if(action.contentEquals("deleteSelectPaymentMethodNote")) {
-			deleteSelectPaymentMethodNote(request,response);
-		} else if (action.contentEquals("delete")) {
-			deletePaymentMethodNote(request,response);
-		} 
+		} else if(action.contentEquals("createPaymentMethodNoteDAO")) {
+			createPaymentMethodNoteDAO(request,response);
+		} else if (action.contentEquals("searchPaymentMethodNoteDAO")) {
+			searchPaymentMethodNoteDAO(request,response);
+		} else if(action.contentEquals("editPaymentMethodNoteJSP")) {
+			editPaymentMethodNoteJSP(request,response);
+		} else if (action.contentEquals("editPaymentMethodNoteDAO")) {
+			editPaymentMethodNoteDAO(request,response);
+		} else if(action.contentEquals("deletePaymentMethodNoteJSP")) {
+			deletePaymentMethodNoteJSP(request,response);
+		} else if (action.contentEquals("deletePaymentMethodNoteDAO")) {
+			deletePaymentMethodNoteDAO(request,response);
+		} else if (action.contentEquals("cancel")) {
+			cancelAction(request,response);
+		}
 	}
 	
 	/*
@@ -66,7 +68,7 @@ public class PaymentMethodNoteController extends HttpServlet {
 	/*
 	 * Sends new payment method note information to payment method note DAO
 	 */
-	private void createPaymentMethodNote(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+	private void createPaymentMethodNoteDAO(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		int paymentMethodID = Integer.parseInt(request.getParameter("paymentMethodID"));
 		String date = request.getParameter("paymentMethodNoteDate");
 		String text = request.getParameter("paymentMethodNoteText");
@@ -84,7 +86,7 @@ public class PaymentMethodNoteController extends HttpServlet {
 	/*
 	 * Accepts search type and term and fetches list of relevant payment method records
 	 */
-	private void search(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+	private void searchPaymentMethodNoteDAO(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		RequestDispatcher rd=request.getRequestDispatcher("searchPaymentMethodNoteResults.jsp");
 		String searchType = request.getParameter("searchType");
 		String searchTerm = request.getParameter("searchTerm");
@@ -107,7 +109,7 @@ public class PaymentMethodNoteController extends HttpServlet {
 	/*
 	 * Fetches payment method note record to populate editable fields
 	 */
-	private void editSelectPaymentMethodNote(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+	private void editPaymentMethodNoteJSP(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		RequestDispatcher rd=request.getRequestDispatcher("editPaymentMethodNote.jsp");
 		int paymentMethodNoteID = Integer.parseInt(request.getParameter("paymentMethodNoteID"));
 		PaymentMethodNote paymentMethodNote = paymentMethodNoteDAO.searchPaymentMethodNote(paymentMethodNoteID);
@@ -124,7 +126,7 @@ public class PaymentMethodNoteController extends HttpServlet {
 	/*
 	 * Sends updated fields information to payment method note DAO
 	 */
-	private void editPaymentMethodNote(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+	private void editPaymentMethodNoteDAO(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		int paymentMethodNoteID = Integer.parseInt(request.getParameter("paymentMethodNoteID"));
 		int paymentMethodID = Integer.parseInt(request.getParameter("paymentMethodID"));
 		String date = request.getParameter("paymentMethodNoteDate");
@@ -144,7 +146,7 @@ public class PaymentMethodNoteController extends HttpServlet {
 	/*
 	 *  Fetches payment method note record to populate payment method note fields for verification
 	 */
-	private void deleteSelectPaymentMethodNote(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+	private void deletePaymentMethodNoteJSP(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		RequestDispatcher rd=request.getRequestDispatcher("deletePaymentMethodNote.jsp");
 		int paymentMethodNoteID = Integer.parseInt(request.getParameter("paymentMethodNoteID"));
 		PaymentMethodNote paymentMethodNote = paymentMethodNoteDAO.searchPaymentMethodNote(paymentMethodNoteID);
@@ -161,11 +163,23 @@ public class PaymentMethodNoteController extends HttpServlet {
 	/*
 	 * Sends payment method note id to payment method note DAO for deletion
 	 */
-	private void deletePaymentMethodNote(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+	private void deletePaymentMethodNoteDAO(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		int id = Integer.parseInt(request.getParameter("paymentMethodNoteID"));
 		paymentMethodNoteDAO.delete(id);
 		
 		message = "** Payment Method Note " + id + " deleted! **";
 		listPaymentMethodNotes(request,response,message);
+	}
+	
+	/*
+	 * Sends user back to previous page of results.
+	 */
+	public void cancelAction (HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+		String originPage = request.getParameter("originPage");
+		if(originPage.contentEquals("listPaymentMethodNotes")) {
+			listPaymentMethodNotes(request,response," ");
+		} else if(originPage.contentEquals("searchPaymentMethodNoteResults")) {
+			searchPaymentMethodNoteDAO(request,response);
+		}
 	}
 }

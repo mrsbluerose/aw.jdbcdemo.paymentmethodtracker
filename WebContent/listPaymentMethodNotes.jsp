@@ -6,6 +6,7 @@
 	String paymentMethodID = request.getParameter("paymentMethodID");
 	String paymentMethodName = (String) request.getAttribute("paymentMethodName");
 	String message = (String) request.getAttribute("message");
+	String originPage = "listPaymentMethodNotes";
 	%>
 
 <!DOCTYPE html>
@@ -45,7 +46,7 @@
 		
 		Search for: <input type="text" name="searchTerm" />
 		<input type="hidden" name="paymentMethodID" value=<%=paymentMethodID%> />
-		<input type="hidden" name="action" value="search" />
+		<input type="hidden" name="action" value="searchPaymentMethodNoteDAO" />
 		<input type="submit" value="Search" />
 		</pre>
 	</form>
@@ -57,7 +58,7 @@
 		Date: <input type="text" name="paymentMethodNoteDate" />
 		Note: <input type="text" name="paymentMethodNoteText" />
 		<input type="hidden" name="paymentMethodID" value=<%=paymentMethodID%> />
-		<input type="hidden" name="action" value="create" />
+		<input type="hidden" name="action" value="createPaymentMethodNoteDAO" />
 		<input type="submit" value="Save">
 		</pre>
 	</form>
@@ -79,19 +80,21 @@
 			<td><%=s[1]%></td>
 			<td><%=s[2]%></td>
 			<td>
+			
 			<!-- Edit button -->
 				<form action="paymentMethodNoteController" method="post">
 					<input type="hidden" name="paymentMethodNoteID" value=<%=s[0]%> />
-					<input type="hidden" name="action" value="editSelectPaymentMethodNote" />
+					<input type="hidden" name="action" value="editPaymentMethodNoteJSP" />
 					<input type="submit" value="Edit">
 				</form>
 			</td>
 			<td>
+			
 			<!-- Delete button -->
 				<form action="paymentMethodNoteController" method="post">
 					<input type="hidden" name="paymentMethodID" value=<%=paymentMethodID%> />
 					<input type="hidden" name="paymentMethodNoteID" value=<%=s[0]%> />
-					<input type="hidden" name="action" value="deleteSelectPaymentMethodNote" />
+					<input type="hidden" name="action" value="deletePaymentMethodNoteJSP" />
 					<input type="submit" value="Delete">
 				</form>
 			</td>

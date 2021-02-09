@@ -38,7 +38,7 @@
 	</form>
 	
 	
-	
+	<!-- Form to cancel action -->
 	<form action="accountNoteController" method="post">
 		<input type="hidden" name="action" value="cancel" />
 		<input type="hidden" name="originPage" value=<%=originPage%> />

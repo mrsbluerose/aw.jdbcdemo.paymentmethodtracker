@@ -80,6 +80,7 @@
 			<td><%=s[1]%></td>
 			<td><%=s[2]%></td>
 			<td>
+			
 			<!-- Edit button -->
 				<form action="accountNoteController" method="post">
 					<input type="hidden" name="originPage" value=<%=originPage%> />
@@ -89,6 +90,7 @@
 				</form>
 			</td>
 			<td>
+			
 			<!-- Delete button -->
 				<form action="accountNoteController" method="post">
 					<input type="hidden" name="originPage" value=<%=originPage%> />

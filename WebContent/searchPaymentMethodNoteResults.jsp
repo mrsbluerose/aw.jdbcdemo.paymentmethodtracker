@@ -2,9 +2,15 @@
 <%@page import="java.util.ArrayList"%>
 
 <%
-ArrayList<String[]> paymentMethodNoteList = (ArrayList<String[]>) request.getAttribute("paymentMethodNoteList");
-String paymentMethodID = request.getParameter("paymentMethodID");
-String paymentMethodName = (String) request.getAttribute("paymentMethodName");
+	//Forwarding information	
+	String searchType = request.getParameter("searchType");
+	String searchTerm = request.getParameter("searchTerm");
+
+	//Data
+	ArrayList<String[]> paymentMethodNoteList = (ArrayList<String[]>) request.getAttribute("paymentMethodNoteList");
+	String paymentMethodID = request.getParameter("paymentMethodID");
+	String paymentMethodName = (String) request.getAttribute("paymentMethodName");
+	String originPage = "searchPaymentMethodNoteResults";
 %>
 
 <!DOCTYPE html>
@@ -42,7 +48,7 @@ String paymentMethodName = (String) request.getAttribute("paymentMethodName");
 		
 		Search for: <input type="text" name="searchTerm" />
 		<input type="hidden" name="paymentMethodID" value=<%=paymentMethodID%> />
-		<input type="hidden" name="action" value="search" />
+		<input type="hidden" name="action" value="searchPaymentMethodNoteDAO" />
 		<input type="submit" value="Search" />
 		</pre>
 	</form>
@@ -54,7 +60,7 @@ String paymentMethodName = (String) request.getAttribute("paymentMethodName");
 		Date: <input type="text" name="paymentMethodNoteDate" />
 		Note: <input type="text" name="paymentMethodNoteText" />
 		<input type="hidden" name="paymentMethodID" value=<%=paymentMethodID%> />
-		<input type="hidden" name="action" value="create" />
+		<input type="hidden" name="action" value="createPaymentMethodNoteDAO" />
 		<input type="submit" value="Save">
 		</pre>
 	</form>
@@ -78,16 +84,22 @@ String paymentMethodName = (String) request.getAttribute("paymentMethodName");
 			<td>
 			<!-- Edit button -->
 				<form action="paymentMethodNoteController" method="post">
+					<input type="hidden" name="originPage" value=<%=originPage%> />
+					<input type="hidden" name="searchType" value=<%=searchType%> />
+					<input type="hidden" name="searchTerm" value=<%=searchTerm%> />
 					<input type="hidden" name="paymentMethodNoteID" value=<%=s[0]%> />
-					<input type="hidden" name="action" value="editSelectPaymentMethodNote" />
+					<input type="hidden" name="action" value="editPaymentMethodNoteJSP" />
 					<input type="submit" value="Edit">
 				</form>
 			</td>
 			<td>
 			<!-- Delete button -->
 				<form action="paymentMethodNoteController" method="post">
+				<input type="hidden" name="originPage" value=<%=originPage%> />
+					<input type="hidden" name="searchType" value=<%=searchType%> />
+					<input type="hidden" name="searchTerm" value=<%=searchTerm%> />
 					<input type="hidden" name="paymentMethodNoteID" value=<%=s[0]%> />
-					<input type="hidden" name="action" value="deleteSelectPaymentMethodNote" />
+					<input type="hidden" name="action" value="deletePaymentMethodNoteJSP" />
 					<input type="submit" value="Delete">
 				</form>
 			</td>
