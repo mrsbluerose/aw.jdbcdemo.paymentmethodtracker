@@ -10,6 +10,7 @@
 	ArrayList<String[]> accountNoteList = (ArrayList<String[]>) request.getAttribute("accountNoteList");
 	String accountID = request.getParameter("accountID");
 	String accountName = (String) request.getAttribute("accountName");
+	String originPage = "searchAccountNoteResults";
 %>
 
 <!DOCTYPE html>
@@ -35,6 +36,7 @@
 	<p>Account Name: <%=accountName%></p>
 	
 	<!-- search type and term form -->
+	<!-- search type and term form -->
 	<form action="accountNoteController" method="post">
 		<pre>
 		Search By: 
@@ -47,7 +49,7 @@
 		
 		Search for: <input type="text" name="searchTerm" />
 		<input type="hidden" name="accountID" value=<%=accountID%> />
-		<input type="hidden" name="action" value="search" />
+		<input type="hidden" name="action" value="searchAccountNoteDAO" />
 		<input type="submit" value="Search" />
 		</pre>
 	</form>
@@ -59,8 +61,8 @@
 		Date: <input type="text" name="accountNoteDate" />
 		Note: <input type="text" name="accountNoteText" />
 		<input type="hidden" name="accountID" value=<%=accountID%> />
-		<input type="hidden" name="action" value="create" />
-		<input type="submit" value="Save">
+		<input type="hidden" name="action" value="createAccountNoteDAO" />
+		<input type="submit" value="Save" />
 		</pre>
 	</form>
 
@@ -83,20 +85,24 @@
 			<td>
 			<!-- Edit button -->
 				<form action="accountNoteController" method="post">
-					<input type="hidden" name="originPage" value="searchAccountNoteResults" />
+					<input type="hidden" name="originPage" value=<%=originPage%> />
+					<input type="hidden" name="accountNoteID" value=<%=s[0]%> />
 					<input type="hidden" name="searchType" value=<%=searchType%> />
 					<input type="hidden" name="searchTerm" value=<%=searchTerm%> />
-					<input type="hidden" name="accountNoteID" value=<%=s[0]%> />
-					<input type="hidden" name="action" value="editSelectAccountNote" />
-					<input type="submit" value="Edit">
+					<input type="hidden" name="action" value="editAccountNoteJSP" />
+					<input type="submit" value="Edit" />
 				</form>
 			</td>
 			<td>
 			<!-- Delete button -->
 				<form action="accountNoteController" method="post">
+					<input type="hidden" name="originPage" value=<%=originPage%> />
+					<input type="hidden" name="accountID" value=<%=accountID%> />
 					<input type="hidden" name="accountNoteID" value=<%=s[0]%> />
-					<input type="hidden" name="action" value="deleteSelectAccountNote" />
-					<input type="submit" value="Delete">
+					<input type="hidden" name="searchType" value=<%=searchType%> />
+					<input type="hidden" name="searchTerm" value=<%=searchTerm%> />
+					<input type="hidden" name="action" value="deleteAccountNoteJSP" />
+					<input type="submit" value="Delete" />
 				</form>
 			</td>
 		</tr>

@@ -85,7 +85,7 @@
 					<input type="hidden" name="originPage" value=<%=originPage%> />
 					<input type="hidden" name="accountNoteID" value=<%=s[0]%> />
 					<input type="hidden" name="action" value="editAccountNoteJSP" />
-					<input type="submit" value="Edit">
+					<input type="submit" value="Edit" />
 				</form>
 			</td>
 			<td>
@@ -95,7 +95,7 @@
 					<input type="hidden" name="accountID" value=<%=accountID%> />
 					<input type="hidden" name="accountNoteID" value=<%=s[0]%> />
 					<input type="hidden" name="action" value="deleteAccountNoteJSP" />
-					<input type="submit" value="Delete">
+					<input type="submit" value="Delete" />
 				</form>
 			</td>
 		</tr>
