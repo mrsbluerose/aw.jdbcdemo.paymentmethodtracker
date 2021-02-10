@@ -39,7 +39,8 @@
 	</form>
 	
 	<!-- Form to delete account note -->
-	<form action="accountController" method="post">	
+	<form action="accountNoteController" method="post">	
+		<pre>
 		<input type="hidden" name="accountNoteID" value="<%=accountNoteItems[0]%>" />
 		<input type="hidden" name="accountID" value="<%=accountNoteItems[1]%>" />
 		<input type="hidden" name="action" value="deleteAccountNoteDAO" />

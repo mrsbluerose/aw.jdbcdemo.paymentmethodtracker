@@ -31,14 +31,14 @@
 	<h1>Payment Methods</h1>
 	
 	<!-- create new account button -->
-	<form action="PaymentMethodController" method="post">
+	<form action="paymentMethodController" method="post">
 		<input type="hidden" name="originPage" value=<%=originPage %> />
 		<input type="hidden" name="action" value="createPaymentMethodJSP" />
 		<input type="submit" value="Create New">
 	</form>
 	
 	<!-- search account button -->
-	<form action="PaymentMethodController" method="post">
+	<form action="paymentMethodController" method="post">
 		<input type="hidden" name="originPage" value=<%=originPage %> />
 		<input type="hidden" name="action" value="searchPaymentMethodJSP" />
 		<input type="submit" value="Search">

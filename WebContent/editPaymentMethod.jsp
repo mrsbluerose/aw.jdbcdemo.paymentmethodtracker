@@ -39,9 +39,9 @@
 	
 	<!-- Form to delete payment method -->
 	<form action="paymentMethodController" method="post">	
-		<input type="hidden" name="accountID" value="<%=paymentMethodItems[0]%>" /> 
+		<input type="hidden" name="paymentMethodID" value="<%=paymentMethodItems[0]%>" /> 
 		<input type="hidden" name="action" value="deletePaymentMethodDAO" />
-		<input type="submit" value="Delete Account" />
+		<input type="submit" value="Delete Payment Method" />
 		</pre>
 	</form>
 	

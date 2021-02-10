@@ -146,7 +146,7 @@ public class PaymentMethodNoteDAO {
 	 * Returns a list of string arrays with paymentMethod note information based on the given year character sequence
 	 */
 	public ArrayList<String[]> searchByYear(String year, int paymentMethodID) {
-		String condition = "WHERE payment_method_note_date LIKE '%" + year + "%'; "
+		String condition = "WHERE payment_method_note_date LIKE '%" + year + "%' "
 				+ "AND payment_method_id=" + paymentMethodID + ";";
 		ArrayList<String[]> paymentMethodNoteList = searchPaymentMethodNote(condition);		
 		return paymentMethodNoteList;

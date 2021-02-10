@@ -140,7 +140,7 @@ public class PaymentMethodDAO {
 				paymentMethod.setID(resultSet.getInt(1));
 				paymentMethod.setName(resultSet.getString(2));
 				paymentMethod.setDescription(resultSet.getString(3));
-				paymentMethod.setExpDate(resultSet.getString(3));
+				paymentMethod.setExpDate(resultSet.getString(4));
 			}
 			ConnectionUtil.closeQuietly(connection);
 

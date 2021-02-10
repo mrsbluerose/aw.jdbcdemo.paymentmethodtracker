@@ -84,7 +84,7 @@
 					<input type="hidden" name="searchType" value=<%=searchType%> />
 					<input type="hidden" name="searchTerm" value=<%=searchTerm%> />
 					<input type="hidden" name="paymentMethodID" value=<%=s[0]%> />
-					<input type="hidden" name="action" value="editSelectPaymentMethod" />
+					<input type="hidden" name="action" value="editPaymentMethodJSP" />
 					<input type="submit" value="Edit">
 				</form>
 			</td>
@@ -96,7 +96,7 @@
 					<input type="hidden" name="searchType" value=<%=searchType%> />
 					<input type="hidden" name="searchTerm" value=<%=searchTerm%> />
 					<input type="hidden" name="paymentMethodID" value=<%=s[0]%> />
-					<input type="hidden" name="action" value="deleteSelectPaymentMethod" />
+					<input type="hidden" name="action" value="deletePaymentMethodJSP" />
 					<input type="submit" value="Delete">
 				</form>
 			</td>

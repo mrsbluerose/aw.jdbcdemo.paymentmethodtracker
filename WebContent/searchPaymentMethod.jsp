@@ -34,7 +34,7 @@
   			<label for="paymentMethodExpYear">Expiration Year</label>
 		
 		Search for: <input type="text" name="searchTerm" />
-		<input type="hidden" name="action" value="searchPaymentMethodJSP" />
+		<input type="hidden" name="action" value="searchPaymentMethodDAO" />
 		<input type="submit" value="Search" />
 		</pre>
 	</form>

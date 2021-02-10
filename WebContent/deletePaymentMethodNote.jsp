@@ -43,7 +43,7 @@
 		<input type="hidden" name="originPage" value=<%=originPage%> />
 		<input type="hidden" name="searchType" value=<%=searchType%> />
 		<input type="hidden" name="searchTerm" value=<%=searchTerm%> />
-		<input type="hidden" name="accountID" value="<%=paymentMethodNoteItems[1]%>" />
+		<input type="hidden" name="paymentMethodID" value="<%=paymentMethodNoteItems[1]%>" />
 		<input type="submit" value="Cancel">
 	</form>
 
