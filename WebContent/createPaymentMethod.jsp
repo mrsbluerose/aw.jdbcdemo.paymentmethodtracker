@@ -24,20 +24,20 @@
 	<!-- Form to enter payment method name, description, expiration date -->
 	<form action="paymentMethodController" method="post">
 		<pre>
-		Name: <input type="text" name="paymentMethodName" />
-		Description: <input type="text" name="paymentMethodDescription" />
-		Expiration: <input type="text" name="paymentMethodExpDate" />
-		<input type="hidden" name="action" value="createPaymentMethodDAO" />
+		Name: <input type="text" name="paymentMethodName" >
+		Description: <input type="text" name="paymentMethodDescription" >
+		Expiration: <input type="text" name="paymentMethodExpDate" >
+		<input type="hidden" name="action" value="createPaymentMethodDAO" >
 		<input type="submit" value="Save">
 		</pre>
 	</form>
 	
 	<!-- Form to cancel action -->
 	<form action="paymentMethodController" method="post">
-		<input type="hidden" name="action" value="cancel" />
-		<input type="hidden" name="originPage" value=<%=originPage%> />
-		<input type="hidden" name="searchType" value=<%=searchType%> />
-		<input type="hidden" name="searchTerm" value=<%=searchTerm%> />
+		<input type="hidden" name="action" value="cancel" >
+		<input type="hidden" name="originPage" value=<%=originPage%> >
+		<input type="hidden" name="searchType" value=<%=searchType%> >
+		<input type="hidden" name="searchTerm" value=<%=searchTerm%> >
 		<input type="submit" value="Cancel">
 	</form>
 	

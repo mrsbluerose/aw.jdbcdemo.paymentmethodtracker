@@ -24,25 +24,25 @@
 
 	<!-- button to go back to list of accounts -->
 	<form action="paymentMethodController" method="post">
-		<input type="hidden" name="action" value="list" />
+		<input type="hidden" name="action" value="list" >
 		<input type="submit" value="Back to Payment Methods">
 	</form>
 	
 	<!-- create new payment method button -->
 	<form action="paymentMethodController" method="post">
-		<input type="hidden" name="originPage" value=<%=originPage%> />
-		<input type="hidden" name="searchType" value=<%=searchType%> />
-		<input type="hidden" name="searchTerm" value=<%=searchTerm%> />
-		<input type="hidden" name="action" value="createPaymentMethodJSP" />
+		<input type="hidden" name="originPage" value=<%=originPage%> >
+		<input type="hidden" name="searchType" value=<%=searchType%> >
+		<input type="hidden" name="searchTerm" value=<%=searchTerm%> >
+		<input type="hidden" name="action" value="createPaymentMethodJSP" >
 		<input type="submit" value="Create New">
 	</form>
 	
 	<!-- search payment Method button -->
 	<form action="paymentMethodController" method="post">
-		<input type="hidden" name="originPage" value=<%=originPage%> />
-		<input type="hidden" name="searchType" value=<%=searchType%> />
-		<input type="hidden" name="searchTerm" value=<%=searchTerm%> />
-		<input type="hidden" name="action" value="searchPaymentMethodJSP" />
+		<input type="hidden" name="originPage" value=<%=originPage%> >
+		<input type="hidden" name="searchType" value=<%=searchType%> >
+		<input type="hidden" name="searchTerm" value=<%=searchTerm%> >
+		<input type="hidden" name="action" value="searchPaymentMethodJSP" >
 		<input type="submit" value="Search">
 	</form>	
 
@@ -71,8 +71,8 @@
 			
 			<!-- button to see list of notes for specified account -->
 			<td><form action="paymentMethodNoteController" method="post">
-					<input type="hidden" name="paymentMethodID" value=<%=s[0]%> />
-					<input type="hidden" name="action" value="list" />
+					<input type="hidden" name="paymentMethodID" value=<%=s[0]%> >
+					<input type="hidden" name="action" value="list" >
 					<input type="submit" value="Notes">
 				</form>
 			</td>
@@ -80,11 +80,11 @@
 			
 			<!-- Edit button -->
 				<form action="paymentMethodController" method="post">
-					<input type="hidden" name="originPage" value=<%=originPage%> />
-					<input type="hidden" name="searchType" value=<%=searchType%> />
-					<input type="hidden" name="searchTerm" value=<%=searchTerm%> />
-					<input type="hidden" name="paymentMethodID" value=<%=s[0]%> />
-					<input type="hidden" name="action" value="editPaymentMethodJSP" />
+					<input type="hidden" name="originPage" value=<%=originPage%> >
+					<input type="hidden" name="searchType" value=<%=searchType%> >
+					<input type="hidden" name="searchTerm" value=<%=searchTerm%> >
+					<input type="hidden" name="paymentMethodID" value=<%=s[0]%> >
+					<input type="hidden" name="action" value="editPaymentMethodJSP" >
 					<input type="submit" value="Edit">
 				</form>
 			</td>
@@ -92,11 +92,11 @@
 			
 			<!-- Delete button -->
 				<form action="paymentMethodController" method="post">
-					<input type="hidden" name="originPage" value=<%=originPage%> />
-					<input type="hidden" name="searchType" value=<%=searchType%> />
-					<input type="hidden" name="searchTerm" value=<%=searchTerm%> />
-					<input type="hidden" name="paymentMethodID" value=<%=s[0]%> />
-					<input type="hidden" name="action" value="deletePaymentMethodJSP" />
+					<input type="hidden" name="originPage" value=<%=originPage%> >
+					<input type="hidden" name="searchType" value=<%=searchType%> >
+					<input type="hidden" name="searchTerm" value=<%=searchTerm%> >
+					<input type="hidden" name="paymentMethodID" value=<%=s[0]%> >
+					<input type="hidden" name="action" value="deletePaymentMethodJSP" >
 					<input type="submit" value="Delete">
 				</form>
 			</td>

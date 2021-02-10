@@ -28,31 +28,31 @@
 	<form action="paymentMethodController" method="post">
 		<pre>
 		ID: <%=paymentMethodItems[0]%>
-		Name: <input type="text" name="paymentMethodName" value="<%=paymentMethodItems[1]%>" />
-		Description: <input type="text" name="paymentMethodDescription" value="<%=paymentMethodItems[2]%>" />
-		Expiration: <input type="text" name="paymentMethodExpDate" value="<%=paymentMethodItems[3]%>" />
-		<input type="hidden" name="paymentMethodID" value="<%=paymentMethodItems[0]%>">
-		<input type="hidden" name="action" value="editPaymentMethodDAO" />
+		Name: <input type="text" name="paymentMethodName" value="<%=paymentMethodItems[1]%>" >
+		Description: <input type="text" name="paymentMethodDescription" value="<%=paymentMethodItems[2]%>" >
+		Expiration: <input type="text" name="paymentMethodExpDate" value="<%=paymentMethodItems[3]%>" >
+		<input type="hidden" name="paymentMethodID" value="<%=paymentMethodItems[0]%>" >
+		<input type="hidden" name="action" value="editPaymentMethodDAO" >
 		<input type="submit" value="Save">
 		</pre>
 	</form>
 	
 	<!-- Form to delete payment method -->
 	<form action="paymentMethodController" method="post">	
-		<input type="hidden" name="paymentMethodID" value="<%=paymentMethodItems[0]%>" /> 
-		<input type="hidden" name="action" value="deletePaymentMethodDAO" />
-		<input type="submit" value="Delete Payment Method" />
+		<pre>
+		<input type="hidden" name="paymentMethodID" value="<%=paymentMethodItems[0]%>" > 
+		<input type="hidden" name="action" value="deletePaymentMethodDAO" >
+		<input type="submit" value="Delete Payment Method" >
 		</pre>
 	</form>
 	
 	<!-- Form to cancel action -->
-	</form>
 		<form action="paymentMethodController" method="post">
-		<input type="hidden" name="action" value="cancel" />
-		<input type="hidden" name="originPage" value=<%=originPage%> />
-		<input type="hidden" name="searchType" value=<%=searchType%> />
-		<input type="hidden" name="searchTerm" value=<%=searchTerm%> />
-		<input type="submit" value="Cancel">
+		<input type="hidden" name="action" value="cancel" >
+		<input type="hidden" name="originPage" value=<%=originPage%> >
+		<input type="hidden" name="searchType" value=<%=searchType%> >
+		<input type="hidden" name="searchTerm" value=<%=searchTerm%> >
+		<input type="submit" value="Cancel" >
 	</form>
 
 </body>

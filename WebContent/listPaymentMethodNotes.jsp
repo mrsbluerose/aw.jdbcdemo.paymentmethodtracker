@@ -25,7 +25,7 @@
 
 	<!-- Back to paymentMethods button -->
 	<form action="paymentMethodController" method="post">
-		<input type="hidden" name="action" value="list" />
+		<input type="hidden" name="action" value="list" >
 		<input type="submit" value="Back to Payment Methods">
 	</form>
 	
@@ -45,8 +45,8 @@
   			<label for="paymentMethodNoteText">Note Text</label>
 		
 		Search for: <input type="text" name="searchTerm" />
-		<input type="hidden" name="paymentMethodID" value=<%=paymentMethodID%> />
-		<input type="hidden" name="action" value="searchPaymentMethodNoteDAO" />
+		<input type="hidden" name="paymentMethodID" value=<%=paymentMethodID%> >
+		<input type="hidden" name="action" value="searchPaymentMethodNoteDAO" >
 		<input type="submit" value="Search" />
 		</pre>
 	</form>
@@ -55,10 +55,10 @@
 	<form action="paymentMethodNoteController" method="post">
 		<pre>
 		New Note
-		Date: <input type="text" name="paymentMethodNoteDate" />
-		Note: <input type="text" name="paymentMethodNoteText" />
-		<input type="hidden" name="paymentMethodID" value=<%=paymentMethodID%> />
-		<input type="hidden" name="action" value="createPaymentMethodNoteDAO" />
+		Date: <input type="text" name="paymentMethodNoteDate" >
+		Note: <input type="text" name="paymentMethodNoteText" >
+		<input type="hidden" name="paymentMethodID" value=<%=paymentMethodID%> >
+		<input type="hidden" name="action" value="createPaymentMethodNoteDAO" >
 		<input type="submit" value="Save">
 		</pre>
 	</form>
@@ -83,9 +83,9 @@
 			
 			<!-- Edit button -->
 				<form action="paymentMethodNoteController" method="post">
-					<input type="hidden" name="originPage" value=<%=originPage%> />
-					<input type="hidden" name="paymentMethodNoteID" value=<%=s[0]%> />
-					<input type="hidden" name="action" value="editPaymentMethodNoteJSP" />
+					<input type="hidden" name="originPage" value=<%=originPage%> >
+					<input type="hidden" name="paymentMethodNoteID" value=<%=s[0]%> >
+					<input type="hidden" name="action" value="editPaymentMethodNoteJSP" >
 					<input type="submit" value="Edit">
 				</form>
 			</td>
@@ -93,10 +93,10 @@
 			
 			<!-- Delete button -->
 				<form action="paymentMethodNoteController" method="post">
-					<input type="hidden" name="paymentMethodID" value=<%=paymentMethodID%> />
-					<input type="hidden" name="originPage" value=<%=originPage%> />
-					<input type="hidden" name="paymentMethodNoteID" value=<%=s[0]%> />
-					<input type="hidden" name="action" value="deletePaymentMethodNoteJSP" />
+					<input type="hidden" name="paymentMethodID" value=<%=paymentMethodID%> >
+					<input type="hidden" name="originPage" value=<%=originPage%> >
+					<input type="hidden" name="paymentMethodNoteID" value=<%=s[0]%> >
+					<input type="hidden" name="action" value="deletePaymentMethodNoteJSP" >
 					<input type="submit" value="Delete">
 				</form>
 			</td>

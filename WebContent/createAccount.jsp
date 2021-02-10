@@ -28,7 +28,7 @@
 	<!-- Form to enter account name and payment method id -->
 	<form action="accountController" method="post">
 		<pre>
-		Name: <input type="text" name="accountName" />
+		Name: <input type="text" name="accountName" >
 		Payment Method: 
 		<select name="paymentMethod">
 		<%for (PaymentMethod pm : paymentMethodList) {%>
@@ -36,17 +36,17 @@
 		<%} %>
     	</select>
     	<br/>
-		<input type="hidden" name="action" value="createAccountDAO" />
+		<input type="hidden" name="action" value="createAccountDAO" >
 		<input type="submit" value="Save">
 		</pre>
 	</form>
 	
 	<!-- Form to cancel action -->
 	<form action="accountController" method="post">
-		<input type="hidden" name="action" value="cancel" />
-		<input type="hidden" name="originPage" value=<%=originPage%> />
-		<input type="hidden" name="searchType" value=<%=searchType%> />
-		<input type="hidden" name="searchTerm" value=<%=searchTerm%> />
+		<input type="hidden" name="action" value="cancel" >
+		<input type="hidden" name="originPage" value=<%=originPage%> >
+		<input type="hidden" name="searchType" value=<%=searchType%> >
+		<input type="hidden" name="searchTerm" value=<%=searchTerm%> >
 		<input type="submit" value="Cancel">
 	</form>
 

@@ -31,18 +31,18 @@
   		<input type="radio" id="paymentMethodID" name="searchType" value="paymentMethodID">
   			<label for="paymentMethodID">Payment Method ID</label>
 		
-		Search for: <input type="text" name="searchTerm" />
-		<input type="hidden" name="action" value="searchAccountsDAO" />
-		<input type="submit" value="Search" />
+		Search for: <input type="text" name="searchTerm" >
+		<input type="hidden" name="action" value="searchAccountsDAO" >
+		<input type="submit" value="Search" >
 		</pre>
 	</form>
 	
 	<!-- Form to cancel action -->
 	<form action="accountController" method="post">
-		<input type="hidden" name="action" value="cancel" />
-		<input type="hidden" name="originPage" value=<%=originPage%> />
-		<input type="hidden" name="searchType" value=<%=searchType%> />
-		<input type="hidden" name="searchTerm" value=<%=searchTerm%> />
+		<input type="hidden" name="action" value="cancel" >
+		<input type="hidden" name="originPage" value=<%=originPage%> >
+		<input type="hidden" name="searchType" value=<%=searchType%> >
+		<input type="hidden" name="searchTerm" value=<%=searchTerm%> >
 		<input type="submit" value="Cancel">
 	</form>
 

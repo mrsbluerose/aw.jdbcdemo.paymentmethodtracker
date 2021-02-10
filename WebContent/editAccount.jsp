@@ -30,7 +30,7 @@
 	<form action="accountController" method="post">
 		<pre>
 		ID: <%=accountItems[0]%>
-		Name: <input type="text" name="accountName" value="<%=accountItems[1]%>" />
+		Name: <input type="text" name="accountName" value="<%=accountItems[1]%>" >
 		Payment Method: 
 		<select name="paymentMethod">
 		<%for (PaymentMethod pm : paymentMethodList) {%>
@@ -38,26 +38,26 @@
 		<%} %>
     	</select>
 		<input type="hidden" name="accountID" value="<%=accountItems[0]%>">
-		<input type="hidden" name="action" value="editAccountDAO" />
+		<input type="hidden" name="action" value="editAccountDAO" >
 		<input type="submit" value="Save">
 		</pre>
 	</form>
 	
 	<!-- Form to delete account -->
-	<form action="accountController" method="post">	
-		<input type="hidden" name="accountID" value="<%=accountItems[0]%>" /> 
-		<input type="hidden" name="action" value="deleteAccountDAO" />
-		<input type="submit" value="Delete Account" />
+	<form action="accountController" method="post">
+		<pre>	
+		<input type="hidden" name="accountID" value="<%=accountItems[0]%>" > 
+		<input type="hidden" name="action" value="deleteAccountDAO" >
+		<input type="submit" value="Delete Account" >
 		</pre>
 	</form>
 	
 	<!-- Form to cancel action -->
-	</form>
-		<form action="accountController" method="post">
-		<input type="hidden" name="action" value="cancel" />
-		<input type="hidden" name="originPage" value=<%=originPage%> />
-		<input type="hidden" name="searchType" value=<%=searchType%> />
-		<input type="hidden" name="searchTerm" value=<%=searchTerm%> />
+	<form action="accountController" method="post">
+		<input type="hidden" name="action" value="cancel" >
+		<input type="hidden" name="originPage" value=<%=originPage%> >
+		<input type="hidden" name="searchType" value=<%=searchType%> >
+		<input type="hidden" name="searchTerm" value=<%=searchTerm%> >
 		<input type="submit" value="Cancel">
 	</form>
 
