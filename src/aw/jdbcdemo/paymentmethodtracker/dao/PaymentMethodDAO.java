@@ -17,7 +17,7 @@ public class PaymentMethodDAO {
 	 * Returns a list of String arrays with payment method (pm) information 
 	 * (pm id, pm name, pm description, pm expDate)
 	 */
-	public ArrayList<String[]> listPaymentMethods(){
+	public ArrayList<String[]> listPaymentMethodsByID(){
 		ArrayList<String[]> paymentMethodList = new ArrayList<>();
 		String[] paymentMethodInfo;
 		Connection connection;
@@ -46,7 +46,11 @@ public class PaymentMethodDAO {
 		return paymentMethodList;
 	}
 	
-	public ArrayList<PaymentMethod> listPaymentMethodNames(){
+	/*
+	 * Returns a list of payment methods (pm) for populating drop-down lists
+	 * (ordered alphabetically by name)
+	 */
+	public ArrayList<PaymentMethod> listPaymentMethodsByName(){
 		ArrayList<PaymentMethod> paymentMethodList = new ArrayList<>();
 		PaymentMethod paymentMethod;
 		Connection connection;
@@ -74,7 +78,11 @@ public class PaymentMethodDAO {
 		return paymentMethodList;
 	}
 	
-	public ArrayList<PaymentMethod> paymentMethods(int paymentMethodID){
+	/*
+	 * Returns a list of payment methods (pm) for populating drop-down lists
+	 * Current payment method is at the top of the list
+	 */
+	public ArrayList<PaymentMethod> paymentMethodsByName(int paymentMethodID){
 		ArrayList<PaymentMethod> paymentMethodList = new ArrayList<>();
 		PaymentMethod paymentMethod = searchPaymentMethod(paymentMethodID);
 		paymentMethodList.add(paymentMethod);

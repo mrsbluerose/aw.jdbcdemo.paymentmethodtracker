@@ -65,7 +65,7 @@ public class PaymentMethodController extends HttpServlet {
 	private void listPaymentMethods (HttpServletRequest request, HttpServletResponse response, String message) throws ServletException, IOException {
 		RequestDispatcher rd=request.getRequestDispatcher("listPaymentMethods.jsp");
 		ArrayList<String[]> paymentMethodList = new ArrayList<>();
-		paymentMethodList = paymentMethodDAO.listPaymentMethods();
+		paymentMethodList = paymentMethodDAO.listPaymentMethodsByID();
 		request.setAttribute("paymentMethodList",paymentMethodList);
 		request.setAttribute("message", message);
 		rd.forward(request, response);
