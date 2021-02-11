@@ -23,7 +23,7 @@ public class AccountNoteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private AccountNoteDAO accountNoteDAO = new AccountNoteDAO();
 	private AccountDAO accountDAO = new AccountDAO();
-	Account account;
+	private Account account;
 	private String message = "";
 	
     public AccountNoteController() {
@@ -174,7 +174,7 @@ public class AccountNoteController extends HttpServlet {
 	/*
 	 * Sends user back to previous page of results.
 	 */
-	public void cancelAction (HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+	private void cancelAction (HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		String originPage = request.getParameter("originPage");
 		if(originPage.contentEquals("listAccountNotes")) {
 			listAccountNotes(request,response," ");

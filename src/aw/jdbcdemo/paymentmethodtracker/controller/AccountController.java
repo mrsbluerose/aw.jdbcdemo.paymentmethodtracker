@@ -193,7 +193,7 @@ public class AccountController extends HttpServlet {
 	/*
 	 * Sends user back to previous page of results.
 	 */
-	public void cancelAction(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+	private void cancelAction(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		String originPage = request.getParameter("originPage");
 		if(originPage.contentEquals("listAccounts")) {
 			listAccounts(request,response," ");
