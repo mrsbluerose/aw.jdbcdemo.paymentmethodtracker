@@ -77,7 +77,7 @@ public class AccountController extends HttpServlet {
 	 */
 	private void createAccountJSP(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		RequestDispatcher rd=request.getRequestDispatcher("createAccount.jsp");
-		ArrayList<PaymentMethod> paymentMethodList = paymentMethodDAO.paymentMethods();
+		ArrayList<PaymentMethod> paymentMethodList = paymentMethodDAO.listPaymentMethodNames();
 		request.setAttribute("paymentMethodList", paymentMethodList);
 		rd.forward(request, response);
 	}

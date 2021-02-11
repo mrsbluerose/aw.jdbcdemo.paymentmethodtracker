@@ -46,7 +46,7 @@ public class PaymentMethodDAO {
 		return paymentMethodList;
 	}
 	
-	public ArrayList<PaymentMethod> paymentMethods(){
+	public ArrayList<PaymentMethod> listPaymentMethodNames(){
 		ArrayList<PaymentMethod> paymentMethodList = new ArrayList<>();
 		PaymentMethod paymentMethod;
 		Connection connection;

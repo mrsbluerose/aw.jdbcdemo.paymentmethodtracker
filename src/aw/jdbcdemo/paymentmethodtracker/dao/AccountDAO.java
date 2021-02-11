@@ -96,7 +96,7 @@ public class AccountDAO {
 	 * Returns a list of string arrays with account information based on the search condition 
 	 * specified in following methods
 	 */
-	public ArrayList<String[]> searchAccount(String condition) {
+	private ArrayList<String[]> searchAccount(String condition) {
 		ArrayList<String[]> accountList = new ArrayList<>();
 		String[] accountInfo;
 		Connection connection;
