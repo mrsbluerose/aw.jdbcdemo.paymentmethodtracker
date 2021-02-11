@@ -53,7 +53,7 @@ ALTER TABLE account AUTO_INCREMENT = 1000;
 ALTER TABLE account_note AUTO_INCREMENT = 2000;
 
 /*
-Adds Sample records
+Adds Sample records, if you want to test
 The order of insertion is significant due to foreign key dependencies
 */
 INSERT INTO payment_method (payment_method_name, payment_method_description, payment_method_exp_date) VALUES ('payment method 0', 'description 0', '2020-12-31');
